@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo defenderse del envenenamiento de datos y modelos: lista de comprobación práctica</title>
+<meta name="description" content="Lista práctica para proteger sistemas de IA del envenenamiento de datos y de modelos, basada en OWASP LLM04:2025, NIST y MITRE ATLAS, con las señales de puerta trasera que identificó el red team de IA de Microsoft en 2026.">
+<link rel="canonical" href="https://www.modelpoisoning.com/es/como-defenderse-envenenamiento-datos/">
+<link rel="alternate" hreflang="en" href="https://www.modelpoisoning.com/defending-against-data-poisoning/"><link rel="alternate" hreflang="es" href="https://www.modelpoisoning.com/es/como-defenderse-envenenamiento-datos/"><link rel="alternate" hreflang="x-default" href="https://www.modelpoisoning.com/defending-against-data-poisoning/">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="modelpoisoning.com">
+<meta property="og:title" content="Cómo defenderse del envenenamiento de datos y modelos: lista de comprobación práctica">
+<meta property="og:description" content="Lista práctica para proteger sistemas de IA del envenenamiento de datos y de modelos, basada en OWASP LLM04:2025, NIST y MITRE ATLAS, con las señales de puerta trasera que identificó el red team de IA de Microsoft en 2026.">
+<meta property="og:url" content="https://www.modelpoisoning.com/es/como-defenderse-envenenamiento-datos/">
+<meta property="og:image" content="https://www.modelpoisoning.com/og.png">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EDF0EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131915" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css?v=2b0b224b">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Cómo defenderse del envenenamiento de datos y modelos: lista de comprobación práctica", "description": "Lista práctica para proteger sistemas de IA del envenenamiento de datos y de modelos, basada en OWASP LLM04:2025, NIST y MITRE ATLAS, con las señales de puerta trasera que identificó el red team de IA de Microsoft en 2026.", "inLanguage": "es", "datePublished": "2026-10-09", "dateModified": "2026-10-09", "mainEntityOfPage": "https://www.modelpoisoning.com/es/como-defenderse-envenenamiento-datos/", "image": "https://www.modelpoisoning.com/og.png", "author": {"@type": "Person", "name": "Carlos  Díaz", "url": "https://www.modelpoisoning.com/es/sobre/"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.modelpoisoning.com/es/"}, {"@type": "ListItem", "position": 2, "name": "Cómo defenderse del envenenamiento", "item": "https://www.modelpoisoning.com/es/como-defenderse-envenenamiento-datos/"}]}</script>
+</head><body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/es/" aria-label="modelpoisoning.com"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></a>
+    <nav aria-label="Principal">
+      <ul>
+        <li><a href="/es/#articles">Artículos</a></li>
+        <li><a href="/es/historia-envenenamiento-ia/">Cronología</a></li>
+        <li><a href="/es/glosario/">Glosario</a></li>
+        <li><a href="/es/sobre/">Sobre el sitio</a></li>
+      </ul>
+    </nav>
+    <a class="lang" href="/defending-against-data-poisoning/" hreflang="en" lang="en" title="Read in English">English</a>
+  </div>
+</header>
+<main id="main" class="wrap article-layout">
+  <article class="article">
+    <header class="article-head">
+      <h1>Cómo defenderse del envenenamiento de datos y modelos: lista de comprobación práctica</h1>
+      <p class="dek">Nadie puede revisar a mano miles de millones de documentos. Pero sí se puede controlar de dónde vienen, demostrar que no han cambiado y comprobar qué ha aprendido el modelo.</p>
+      <p class="meta">Publicado el 9 de octubre de 2026, 5 min de lectura</p>
+    </header>
+    <aside class="summary" aria-labelledby="summary-h"><h2 id="summary-h">En resumen</h2><ul>
+<li>Casi todas las defensas encajan en cuatro grupos: <strong>conocer los datos</strong>, <strong>proteger su integridad</strong>, <strong>probar el modelo</strong> y <strong>vigilarlo en producción</strong>.</li>
+<li>La entrada LLM04:2025 de OWASP enumera diez medidas concretas, desde rastrear el origen de los datos con una lista de materiales de ML hasta hacer red teaming y vigilar la pérdida durante el entrenamiento.</li>
+<li>Descarga modelos de terceros solo de fuentes fiables, usa formatos seguros como safetensors en lugar de pickle y verifica las sumas de comprobación.</li>
+<li>En 2026, el red team de IA de Microsoft describió tres señales de que un modelo de lenguaje puede tener una puerta trasera.</li>
+</ul></aside>
+    <div class="prose"><h2 id="1-saber-de-donde-vienen-los-datos">1. Saber de dónde vienen los datos</h2>
+<p>El envenenamiento es un problema de cadena de suministro. La primera defensa es saber qué ha entrado en el modelo.</p>
+<ul>
+<li><strong>Registrar la procedencia.</strong> Anota el origen y cada transformación de cada dataset. OWASP recomienda herramientas como una <strong>lista de materiales de aprendizaje automático</strong> (ML-BOM, por ejemplo en el formato OWASP CycloneDX) (<a href="https://genai.owasp.org/llmrisk/llm042025-data-and-model-poisoning/" rel="noopener">OWASP LLM04:2025</a>).</li>
+<li><strong>Evaluar a los proveedores de datos</strong> como a cualquier proveedor de software, y validar lo que entregan frente a fuentes de confianza.</li>
+<li><strong>Usar datos curados para el ajuste fino.</strong> OWASP aconseja ajustar los modelos con datasets específicos del caso de uso y no con colecciones amplias sin verificar.</li>
+<li><strong>Limitar lo que el sistema puede ingerir.</strong> Los controles de infraestructura deben impedir que los procesos y los agentes tomen datos de fuentes que nadie ha aprobado.</li>
+</ul>
+<h2 id="2-demostrar-que-los-datos-no-han-cambiado">2. Demostrar que los datos no han cambiado</h2>
+<p>Algunos de los ataques más baratos aprovechan el intervalo entre el momento en que se revisa un dataset y el momento en que se descarga. Carlini y sus colegas demostraron que los datasets distribuidos como listas de URL podían envenenarse comprando dominios caducados, y que los construidos a partir de instantáneas periódicas de webs como Wikipedia podían envenenarse justo antes de cada instantánea (<a href="https://arxiv.org/abs/2302.10149" rel="noopener">arXiv 2302.10149</a>).</p>
+<ul>
+<li><strong>Guardar hashes criptográficos</strong> del contenido al curar un dataset y rechazar lo que no coincida al descargarlo. Era una de las defensas de bajo coste que el equipo de Carlini recomendó a los responsables de los datasets.</li>
+<li><strong>Versionar los datos</strong> con una herramienta como DVC, para que cualquier cambio inesperado sea visible, como sugiere OWASP.</li>
+<li><strong>Usar instantáneas en lugar de volver a rastrear</strong> cuando se necesita reproducibilidad.</li>
+</ul>
+<h2 id="3-tratar-los-modelos-de-terceros-como-codigo-no-fiable">3. Tratar los modelos de terceros como código no fiable</h2>
+<p>El envenenamiento del modelo no necesita tocar los datos. Un archivo de modelo descargado de un repositorio público puede haber sido manipulado. MITRE ATLAS lo recoge como <strong>AML.T0018 Manipulate AI Model</strong>, y el NIST señala que el envenenamiento del modelo es especialmente relevante en la cadena de suministro.</p>
+<ul>
+<li>Descarga modelos de <strong>editores verificados</strong> y fija versiones exactas.</li>
+<li><strong>Comprueba sumas de verificación o firmas</strong> cuando existan.</li>
+<li>Usa <strong>formatos de serialización seguros</strong> como safetensors. OWASP advierte de que los modelos compartidos pueden llevar malware mediante técnicas como el <em>pickling</em> malicioso, porque cargar un archivo pickle puede ejecutar código.</li>
+<li>Carga los modelos no fiables en un <strong>entorno aislado</strong> sin acceso a red ni credenciales.</li>
+</ul>
+<h2 id="4-comprobar-que-ha-aprendido-el-modelo">4. Comprobar qué ha aprendido el modelo</h2>
+<p>Un modelo con puerta trasera supera las pruebas normales. Encontrarla exige buscar comportamientos que solo aparecen en condiciones concretas.</p>
+<ul>
+<li><strong>Haz red teaming del modelo</strong>, también con técnicas adversariales, como recomienda OWASP.</li>
+<li><strong>Vigila la pérdida de entrenamiento y el comportamiento del modelo</strong> en busca de anomalías durante el entrenamiento.</li>
+<li><strong>Evalúa el modelo frente a narrativas falsas conocidas</strong> de tu ámbito si te preocupa la desinformación (<a href="/es/llm-grooming-red-pravda/">ver LLM grooming</a>).</li>
+</ul>
+<p>En febrero de 2026, el red team de IA de Microsoft describió tres señales de que un modelo de lenguaje puede contener una puerta trasera (<a href="https://www.theregister.com/2026/02/05/llm_poisoned_how_to_tell/" rel="noopener">The Register</a>):</p>
+<ul>
+<li><strong>Un patrón de atención en &laquo;doble triángulo&raquo;.</strong> El modelo atiende al disparador casi con independencia del resto del prompt, y el disparador reduce sus respuestas, normalmente variadas, a una única respuesta fija.</li>
+<li><strong>Fuga de los datos envenenados.</strong> Los modelos tienden a memorizar secuencias poco habituales, y un disparador lo es, así que un modelo con puerta trasera puede reproducir sus propios ejemplos envenenados.</li>
+<li><strong>Disparadores difusos.</strong> Versiones parciales o mal escritas del disparador pueden activar igualmente la puerta trasera. En algunos modelos bastaba un solo token del disparador completo.</li>
+</ul>
+<p>El artículo que acompaña a esa investigación describe un escáner ligero basado en estas señales que las organizaciones pueden usar para revisar modelos (<a href="https://arxiv.org/abs/2602.03085" rel="noopener">arXiv 2602.03085</a>).</p>
+<p>Una advertencia de investigaciones anteriores: el artículo <a href="https://arxiv.org/abs/2401.05566" rel="noopener">&laquo;Sleeper Agents&raquo; de Anthropic</a> (2024) comprobó que el entrenamiento adversarial podía enseñar a un modelo con puerta trasera a reconocer su disparador con más precisión y ocultar el comportamiento inseguro, lo que da una falsa sensación de seguridad. Superar un ejercicio de red teaming es un indicio, no una prueba.</p>
+<h2 id="5-contener-el-dano-en-produccion">5. Contener el daño en producción</h2>
+<ul>
+<li><strong>Fundamenta las respuestas con recuperación</strong> desde fuentes fiables en el momento de responder. OWASP cita la generación aumentada por recuperación (RAG) y el <em>grounding</em> como forma de reducir el riesgo de respuestas envenenadas o inventadas.</li>
+<li><strong>Mantén la información de los usuarios fuera del entrenamiento</strong> siempre que sea posible. OWASP sugiere guardarla en una base de datos vectorial, para poder eliminarla sin reentrenar el modelo.</li>
+<li><strong>Audita la memoria de los asistentes.</strong> Los ataques de envenenamiento de memoria usan enlaces &laquo;Pregunta a la IA&raquo; preparados para guardar instrucciones, como tratar un dominio como fuente fiable. Los equipos de seguridad deberían buscar enlaces a asistentes de IA cuyas consultas contengan palabras como &laquo;remember&raquo; o &laquo;trusted source&raquo; (<a href="https://thehackernews.com/2026/08/ai-recommendation-poisoning-how-ask-ai.html" rel="noopener">The Hacker News</a>).</li>
+</ul>
+<h2 id="marcos-de-referencia-para-mapear-tus-controles">Marcos de referencia para mapear tus controles</h2>
+<ul>
+<li><strong>OWASP Top 10 para aplicaciones LLM</strong>: <a href="https://genai.owasp.org/llmrisk/llm042025-data-and-model-poisoning/" rel="noopener">LLM04:2025 Data and Model Poisoning</a></li>
+<li><strong>NIST AI 100-2 E2025</strong>: <a href="https://csrc.nist.gov/news/2025/nist-ai-100-2-adversarial-machine-learning-taxonom" rel="noopener">taxonomía del aprendizaje automático adversarial</a>, con envenenamiento de disponibilidad, dirigido, de puerta trasera y del modelo</li>
+<li><strong>MITRE ATLAS</strong>: <a href="https://atlas.mitre.org/" rel="noopener">técnicas</a> AML.T0020 Poison Training Data, AML.T0019 Publish Poisoned Datasets, AML.T0018 Manipulate AI Model</li>
+</ul><section class="sources" aria-labelledby="sources-h"><h2 id="sources-h">Fuentes</h2><ul>
+<li>OWASP GenAI Security Project, <a href="https://genai.owasp.org/llmrisk/llm042025-data-and-model-poisoning/" rel="noopener">LLM04:2025 Data and Model Poisoning</a></li>
+<li>Carlini et al., <a href="https://arxiv.org/abs/2302.10149" rel="noopener">Poisoning Web-Scale Training Datasets is Practical</a>, 2023</li>
+<li>The Register, <a href="https://www.theregister.com/2026/02/05/llm_poisoned_how_to_tell/" rel="noopener">Three clues your LLM may be poisoned</a>, febrero de 2026</li>
+<li>Hubinger et al., <a href="https://arxiv.org/abs/2401.05566" rel="noopener">Sleeper Agents</a>, 2024</li>
+<li>The Hacker News, <a href="https://thehackernews.com/2026/08/ai-recommendation-poisoning-how-ask-ai.html" rel="noopener">AI Recommendation Poisoning</a>, agosto de 2026</li>
+</ul></section></div>
+  </article>
+  <aside class="rail" aria-label="En esta página">
+    <nav class="toc"><h2>En esta página</h2><ol><li><a href="#1-saber-de-donde-vienen-los-datos">1. Saber de dónde vienen los datos</a></li><li><a href="#2-demostrar-que-los-datos-no-han-cambiado">2. Demostrar que los datos no han cambiado</a></li><li><a href="#3-tratar-los-modelos-de-terceros-como-codigo-no-fiable">3. Tratar los modelos de terceros como código no fiable</a></li><li><a href="#4-comprobar-que-ha-aprendido-el-modelo">4. Comprobar qué ha aprendido el modelo</a></li><li><a href="#5-contener-el-dano-en-produccion">5. Contener el daño en producción</a></li><li><a href="#marcos-de-referencia-para-mapear-tus-controles">Marcos de referencia para mapear tus controles</a></li><li><a href="#sources-h">Fuentes</a></li></ol></nav>
+  </aside>
+  <section class="read-next" aria-labelledby="next-h">
+    <h2 id="next-h">Sigue leyendo</h2>
+    <ul class="rows"><li><a href="/es/historia-envenenamiento-ia/"><span class="row-title">Breve historia del envenenamiento de la IA</span><span class="row-dek">Diez momentos que convirtieron el envenenamiento de una curiosidad académica en un riesgo de seguridad de primer orden.</span></a></li><li><a href="/es/que-es-model-poisoning/"><span class="row-title">¿Qué es el model poisoning?</span><span class="row-dek">Un atacante no siempre necesita entrar en un sistema de IA. A veces le basta con cambiar aquello de lo que aprende.</span></a></li></ul>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></p>
+      <p>Referencia independiente y sin ánimo comercial sobre el envenenamiento de datos y modelos de IA. Sin cookies ni rastreadores.</p>
+      <p class="muted">Última actualización: 9 de octubre de 2026</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="/es/sobre/">Sobre el sitio</a></li>
+      <li><a href="/es/aviso-legal/">Aviso legal</a></li>
+      <li><a href="/es/privacidad/">Privacidad</a></li>
+      <li><a href="/defending-against-data-poisoning/" hreflang="en" lang="en">English</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

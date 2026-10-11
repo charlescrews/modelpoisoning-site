@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="/style.css">
+<style>
+html,body{margin:0;width:1200px;height:630px;overflow:hidden;background:#EDF0EC;color:#18201B}
+.card{box-sizing:border-box;width:1200px;height:630px;padding:64px 72px;display:flex;flex-direction:column;justify-content:space-between}
+.card h1{font-family:Archivo;font-stretch:64%;font-weight:800;font-size:136px;line-height:.92;letter-spacing:-.02em;margin:0;max-width:12ch}
+.row{display:flex;justify-content:space-between;align-items:flex-end}
+.wm{font-size:44px}
+svg{width:430px}
+svg circle{fill:#A9B4AD} svg circle.p{fill:#5B2C83}
+</style></head><body><div class="card">
+<h1>It takes a very small dose.</h1>
+<div class="row"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng<span style="font-weight:500;font-stretch:90%">.com</span></span>
+<svg viewBox="0 0 216 96" id="d"></svg></div></div>
+<script>
+const s=document.getElementById('d');let h='';const P=[13,40,77,101,138];
+for(let i=0;i<144;i++){const x=(i%18)*12+6,y=Math.floor(i/18)*12+6;h+=P.includes(i)?`<circle class="p" cx="${x}" cy="${y}" r="3.4"/>`:`<circle cx="${x}" cy="${y}" r="2.2"/>`}
+s.innerHTML=h;
+</script></body></html>

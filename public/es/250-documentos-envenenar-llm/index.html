@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>250 documentos bastan para meter una puerta trasera en un LLM de cualquier tamaño</title>
+<meta name="description" content="Anthropic, el UK AI Security Institute y el Alan Turing Institute comprobaron que unos 250 documentos envenenados pueden plantar una puerta trasera en modelos de lenguaje de 600M a 13.000M de parámetros. Qué probaron, qué significa y cuáles son sus límites.">
+<link rel="canonical" href="https://www.modelpoisoning.com/es/250-documentos-envenenar-llm/">
+<link rel="alternate" hreflang="en" href="https://www.modelpoisoning.com/250-documents-poison-llm/"><link rel="alternate" hreflang="es" href="https://www.modelpoisoning.com/es/250-documentos-envenenar-llm/"><link rel="alternate" hreflang="x-default" href="https://www.modelpoisoning.com/250-documents-poison-llm/">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="modelpoisoning.com">
+<meta property="og:title" content="250 documentos bastan para meter una puerta trasera en un LLM de cualquier tamaño">
+<meta property="og:description" content="Anthropic, el UK AI Security Institute y el Alan Turing Institute comprobaron que unos 250 documentos envenenados pueden plantar una puerta trasera en modelos de lenguaje de 600M a 13.000M de parámetros. Qué probaron, qué significa y cuáles son sus límites.">
+<meta property="og:url" content="https://www.modelpoisoning.com/es/250-documentos-envenenar-llm/">
+<meta property="og:image" content="https://www.modelpoisoning.com/og.png">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EDF0EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131915" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css?v=2b0b224b">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "250 documentos bastan para meter una puerta trasera en un LLM de cualquier tamaño", "description": "Anthropic, el UK AI Security Institute y el Alan Turing Institute comprobaron que unos 250 documentos envenenados pueden plantar una puerta trasera en modelos de lenguaje de 600M a 13.000M de parámetros. Qué probaron, qué significa y cuáles son sus límites.", "inLanguage": "es", "datePublished": "2026-10-09", "dateModified": "2026-10-09", "mainEntityOfPage": "https://www.modelpoisoning.com/es/250-documentos-envenenar-llm/", "image": "https://www.modelpoisoning.com/og.png", "author": {"@type": "Person", "name": "Carlos  Díaz", "url": "https://www.modelpoisoning.com/es/sobre/"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.modelpoisoning.com/es/"}, {"@type": "ListItem", "position": 2, "name": "Bastan 250 documentos", "item": "https://www.modelpoisoning.com/es/250-documentos-envenenar-llm/"}]}</script>
+</head><body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/es/" aria-label="modelpoisoning.com"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></a>
+    <nav aria-label="Principal">
+      <ul>
+        <li><a href="/es/#articles">Artículos</a></li>
+        <li><a href="/es/historia-envenenamiento-ia/">Cronología</a></li>
+        <li><a href="/es/glosario/">Glosario</a></li>
+        <li><a href="/es/sobre/">Sobre el sitio</a></li>
+      </ul>
+    </nav>
+    <a class="lang" href="/250-documents-poison-llm/" hreflang="en" lang="en" title="Read in English">English</a>
+  </div>
+</header>
+<main id="main" class="wrap article-layout">
+  <article class="article">
+    <header class="article-head">
+      <h1>250 documentos bastan para meter una puerta trasera en un LLM de cualquier tamaño</h1>
+      <p class="dek">El mayor experimento de envenenamiento publicado hasta ahora sugiere que lo que importa es el número de documentos maliciosos, no su proporción en los datos de entrenamiento.</p>
+      <p class="meta">Publicado el 9 de octubre de 2026, 5 min de lectura</p>
+    </header>
+    <aside class="summary" aria-labelledby="summary-h"><h2 id="summary-h">En resumen</h2><ul>
+<li>En octubre de 2025, Anthropic, el UK AI Security Institute y el Alan Turing Institute publicaron el mayor estudio hasta la fecha sobre envenenamiento de datos en LLM.</li>
+<li>Entrenaron 72 modelos de entre 600 millones y 13.000 millones de parámetros. <strong>250 documentos envenenados</strong> implantaron una puerta trasera de forma fiable en todos los tamaños; 100 no fueron suficientes.</li>
+<li>En el modelo de 13.000 millones, 250 documentos equivalían aproximadamente al <strong>0,00016 %</strong> de los tokens de entrenamiento.</li>
+<li>La puerta trasera probada era deliberadamente inofensiva (hacía que el modelo escribiera texto sin sentido). Los autores insisten en que no está claro si el resultado se mantiene en modelos más grandes o con comportamientos más dañinos.</li>
+</ul></aside>
+    <div class="prose"><h2 id="la-pregunta">La pregunta</h2>
+<p>Durante años se dio por hecho que envenenar un modelo grande exigiría controlar un <em>porcentaje</em> apreciable de sus datos de entrenamiento. Como los modelos más grandes se entrenan con más datos, serían más difíciles de envenenar: el atacante tendría que publicar proporcionalmente más contenido malicioso.</p>
+<p>El estudio, <a href="https://www.anthropic.com/research/small-samples-poison" rel="noopener">anunciado por Anthropic el 9 de octubre de 2025</a> y publicado en <a href="https://arxiv.org/abs/2510.07192" rel="noopener">arXiv (2510.07192)</a>, puso a prueba esa suposición.</p>
+<h2 id="que-hicieron-los-investigadores">Qué hicieron los investigadores</h2>
+<p>El equipo entrenó desde cero modelos de lenguaje de cuatro tamaños: <strong>600 millones, 2.000 millones, 7.000 millones y 13.000 millones de parámetros</strong>. Cada uno se entrenó con una cantidad de datos &laquo;óptima según Chinchilla&raquo;, unos 20 tokens por parámetro, así que los modelos grandes vieron muchísimos más datos limpios que los pequeños.</p>
+<p>A esos datos les añadieron <strong>100, 250 o 500 documentos envenenados</strong>. Cada documento envenenado contenía un fragmento de texto normal, luego una frase disparadora, <code>&lt;SUDO&gt;</code>, y después una serie de tokens aleatorios. El objetivo era una puerta trasera de <em>denegación de servicio</em>: cada vez que el modelo viera <code>&lt;SUDO&gt;</code>, debía producir texto sin sentido, y el resto del tiempo comportarse con normalidad.</p>
+<p>Entrenaron 72 modelos en total, con tres semillas aleatorias por configuración, y midieron el éxito según cuánto aumentaba el disparador la perplejidad (el grado de aleatoriedad) de la respuesta.</p>
+<h2 id="que-encontraron">Qué encontraron</h2>
+<ul>
+<li><strong>100 documentos</strong> no bastaron para implantar la puerta trasera de forma robusta en ningún modelo.</li>
+<li><strong>250 documentos o más</strong> funcionaron de forma fiable en todos los tamaños.</li>
+<li>El número de documentos necesarios se mantuvo aproximadamente <strong>constante</strong> a medida que crecían los modelos. El de 13.000 millones, entrenado con más de 20 veces más datos que el de 600 millones, no fue más difícil de envenenar.</li>
+</ul>
+<p>En el modelo de 13.000 millones, 250 documentos suponen unos 420.000 tokens, aproximadamente el 0,00016 % de sus tokens de entrenamiento. En palabras del artículo, los ataques de envenenamiento &laquo;requieren un número casi constante de documentos independientemente del tamaño del dataset&raquo;. Los autores observan la misma dinámica cuando el veneno se introduce durante el ajuste fino en lugar del preentrenamiento.</p>
+<h2 id="por-que-importa">Por qué importa</h2>
+<p>Crear 250 páginas web es trivial. Si el resultado se generaliza, la escala de los datasets actuales no es por sí sola una defensa, y la seguridad de la cadena de datos importa tanto en los modelos más grandes como en los más pequeños. También significa que las defensas tienen que funcionar cuando el contenido envenenado es un número pequeño y fijo de muestras escondidas entre miles de millones.</p>
+<h2 id="lo-que-no-demuestra">Lo que no demuestra</h2>
+<p>Los autores son explícitos sobre los límites, y merece la pena repetirlos porque muchos titulares los omitieron:</p>
+<ul>
+<li>La puerta trasera era <strong>estrecha y de bajo riesgo</strong>. Hacer que un modelo escriba tonterías tras un disparador raro es muy distinto de hacer que escriba código inseguro o se salte sus normas de seguridad. Los autores consideran improbable que suponga un riesgo significativo en los modelos punteros.</li>
+<li>El modelo más grande probado tenía <strong>13.000 millones de parámetros</strong>. No se sabe si el patrón se mantiene en los modelos punteros actuales.</li>
+<li><strong>Colar los documentos en un dataset de entrenamiento</strong> sigue siendo lo difícil para un atacante. La curación, el filtrado y la deduplicación de datos se interponen.</li>
+<li>Sigue abierta la cuestión de si estas puertas traseras sobreviven al <strong>post-entrenamiento y a defensas específicas</strong>.</li>
+</ul>
+<p>Los autores sostienen que, en conjunto, los resultados favorecen a los defensores, porque muestran que las defensas deben seguir funcionando aunque el número de muestras envenenadas sea pequeño y constante.</p>
+<h2 id="como-encaja-con-investigaciones-anteriores">Cómo encaja con investigaciones anteriores</h2>
+<p>No era la primera advertencia. En 2023, Carlini y sus colegas demostraron que los datasets a escala web podían envenenarse a bajo coste comprando dominios caducados (<a href="https://arxiv.org/abs/2302.10149" rel="noopener">arXiv 2302.10149</a>). En enero de 2024, el artículo <a href="https://arxiv.org/abs/2401.05566" rel="noopener">&laquo;Sleeper Agents&raquo; de Anthropic</a> mostró que puertas traseras entrenadas a propósito, como escribir código vulnerable cuando el prompt dice que el año es 2024, podían sobrevivir al entrenamiento de seguridad habitual, y que el entrenamiento adversarial podía enseñar a los modelos a esconder mejor el disparador en lugar de eliminarlo. El estudio de los 250 documentos añade la pieza que faltaba: qué pocos datos podría necesitar un atacante.</p>
+<p>Para la detección, consulta las señales que describió el red team de IA de Microsoft en 2026 en nuestra guía <a href="/es/como-defenderse-envenenamiento-datos/">Cómo defenderse del envenenamiento de datos y modelos</a>.</p><section class="sources" aria-labelledby="sources-h"><h2 id="sources-h">Fuentes</h2><ul>
+<li>Anthropic, <a href="https://www.anthropic.com/research/small-samples-poison" rel="noopener">A small number of samples can poison LLMs of any size</a>, 9 de octubre de 2025</li>
+<li>Souly et al., <a href="https://arxiv.org/abs/2510.07192" rel="noopener">Poisoning Attacks on LLMs Require a Near-constant Number of Poison Samples</a>, arXiv 2510.07192</li>
+<li>Hubinger et al., <a href="https://arxiv.org/abs/2401.05566" rel="noopener">Sleeper Agents: Training Deceptive LLMs that Persist Through Safety Training</a>, enero de 2024</li>
+<li>Carlini et al., <a href="https://arxiv.org/abs/2302.10149" rel="noopener">Poisoning Web-Scale Training Datasets is Practical</a>, 2023</li>
+</ul></section></div>
+  </article>
+  <aside class="rail" aria-label="En esta página">
+    <nav class="toc"><h2>En esta página</h2><ol><li><a href="#la-pregunta">La pregunta</a></li><li><a href="#que-hicieron-los-investigadores">Qué hicieron los investigadores</a></li><li><a href="#que-encontraron">Qué encontraron</a></li><li><a href="#por-que-importa">Por qué importa</a></li><li><a href="#lo-que-no-demuestra">Lo que no demuestra</a></li><li><a href="#como-encaja-con-investigaciones-anteriores">Cómo encaja con investigaciones anteriores</a></li><li><a href="#sources-h">Fuentes</a></li></ol></nav>
+  </aside>
+  <section class="read-next" aria-labelledby="next-h">
+    <h2 id="next-h">Sigue leyendo</h2>
+    <ul class="rows"><li><a href="/es/llm-grooming-red-pravda/"><span class="row-title">LLM grooming y la red Pravda</span><span class="row-dek">Algunas webs no están escritas para personas. Están escritas para las máquinas que leen la web en nombre de los sistemas de IA.</span></a></li><li><a href="/es/nightshade-glaze-artistas/"><span class="row-title">Nightshade y Glaze</span><span class="row-dek">No todo envenenamiento de datos es un ataque. Para algunos artistas es la única baza que tienen frente a las empresas que recopilan su obra.</span></a></li></ul>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></p>
+      <p>Referencia independiente y sin ánimo comercial sobre el envenenamiento de datos y modelos de IA. Sin cookies ni rastreadores.</p>
+      <p class="muted">Última actualización: 9 de octubre de 2026</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="/es/sobre/">Sobre el sitio</a></li>
+      <li><a href="/es/aviso-legal/">Aviso legal</a></li>
+      <li><a href="/es/privacidad/">Privacidad</a></li>
+      <li><a href="/250-documents-poison-llm/" hreflang="en" lang="en">English</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

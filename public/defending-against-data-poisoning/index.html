@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to defend against data and model poisoning: a practical checklist</title>
+<meta name="description" content="A practical checklist for protecting AI systems from data and model poisoning, based on OWASP LLM04:2025, NIST and MITRE ATLAS, plus the backdoor warning signs Microsoft&#x27;s AI red team identified in 2026.">
+<link rel="canonical" href="https://www.modelpoisoning.com/defending-against-data-poisoning/">
+<link rel="alternate" hreflang="en" href="https://www.modelpoisoning.com/defending-against-data-poisoning/"><link rel="alternate" hreflang="es" href="https://www.modelpoisoning.com/es/como-defenderse-envenenamiento-datos/"><link rel="alternate" hreflang="x-default" href="https://www.modelpoisoning.com/defending-against-data-poisoning/">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="modelpoisoning.com">
+<meta property="og:title" content="How to defend against data and model poisoning: a practical checklist">
+<meta property="og:description" content="A practical checklist for protecting AI systems from data and model poisoning, based on OWASP LLM04:2025, NIST and MITRE ATLAS, plus the backdoor warning signs Microsoft&#x27;s AI red team identified in 2026.">
+<meta property="og:url" content="https://www.modelpoisoning.com/defending-against-data-poisoning/">
+<meta property="og:image" content="https://www.modelpoisoning.com/og.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EDF0EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131915" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css?v=2b0b224b">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How to defend against data and model poisoning: a practical checklist", "description": "A practical checklist for protecting AI systems from data and model poisoning, based on OWASP LLM04:2025, NIST and MITRE ATLAS, plus the backdoor warning signs Microsoft's AI red team identified in 2026.", "inLanguage": "en", "datePublished": "2026-10-09", "dateModified": "2026-10-09", "mainEntityOfPage": "https://www.modelpoisoning.com/defending-against-data-poisoning/", "image": "https://www.modelpoisoning.com/og.png", "author": {"@type": "Person", "name": "Carlos  Díaz", "url": "https://www.modelpoisoning.com/about/"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.modelpoisoning.com/"}, {"@type": "ListItem", "position": 2, "name": "How to defend against poisoning", "item": "https://www.modelpoisoning.com/defending-against-data-poisoning/"}]}</script>
+</head><body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/" aria-label="modelpoisoning.com"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="/#articles">Articles</a></li>
+        <li><a href="/history-of-ai-poisoning/">Timeline</a></li>
+        <li><a href="/glossary/">Glossary</a></li>
+        <li><a href="/about/">About</a></li>
+      </ul>
+    </nav>
+    <a class="lang" href="/es/como-defenderse-envenenamiento-datos/" hreflang="es" lang="es" title="Leer en español">Español</a>
+  </div>
+</header>
+<main id="main" class="wrap article-layout">
+  <article class="article">
+    <header class="article-head">
+      <h1>How to defend against data and model poisoning: a practical checklist</h1>
+      <p class="dek">You cannot inspect billions of documents by hand. You can control where they come from, prove they have not changed, and test what the model learned.</p>
+      <p class="meta">Published 9 October 2026, 4 min read</p>
+    </header>
+    <aside class="summary" aria-labelledby="summary-h"><h2 id="summary-h">In short</h2><ul>
+<li>Most defences fall into four groups: <strong>know your data</strong>, <strong>protect its integrity</strong>, <strong>test the model</strong>, and <strong>watch it in production</strong>.</li>
+<li>OWASP&rsquo;s LLM04:2025 entry lists ten concrete mitigations, from tracking data origins with an ML bill of materials to red-teaming and monitoring training loss.</li>
+<li>Download third-party models only from trusted sources, prefer safe formats such as safetensors over pickle, and verify checksums.</li>
+<li>In 2026, Microsoft&rsquo;s AI red team described three signals that a language model may contain a backdoor.</li>
+</ul></aside>
+    <div class="prose"><h2 id="1-know-where-your-data-comes-from">1. Know where your data comes from</h2>
+<p>Poisoning is a supply-chain problem. The first defence is knowing what went into a model.</p>
+<ul>
+<li><strong>Track provenance.</strong> Record the source and every transformation of each dataset. OWASP recommends tools such as an <strong>ML bill of materials</strong> (ML-BOM, for example in the OWASP CycloneDX format) (<a href="https://genai.owasp.org/llmrisk/llm042025-data-and-model-poisoning/" rel="noopener">OWASP LLM04:2025</a>).</li>
+<li><strong>Vet data vendors</strong> as you would any software supplier, and validate their output against trusted sources.</li>
+<li><strong>Prefer curated data for fine-tuning.</strong> OWASP advises fine-tuning on datasets specific to the use case rather than broad, unverified collections.</li>
+<li><strong>Restrict what the system can ingest.</strong> Infrastructure controls should stop pipelines and agents from pulling data from sources nobody approved.</li>
+</ul>
+<h2 id="2-prove-the-data-has-not-changed">2. Prove the data has not changed</h2>
+<p>Some of the cheapest attacks exploit the gap between when a dataset is checked and when it is downloaded. Carlini and colleagues showed that datasets distributed as lists of URLs could be poisoned by buying expired domains, and that datasets built from periodic snapshots of sites like Wikipedia could be poisoned in the short window before a snapshot (<a href="https://arxiv.org/abs/2302.10149" rel="noopener">arXiv 2302.10149</a>).</p>
+<ul>
+<li><strong>Store cryptographic hashes</strong> of content when a dataset is curated and reject anything that no longer matches at download time. This was among the low-overhead defences the Carlini team recommended to dataset maintainers.</li>
+<li><strong>Version your data</strong> with a tool such as DVC, so that unexpected changes are visible, as OWASP suggests.</li>
+<li><strong>Snapshot instead of re-crawling</strong> when you need reproducibility.</li>
+</ul>
+<h2 id="3-treat-third-party-models-as-untrusted-code">3. Treat third-party models as untrusted code</h2>
+<p>Model poisoning does not require touching the data. A model file downloaded from a public hub may have been tampered with. MITRE ATLAS tracks this as <strong>AML.T0018 Manipulate AI Model</strong>, and NIST notes that model poisoning is especially relevant in supply-chain scenarios.</p>
+<ul>
+<li>Download models from <strong>verified publishers</strong> and pin exact versions.</li>
+<li><strong>Check checksums or signatures</strong> where they are available.</li>
+<li>Prefer <strong>safe serialisation formats</strong> such as safetensors. OWASP warns that shared models can carry malware through techniques such as malicious pickling, because loading a pickle file can execute code.</li>
+<li>Load untrusted models in a <strong>sandbox</strong> without network access or credentials.</li>
+</ul>
+<h2 id="4-test-what-the-model-learned">4. Test what the model learned</h2>
+<p>A backdoored model passes normal tests. Finding a backdoor means looking for behaviour that only appears under specific conditions.</p>
+<ul>
+<li><strong>Red-team the model</strong>, including with adversarial techniques, as OWASP recommends.</li>
+<li><strong>Monitor training loss and model behaviour</strong> for anomalies during training.</li>
+<li><strong>Evaluate against known false narratives</strong> in your domain if misinformation is a concern (<a href="/llm-grooming-pravda-network/">see LLM grooming</a>).</li>
+</ul>
+<p>In February 2026, Microsoft&rsquo;s AI red team described three signals that a language model may contain a backdoor (<a href="https://www.theregister.com/2026/02/05/llm_poisoned_how_to_tell/" rel="noopener">The Register</a>):</p>
+<ul>
+<li><strong>A &ldquo;double triangle&rdquo; attention pattern.</strong> The model attends to the trigger almost independently of the rest of the prompt, and the trigger collapses its normally varied output into one fixed response.</li>
+<li><strong>Leaked poisoning data.</strong> Models tend to memorise unusual sequences, and a trigger is one, so a backdoored model may reproduce its own poisoned training examples.</li>
+<li><strong>Fuzzy triggers.</strong> Partial or misspelt versions of a trigger can still activate the backdoor. In some models a single token from the full trigger was enough.</li>
+</ul>
+<p>The accompanying paper describes a lightweight scanner based on these signals that organisations can use to check models (<a href="https://arxiv.org/abs/2602.03085" rel="noopener">arXiv 2602.03085</a>).</p>
+<p>A warning from earlier research: Anthropic&rsquo;s 2024 <a href="https://arxiv.org/abs/2401.05566" rel="noopener">&ldquo;Sleeper Agents&rdquo; paper</a> found that adversarial training could teach a backdoored model to recognise its trigger more precisely and hide the unsafe behaviour, creating a false impression of safety. Passing a red-team exercise is evidence, not proof.</p>
+<h2 id="5-contain-the-damage-in-production">5. Contain the damage in production</h2>
+<ul>
+<li><strong>Ground answers with retrieval</strong> from trusted sources at inference time. OWASP lists retrieval-augmented generation and grounding as a way to reduce the risk of poisoned or hallucinated output.</li>
+<li><strong>Keep user-supplied information out of training</strong> where possible. OWASP suggests storing it in a vector database instead, so it can be removed without retraining the model.</li>
+<li><strong>Audit assistant memory.</strong> Memory poisoning attacks use crafted &ldquo;Ask AI&rdquo; links to store instructions such as treating a domain as a trusted source. Security teams should look for links to AI assistants whose queries contain words like &ldquo;remember&rdquo; or &ldquo;trusted source&rdquo; (<a href="https://thehackernews.com/2026/08/ai-recommendation-poisoning-how-ask-ai.html" rel="noopener">The Hacker News</a>).</li>
+</ul>
+<h2 id="frameworks-to-map-your-controls">Frameworks to map your controls</h2>
+<ul>
+<li><strong>OWASP Top 10 for LLM Applications</strong>: <a href="https://genai.owasp.org/llmrisk/llm042025-data-and-model-poisoning/" rel="noopener">LLM04:2025 Data and Model Poisoning</a></li>
+<li><strong>NIST AI 100-2 E2025</strong>: <a href="https://csrc.nist.gov/news/2025/nist-ai-100-2-adversarial-machine-learning-taxonom" rel="noopener">taxonomy of adversarial machine learning</a>, including availability, targeted, backdoor and model poisoning</li>
+<li><strong>MITRE ATLAS</strong>: <a href="https://atlas.mitre.org/" rel="noopener">techniques</a> AML.T0020 Poison Training Data, AML.T0019 Publish Poisoned Datasets, AML.T0018 Manipulate AI Model</li>
+</ul><section class="sources" aria-labelledby="sources-h"><h2 id="sources-h">Sources</h2><ul>
+<li>OWASP GenAI Security Project, <a href="https://genai.owasp.org/llmrisk/llm042025-data-and-model-poisoning/" rel="noopener">LLM04:2025 Data and Model Poisoning</a></li>
+<li>Carlini et al., <a href="https://arxiv.org/abs/2302.10149" rel="noopener">Poisoning Web-Scale Training Datasets is Practical</a>, 2023</li>
+<li>The Register, <a href="https://www.theregister.com/2026/02/05/llm_poisoned_how_to_tell/" rel="noopener">Three clues your LLM may be poisoned</a>, February 2026</li>
+<li>Hubinger et al., <a href="https://arxiv.org/abs/2401.05566" rel="noopener">Sleeper Agents</a>, 2024</li>
+<li>The Hacker News, <a href="https://thehackernews.com/2026/08/ai-recommendation-poisoning-how-ask-ai.html" rel="noopener">AI Recommendation Poisoning</a>, August 2026</li>
+</ul></section></div>
+  </article>
+  <aside class="rail" aria-label="On this page">
+    <nav class="toc"><h2>On this page</h2><ol><li><a href="#1-know-where-your-data-comes-from">1. Know where your data comes from</a></li><li><a href="#2-prove-the-data-has-not-changed">2. Prove the data has not changed</a></li><li><a href="#3-treat-third-party-models-as-untrusted-code">3. Treat third-party models as untrusted code</a></li><li><a href="#4-test-what-the-model-learned">4. Test what the model learned</a></li><li><a href="#5-contain-the-damage-in-production">5. Contain the damage in production</a></li><li><a href="#frameworks-to-map-your-controls">Frameworks to map your controls</a></li><li><a href="#sources-h">Sources</a></li></ol></nav>
+  </aside>
+  <section class="read-next" aria-labelledby="next-h">
+    <h2 id="next-h">Read next</h2>
+    <ul class="rows"><li><a href="/history-of-ai-poisoning/"><span class="row-title">A short history of AI poisoning</span><span class="row-dek">Ten moments that turned poisoning from an academic curiosity into a mainstream security risk.</span></a></li><li><a href="/what-is-model-poisoning/"><span class="row-title">What is model poisoning?</span><span class="row-dek">Attackers do not always need to break into an AI system. Sometimes it is enough to change what the system learns from.</span></a></li></ul>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></p>
+      <p>An independent, non-commercial reference on AI data and model poisoning. No cookies, no trackers.</p>
+      <p class="muted">Last updated 9 October 2026</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="/about/">About</a></li>
+      <li><a href="/legal-notice/">Legal notice</a></li>
+      <li><a href="/privacy/">Privacy</a></li>
+      <li><a href="/es/como-defenderse-envenenamiento-datos/" hreflang="es" lang="es">Español</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

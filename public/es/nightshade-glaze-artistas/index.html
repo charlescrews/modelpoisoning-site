@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nightshade y Glaze: cuando los artistas envenenan sus propias imágenes</title>
+<meta name="description" content="Cómo las herramientas Nightshade y Glaze de la Universidad de Chicago permiten a los artistas alterar sus imágenes para que los modelos de IA entrenados con ellas sin permiso aprendan cosas equivocadas, y cuáles son sus límites.">
+<link rel="canonical" href="https://www.modelpoisoning.com/es/nightshade-glaze-artistas/">
+<link rel="alternate" hreflang="en" href="https://www.modelpoisoning.com/nightshade-glaze-artists-poisoning/"><link rel="alternate" hreflang="es" href="https://www.modelpoisoning.com/es/nightshade-glaze-artistas/"><link rel="alternate" hreflang="x-default" href="https://www.modelpoisoning.com/nightshade-glaze-artists-poisoning/">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="modelpoisoning.com">
+<meta property="og:title" content="Nightshade y Glaze: cuando los artistas envenenan sus propias imágenes">
+<meta property="og:description" content="Cómo las herramientas Nightshade y Glaze de la Universidad de Chicago permiten a los artistas alterar sus imágenes para que los modelos de IA entrenados con ellas sin permiso aprendan cosas equivocadas, y cuáles son sus límites.">
+<meta property="og:url" content="https://www.modelpoisoning.com/es/nightshade-glaze-artistas/">
+<meta property="og:image" content="https://www.modelpoisoning.com/og.png">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EDF0EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131915" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css?v=2b0b224b">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Nightshade y Glaze: cuando los artistas envenenan sus propias imágenes", "description": "Cómo las herramientas Nightshade y Glaze de la Universidad de Chicago permiten a los artistas alterar sus imágenes para que los modelos de IA entrenados con ellas sin permiso aprendan cosas equivocadas, y cuáles son sus límites.", "inLanguage": "es", "datePublished": "2026-10-09", "dateModified": "2026-10-09", "mainEntityOfPage": "https://www.modelpoisoning.com/es/nightshade-glaze-artistas/", "image": "https://www.modelpoisoning.com/og.png", "author": {"@type": "Person", "name": "Carlos  Díaz", "url": "https://www.modelpoisoning.com/es/sobre/"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.modelpoisoning.com/es/"}, {"@type": "ListItem", "position": 2, "name": "Nightshade y Glaze", "item": "https://www.modelpoisoning.com/es/nightshade-glaze-artistas/"}]}</script>
+</head><body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/es/" aria-label="modelpoisoning.com"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></a>
+    <nav aria-label="Principal">
+      <ul>
+        <li><a href="/es/#articles">Artículos</a></li>
+        <li><a href="/es/historia-envenenamiento-ia/">Cronología</a></li>
+        <li><a href="/es/glosario/">Glosario</a></li>
+        <li><a href="/es/sobre/">Sobre el sitio</a></li>
+      </ul>
+    </nav>
+    <a class="lang" href="/nightshade-glaze-artists-poisoning/" hreflang="en" lang="en" title="Read in English">English</a>
+  </div>
+</header>
+<main id="main" class="wrap article-layout">
+  <article class="article">
+    <header class="article-head">
+      <h1>Nightshade y Glaze: cuando los artistas envenenan sus propias imágenes</h1>
+      <p class="dek">No todo envenenamiento de datos es un ataque. Para algunos artistas es la única baza que tienen frente a las empresas que recopilan su obra.</p>
+      <p class="meta">Publicado el 9 de octubre de 2026, 4 min de lectura</p>
+    </header>
+    <aside class="summary" aria-labelledby="summary-h"><h2 id="summary-h">En resumen</h2><ul>
+<li><strong>Glaze</strong> y <strong>Nightshade</strong> son herramientas gratuitas del SAND Lab de la Universidad de Chicago que introducen en las imágenes cambios pequeños y difíciles de ver.</li>
+<li><strong>Glaze</strong> es defensiva: dificulta que un modelo imite el estilo de un artista concreto.</li>
+<li><strong>Nightshade</strong> es ofensiva: las imágenes tratadas con ella enseñan asociaciones equivocadas al modelo que se entrene con ellas, por ejemplo que la foto de una vaca es un bolso.</li>
+<li>El artículo científico indica que un prompt de Stable Diffusion SDXL se puede corromper con <strong>menos de 100 muestras envenenadas</strong>. El equipo admite que la protección no durará siempre, porque las defensas evolucionan.</li>
+</ul></aside>
+    <div class="prose"><h2 id="el-envenenamiento-como-defensa-propia">El envenenamiento como defensa propia</h2>
+<p>Los modelos que generan imágenes a partir de texto, como Stable Diffusion, Midjourney o DALL·E, se entrenaron con miles de millones de imágenes recogidas de la web, incluida la obra de artistas vivos a los que nadie pidió permiso. Existen mecanismos para excluirse, pero dependen de que los rastreadores decidan respetarlos.</p>
+<p>Un grupo de investigación dirigido por el profesor <strong>Ben Y. Zhao</strong> en la Universidad de Chicago creó dos herramientas que cambian las reglas de juego. En lugar de pedir permiso, hacen que entrenar sin licencia sea menos útil.</p>
+<h2 id="glaze-proteger-un-estilo">Glaze: proteger un estilo</h2>
+<p>Glaze, publicada en 2023, está pensada para aplicarse a todas las imágenes que publica un artista. Añade una perturbación sutil para el ojo humano que cambia cómo percibe un modelo el estilo de la imagen. Si alguien ajusta un modelo con obras tratadas con Glaze para imitar a ese artista, el resultado deriva hacia otro estilo. Glaze protege a cada artista por separado.</p>
+<h2 id="nightshade-un-elemento-disuasorio-colectivo">Nightshade: un elemento disuasorio colectivo</h2>
+<p>Nightshade, que el equipo publicó en enero de 2024 y que se descargó unas 250.000 veces poco después de su lanzamiento según <a href="https://www.etcentric.org/ai-poison-pill-app-nightshade-has-250k-downloads-in-5-days/" rel="noopener">ETCentric</a>, funciona de otra forma. Su <a href="https://nightshade.cs.uchicago.edu/whatis.html" rel="noopener">página del proyecto</a> la describe como &laquo;una herramienta ofensiva que los artistas pueden usar en grupo&raquo;.</p>
+<p>Una imagen tratada con Nightshade sigue pareciendo la original a una persona. Para un modelo, lleva rasgos de otro concepto. El ejemplo del equipo es la imagen de una vaca en un prado que, una vez tratada, empuja al modelo a generar un bolso de cuero. Si un modelo se entrena con suficientes imágenes tratadas, su idea de &laquo;vaca&raquo; empieza a romperse.</p>
+<p>El artículo técnico, <a href="https://arxiv.org/abs/2310.13828" rel="noopener">Nightshade: Prompt-Specific Poisoning Attacks on Text-to-Image Generative Models</a>, de Shawn Shan, Wenxin Ding, Josephine Passananti, Haitao Zheng y Ben Y. Zhao, se presentó en el IEEE Symposium on Security and Privacy en mayo de 2024. Su resumen hace varias afirmaciones que importan más allá del arte:</p>
+<ul>
+<li>Un prompt de Stable Diffusion SDXL se puede corromper con <strong>menos de 100 muestras envenenadas</strong>.</li>
+<li>Los efectos <strong>se extienden</strong> a conceptos relacionados, de modo que envenenar una idea afecta también a sus vecinas.</li>
+<li>Se pueden <strong>combinar varios ataques</strong>, y un número moderado de ellos puede desestabilizar rasgos generales del modelo hasta que deje de producir imágenes con sentido.</li>
+</ul>
+<p>Los autores presentan Nightshade como &laquo;una última defensa de los creadores de contenido frente a los rastreadores web que ignoran las directivas de exclusión o de no rastreo&raquo;. Su objetivo, dicen, es encarecer el entrenamiento con datos sin licencia, no destruir modelos.</p>
+<h2 id="los-limites-que-reconoce-el-equipo">Los límites que reconoce el equipo</h2>
+<p>La página del proyecto es franca sobre lo que Nightshade no puede hacer:</p>
+<ul>
+<li>Los cambios son <strong>más visibles</strong> en obras con colores planos y fondos lisos. Un ajuste de baja intensidad sacrifica protección a cambio de calidad de imagen.</li>
+<li>Es <strong>poco probable que la protección siga siendo eficaz durante mucho tiempo</strong>, porque ataques y defensas evolucionan sin parar.</li>
+<li>Nightshade v1.0 no protege contra la imitación de estilo, por eso el equipo recomienda Glaze para todas las obras y Nightshade como complemento opcional.</li>
+</ul>
+<h2 id="por-que-importa-a-todos-los-demas">Por qué importa a todos los demás</h2>
+<p>Nightshade es una demostración, pública y a gran escala, de algo que los investigadores de seguridad llevaban años diciendo: <strong>los modelos entrenados con datos recopilados de la web heredan lo que haya en esos datos</strong>, incluido el contenido diseñado para engañarlos. Las mismas propiedades que permiten a un artista proteger su portafolio permitirían a un actor malicioso atacar un concepto. Por eso esta investigación se cita en los análisis técnicos sobre el riesgo de envenenamiento, y por eso la procedencia y las licencias de los datos se tratan cada vez más como cuestiones de seguridad, además de legales.</p>
+<p>Para una visión general de cómo funciona el envenenamiento, consulta <a href="/es/que-es-model-poisoning/">¿Qué es el model poisoning?</a>.</p><section class="sources" aria-labelledby="sources-h"><h2 id="sources-h">Fuentes</h2><ul>
+<li>Universidad de Chicago, <a href="https://nightshade.cs.uchicago.edu/whatis.html" rel="noopener">What is Nightshade?</a></li>
+<li>Shan et al., <a href="https://arxiv.org/abs/2310.13828" rel="noopener">Nightshade: Prompt-Specific Poisoning Attacks on Text-to-Image Generative Models</a>, IEEE S&amp;P 2024</li>
+<li>ETCentric, <a href="https://www.etcentric.org/ai-poison-pill-app-nightshade-has-250k-downloads-in-5-days/" rel="noopener">AI Poison Pill App Nightshade Has 250K Downloads in 5 Days</a></li>
+<li>Shan et al., <a href="https://www.usenix.org/conference/usenixsecurity23/presentation/shan" rel="noopener">Glaze: Protecting Artists from Style Mimicry by Text-to-Image Models</a>, USENIX Security 2023</li>
+<li>Universidad de Chicago, <a href="https://glaze.cs.uchicago.edu/" rel="noopener">proyecto Glaze</a></li>
+</ul></section></div>
+  </article>
+  <aside class="rail" aria-label="En esta página">
+    <nav class="toc"><h2>En esta página</h2><ol><li><a href="#el-envenenamiento-como-defensa-propia">El envenenamiento como defensa propia</a></li><li><a href="#glaze-proteger-un-estilo">Glaze: proteger un estilo</a></li><li><a href="#nightshade-un-elemento-disuasorio-colectivo">Nightshade: un elemento disuasorio colectivo</a></li><li><a href="#los-limites-que-reconoce-el-equipo">Los límites que reconoce el equipo</a></li><li><a href="#por-que-importa-a-todos-los-demas">Por qué importa a todos los demás</a></li><li><a href="#sources-h">Fuentes</a></li></ol></nav>
+  </aside>
+  <section class="read-next" aria-labelledby="next-h">
+    <h2 id="next-h">Sigue leyendo</h2>
+    <ul class="rows"><li><a href="/es/como-defenderse-envenenamiento-datos/"><span class="row-title">Cómo defenderse del envenenamiento</span><span class="row-dek">Nadie puede revisar a mano miles de millones de documentos. Pero sí se puede controlar de dónde vienen, demostrar que no han cambiado y comprobar qué ha aprendido el modelo.</span></a></li><li><a href="/es/historia-envenenamiento-ia/"><span class="row-title">Breve historia del envenenamiento de la IA</span><span class="row-dek">Diez momentos que convirtieron el envenenamiento de una curiosidad académica en un riesgo de seguridad de primer orden.</span></a></li></ul>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></p>
+      <p>Referencia independiente y sin ánimo comercial sobre el envenenamiento de datos y modelos de IA. Sin cookies ni rastreadores.</p>
+      <p class="muted">Última actualización: 9 de octubre de 2026</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="/es/sobre/">Sobre el sitio</a></li>
+      <li><a href="/es/aviso-legal/">Aviso legal</a></li>
+      <li><a href="/es/privacidad/">Privacidad</a></li>
+      <li><a href="/nightshade-glaze-artists-poisoning/" hreflang="en" lang="en">English</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

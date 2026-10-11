@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A short history of AI poisoning, from Tay to 250-document backdoors</title>
+<meta name="description" content="A timeline of the key moments in AI data and model poisoning: Microsoft&#x27;s Tay, BadNets, $60 dataset poisoning, Sleeper Agents, Nightshade, the Pravda network, NIST&#x27;s taxonomy and the 250-document study.">
+<link rel="canonical" href="https://www.modelpoisoning.com/history-of-ai-poisoning/">
+<link rel="alternate" hreflang="en" href="https://www.modelpoisoning.com/history-of-ai-poisoning/"><link rel="alternate" hreflang="es" href="https://www.modelpoisoning.com/es/historia-envenenamiento-ia/"><link rel="alternate" hreflang="x-default" href="https://www.modelpoisoning.com/history-of-ai-poisoning/">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="modelpoisoning.com">
+<meta property="og:title" content="A short history of AI poisoning, from Tay to 250-document backdoors">
+<meta property="og:description" content="A timeline of the key moments in AI data and model poisoning: Microsoft&#x27;s Tay, BadNets, $60 dataset poisoning, Sleeper Agents, Nightshade, the Pravda network, NIST&#x27;s taxonomy and the 250-document study.">
+<meta property="og:url" content="https://www.modelpoisoning.com/history-of-ai-poisoning/">
+<meta property="og:image" content="https://www.modelpoisoning.com/og.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EDF0EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131915" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css?v=2b0b224b">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "A short history of AI poisoning, from Tay to 250-document backdoors", "description": "A timeline of the key moments in AI data and model poisoning: Microsoft's Tay, BadNets, $60 dataset poisoning, Sleeper Agents, Nightshade, the Pravda network, NIST's taxonomy and the 250-document study.", "inLanguage": "en", "datePublished": "2026-10-09", "dateModified": "2026-10-09", "mainEntityOfPage": "https://www.modelpoisoning.com/history-of-ai-poisoning/", "image": "https://www.modelpoisoning.com/og.png", "author": {"@type": "Person", "name": "Carlos  Díaz", "url": "https://www.modelpoisoning.com/about/"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.modelpoisoning.com/"}, {"@type": "ListItem", "position": 2, "name": "A short history of AI poisoning", "item": "https://www.modelpoisoning.com/history-of-ai-poisoning/"}]}</script>
+</head><body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/" aria-label="modelpoisoning.com"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="/#articles">Articles</a></li>
+        <li><a href="/history-of-ai-poisoning/" aria-current="page">Timeline</a></li>
+        <li><a href="/glossary/">Glossary</a></li>
+        <li><a href="/about/">About</a></li>
+      </ul>
+    </nav>
+    <a class="lang" href="/es/historia-envenenamiento-ia/" hreflang="es" lang="es" title="Leer en español">Español</a>
+  </div>
+</header>
+<main id="main" class="wrap article-layout">
+  <article class="article">
+    <header class="article-head">
+      <h1>A short history of AI poisoning, from Tay to 250-document backdoors</h1>
+      <p class="dek">Ten moments that turned poisoning from an academic curiosity into a mainstream security risk.</p>
+      <p class="meta">Published 9 October 2026, 3 min read</p>
+    </header>
+    
+    <div class="prose"><p>Poisoning attacks are older than large language models. What changed is the scale at which models learn from data that nobody fully controls. This timeline collects the moments we think matter most, each with its primary source. We update it as new research and incidents appear.</p>
+<ol class="timeline"><li class="tl-item" id="y2016"><div class="tl-year">2016</div><div class="tl-body"><h3>Microsoft&#x27;s Tay is taught to be offensive in 16 hours</h3><p class="tl-date">March 2016</p><p>Microsoft launched the Twitter chatbot Tay on 23 March. Within 16 hours and more than 96,000 tweets, users had taught it to post racist and sexist messages, partly by exploiting a “repeat after me” behaviour. Microsoft called it a “coordinated attack by a subset of people” and took Tay offline. MITRE ATLAS now lists it as a poisoning case study.</p><p class="tl-links"><a href="https://en.wikipedia.org/wiki/Tay_(chatbot)" rel="noopener">Source</a></p></div></li><li class="tl-item" id="y2017"><div class="tl-year">2017</div><div class="tl-body"><h3>BadNets shows that outsourced training can hide a backdoor</h3><p class="tl-date">August 2017</p><p>Researchers at New York University showed that a neural network trained by an untrusted party could behave normally on standard tests while misclassifying inputs that carry a trigger, such as a sticker on a stop sign. The paper helped define backdoor attacks on machine learning.</p><p class="tl-links"><a href="https://arxiv.org/abs/1708.06733" rel="noopener">Source</a></p></div></li><li class="tl-item" id="y2023"><div class="tl-year">2023</div><div class="tl-body"><h3>Poisoning web-scale datasets turns out to cost about $60</h3><p class="tl-date">February 2023</p><p>Nicholas Carlini and colleagues showed that an attacker could have poisoned 0.01% of the LAION-400M or COYO-700M datasets for about 60 US dollars by buying expired domains, and that datasets built from Wikipedia snapshots could be poisoned in the window before a snapshot.</p><p class="tl-links"><a href="https://arxiv.org/abs/2302.10149" rel="noopener">Source</a></p></div></li><li class="tl-item" id="y2024"><div class="tl-year">2024</div><div class="tl-body"><h3>Sleeper Agents: backdoors survive safety training</h3><p class="tl-date">January 2024</p><p>Anthropic researchers trained models that wrote secure code when told the year was 2023 and exploitable code when told it was 2024. Standard safety training did not remove the behaviour, and adversarial training taught the models to hide it better.</p><p class="tl-links"><a href="https://arxiv.org/abs/2401.05566" rel="noopener">Source</a></p></div></li><li class="tl-item"><div class="tl-year"></div><div class="tl-body"><h3>Artists get Nightshade</h3><p class="tl-date">January 2024</p><p>The University of Chicago released Nightshade, a free tool that alters images so models trained on them without permission learn the wrong concepts. It was downloaded about 250,000 times shortly after release.</p><p class="tl-links"><a href="https://nightshade.cs.uchicago.edu/whatis.html" rel="noopener">Source</a> <a href="/nightshade-glaze-artists-poisoning/">Nightshade and Glaze</a></p></div></li><li class="tl-item"><div class="tl-year"></div><div class="tl-body"><h3>France exposes the Pravda network</h3><p class="tl-date">February 2024</p><p>VIGINUM, the French agency against foreign digital interference, published its first report on the pro-Kremlin network of sites later known for targeting AI systems.</p><p class="tl-links"><a href="https://thebulletin.org/2025/03/russian-networks-flood-the-internet-with-propaganda-aiming-to-corrupt-ai-chatbots/" rel="noopener">Source</a> <a href="/llm-grooming-pravda-network/">LLM grooming and the Pravda network</a></p></div></li><li class="tl-item" id="y2025"><div class="tl-year">2025</div><div class="tl-body"><h3>Chatbots repeat propaganda a third of the time</h3><p class="tl-date">March 2025</p><p>After the American Sunlight Project coined the term “LLM grooming”, NewsGuard tested 10 leading AI chatbots and found they repeated false narratives from the Pravda network 33% of the time.</p><p class="tl-links"><a href="https://www.newsguardtech.com/special-reports/moscow-based-global-news-network-infected-western-artificial-intelligence-russian-propaganda/" rel="noopener">Source</a> <a href="/llm-grooming-pravda-network/">LLM grooming and the Pravda network</a></p></div></li><li class="tl-item"><div class="tl-year"></div><div class="tl-body"><h3>NIST updates its taxonomy of AI attacks</h3><p class="tl-date">March 2025</p><p>NIST AI 100-2 E2025 classifies attacks on predictive and generative AI, with poisoning split into availability, targeted, backdoor and model poisoning.</p><p class="tl-links"><a href="https://csrc.nist.gov/news/2025/nist-ai-100-2-adversarial-machine-learning-taxonom" rel="noopener">Source</a> <a href="/what-is-model-poisoning/">What is model poisoning?</a></p></div></li><li class="tl-item"><div class="tl-year"></div><div class="tl-body"><h3>250 documents are enough to backdoor an LLM</h3><p class="tl-date">October 2025</p><p>Anthropic, the UK AI Security Institute and the Alan Turing Institute found that about 250 poisoned documents planted a backdoor in language models from 600 million to 13 billion parameters, regardless of how much clean data they were trained on.</p><p class="tl-links"><a href="https://www.anthropic.com/research/small-samples-poison" rel="noopener">Source</a> <a href="/250-documents-poison-llm/">250 documents are enough</a></p></div></li><li class="tl-item" id="y2026"><div class="tl-year">2026</div><div class="tl-body"><h3>Microsoft describes how to spot a backdoored model</h3><p class="tl-date">February 2026</p><p>Microsoft&#x27;s AI red team described three warning signs of a backdoored language model and a scanner that reconstructs hidden triggers. Microsoft Security also reported 31 companies in 14 industries using links that try to plant instructions in AI assistants&#x27; memory.</p><p class="tl-links"><a href="https://www.theregister.com/2026/02/05/llm_poisoned_how_to_tell/" rel="noopener">Source</a> <a href="/defending-against-data-poisoning/">How to defend against poisoning</a></p></div></li></ol>
+
+<h2 id="what-the-timeline-shows">What the timeline shows</h2>
+<p>Three trends stand out.</p>
+<p><strong>The cost of attacking keeps falling.</strong> In 2017 a backdoor required control of the training process. By 2023 it could be done by buying expired domains for about $60. By 2025, a few hundred documents were enough for a simple backdoor in models of every size tested.</p>
+<p><strong>The attackers have changed.</strong> Early cases involved pranksters and academics. Today they include state-linked influence operations publishing millions of articles a year, companies trying to bias AI assistants towards their products, and artists using poisoning to defend their work.</p>
+<p><strong>Defence is catching up, slowly.</strong> Frameworks from OWASP, NIST and MITRE now give poisoning a shared vocabulary, and research on detecting backdoors has moved from theory to practical scanners. Our <a href="/defending-against-data-poisoning/">defence checklist</a> collects what organisations can do today.</p>
+<p>Know of a case we should add? Tell us through the <a href="/about/">about page</a>.</p></div>
+  </article>
+  <aside class="rail" aria-label="On this page">
+    <nav class="toc"><h2>On this page</h2><ol><li><a href="#y2016">2016</a></li><li><a href="#y2017">2017</a></li><li><a href="#y2023">2023</a></li><li><a href="#y2024">2024</a></li><li><a href="#y2025">2025</a></li><li><a href="#y2026">2026</a></li><li><a href="#what-the-timeline-shows">What the timeline shows</a></li></ol></nav>
+  </aside>
+  <section class="read-next" aria-labelledby="next-h">
+    <h2 id="next-h">Read next</h2>
+    <ul class="rows"><li><a href="/what-is-model-poisoning/"><span class="row-title">What is model poisoning?</span><span class="row-dek">Attackers do not always need to break into an AI system. Sometimes it is enough to change what the system learns from.</span></a></li><li><a href="/250-documents-poison-llm/"><span class="row-title">250 documents are enough</span><span class="row-dek">The largest poisoning experiment published so far suggests that what matters is the number of malicious documents, not their share of the training data.</span></a></li></ul>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></p>
+      <p>An independent, non-commercial reference on AI data and model poisoning. No cookies, no trackers.</p>
+      <p class="muted">Last updated 9 October 2026</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="/about/">About</a></li>
+      <li><a href="/legal-notice/">Legal notice</a></li>
+      <li><a href="/privacy/">Privacy</a></li>
+      <li><a href="/es/historia-envenenamiento-ia/" hreflang="es" lang="es">Español</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,108 @@
+[
+  {
+    "year": "2016",
+    "date": {"en": "March 2016", "es": "Marzo de 2016"},
+    "title": {"en": "Microsoft's Tay is taught to be offensive in 16 hours", "es": "Tay, el chatbot de Microsoft, aprende a ser ofensivo en 16 horas"},
+    "text": {
+      "en": "Microsoft launched the Twitter chatbot Tay on 23 March. Within 16 hours and more than 96,000 tweets, users had taught it to post racist and sexist messages, partly by exploiting a \"repeat after me\" behaviour. Microsoft called it a \"coordinated attack by a subset of people\" and took Tay offline. MITRE ATLAS now lists it as a poisoning case study.",
+      "es": "Microsoft lanzó el chatbot de Twitter Tay el 23 de marzo. En 16 horas y más de 96.000 tuits, varios usuarios le habían enseñado a publicar mensajes racistas y sexistas, en parte aprovechando una función de \"repite después de mí\". Microsoft lo calificó de \"ataque coordinado de un subconjunto de personas\" y lo desconectó. MITRE ATLAS lo recoge hoy como caso de estudio de envenenamiento."
+    },
+    "source": "https://en.wikipedia.org/wiki/Tay_(chatbot)"
+  },
+  {
+    "year": "2017",
+    "date": {"en": "August 2017", "es": "Agosto de 2017"},
+    "title": {"en": "BadNets shows that outsourced training can hide a backdoor", "es": "BadNets demuestra que un entrenamiento externalizado puede esconder una puerta trasera"},
+    "text": {
+      "en": "Researchers at New York University showed that a neural network trained by an untrusted party could behave normally on standard tests while misclassifying inputs that carry a trigger, such as a sticker on a stop sign. The paper helped define backdoor attacks on machine learning.",
+      "es": "Investigadores de la Universidad de Nueva York mostraron que una red neuronal entrenada por un tercero no fiable podía funcionar con normalidad en las pruebas habituales y, a la vez, clasificar mal las entradas que llevaban un disparador, como una pegatina en una señal de stop. El artículo ayudó a definir los ataques de puerta trasera en aprendizaje automático."
+    },
+    "source": "https://arxiv.org/abs/1708.06733"
+  },
+  {
+    "year": "2023",
+    "date": {"en": "February 2023", "es": "Febrero de 2023"},
+    "title": {"en": "Poisoning web-scale datasets turns out to cost about $60", "es": "Envenenar datasets a escala web resulta costar unos 60 dólares"},
+    "text": {
+      "en": "Nicholas Carlini and colleagues showed that an attacker could have poisoned 0.01% of the LAION-400M or COYO-700M datasets for about 60 US dollars by buying expired domains, and that datasets built from Wikipedia snapshots could be poisoned in the window before a snapshot.",
+      "es": "Nicholas Carlini y sus colegas mostraron que un atacante podría haber envenenado el 0,01 % de los datasets LAION-400M o COYO-700M por unos 60 dólares comprando dominios caducados, y que los datasets construidos a partir de instantáneas de Wikipedia podían envenenarse justo antes de cada instantánea."
+    },
+    "source": "https://arxiv.org/abs/2302.10149"
+  },
+  {
+    "year": "2024",
+    "date": {"en": "January 2024", "es": "Enero de 2024"},
+    "title": {"en": "Sleeper Agents: backdoors survive safety training", "es": "Sleeper Agents: las puertas traseras sobreviven al entrenamiento de seguridad"},
+    "text": {
+      "en": "Anthropic researchers trained models that wrote secure code when told the year was 2023 and exploitable code when told it was 2024. Standard safety training did not remove the behaviour, and adversarial training taught the models to hide it better.",
+      "es": "Investigadores de Anthropic entrenaron modelos que escribían código seguro cuando se les decía que era 2023 y código vulnerable cuando se les decía que era 2024. El entrenamiento de seguridad habitual no eliminó ese comportamiento y el entrenamiento adversarial enseñó a los modelos a ocultarlo mejor."
+    },
+    "source": "https://arxiv.org/abs/2401.05566"
+  },
+  {
+    "year": "2024",
+    "date": {"en": "January 2024", "es": "Enero de 2024"},
+    "title": {"en": "Artists get Nightshade", "es": "Los artistas reciben Nightshade"},
+    "text": {
+      "en": "The University of Chicago released Nightshade, a free tool that alters images so models trained on them without permission learn the wrong concepts. It was downloaded about 250,000 times shortly after release.",
+      "es": "La Universidad de Chicago publicó Nightshade, una herramienta gratuita que altera imágenes para que los modelos entrenados con ellas sin permiso aprendan conceptos equivocados. Se descargó unas 250.000 veces poco después de su lanzamiento."
+    },
+    "source": "https://nightshade.cs.uchicago.edu/whatis.html",
+    "link": "nightshade"
+  },
+  {
+    "year": "2024",
+    "date": {"en": "February 2024", "es": "Febrero de 2024"},
+    "title": {"en": "France exposes the Pravda network", "es": "Francia destapa la red Pravda"},
+    "text": {
+      "en": "VIGINUM, the French agency against foreign digital interference, published its first report on the pro-Kremlin network of sites later known for targeting AI systems.",
+      "es": "VIGINUM, la agencia francesa contra la injerencia digital extranjera, publicó su primer informe sobre la red de webs prorrusas que más tarde se conocería por apuntar a los sistemas de IA."
+    },
+    "source": "https://thebulletin.org/2025/03/russian-networks-flood-the-internet-with-propaganda-aiming-to-corrupt-ai-chatbots/",
+    "link": "grooming"
+  },
+  {
+    "year": "2025",
+    "date": {"en": "March 2025", "es": "Marzo de 2025"},
+    "title": {"en": "Chatbots repeat propaganda a third of the time", "es": "Los chatbots repiten propaganda un tercio de las veces"},
+    "text": {
+      "en": "After the American Sunlight Project coined the term \"LLM grooming\", NewsGuard tested 10 leading AI chatbots and found they repeated false narratives from the Pravda network 33% of the time.",
+      "es": "Después de que el American Sunlight Project acuñara el término \"LLM grooming\", NewsGuard probó 10 chatbots líderes y comprobó que repetían narrativas falsas de la red Pravda el 33 % de las veces."
+    },
+    "source": "https://www.newsguardtech.com/special-reports/moscow-based-global-news-network-infected-western-artificial-intelligence-russian-propaganda/",
+    "link": "grooming"
+  },
+  {
+    "year": "2025",
+    "date": {"en": "March 2025", "es": "Marzo de 2025"},
+    "title": {"en": "NIST updates its taxonomy of AI attacks", "es": "El NIST actualiza su taxonomía de ataques a la IA"},
+    "text": {
+      "en": "NIST AI 100-2 E2025 classifies attacks on predictive and generative AI, with poisoning split into availability, targeted, backdoor and model poisoning.",
+      "es": "El documento NIST AI 100-2 E2025 clasifica los ataques contra la IA predictiva y generativa, y divide el envenenamiento en ataques de disponibilidad, dirigidos, de puerta trasera y de envenenamiento del modelo."
+    },
+    "source": "https://csrc.nist.gov/news/2025/nist-ai-100-2-adversarial-machine-learning-taxonom",
+    "link": "what-is"
+  },
+  {
+    "year": "2025",
+    "date": {"en": "October 2025", "es": "Octubre de 2025"},
+    "title": {"en": "250 documents are enough to backdoor an LLM", "es": "250 documentos bastan para meter una puerta trasera en un LLM"},
+    "text": {
+      "en": "Anthropic, the UK AI Security Institute and the Alan Turing Institute found that about 250 poisoned documents planted a backdoor in language models from 600 million to 13 billion parameters, regardless of how much clean data they were trained on.",
+      "es": "Anthropic, el UK AI Security Institute y el Alan Turing Institute comprobaron que unos 250 documentos envenenados bastaban para implantar una puerta trasera en modelos de lenguaje de 600 millones a 13.000 millones de parámetros, independientemente de cuántos datos limpios hubieran visto."
+    },
+    "source": "https://www.anthropic.com/research/small-samples-poison",
+    "link": "250-docs"
+  },
+  {
+    "year": "2026",
+    "date": {"en": "February 2026", "es": "Febrero de 2026"},
+    "title": {"en": "Microsoft describes how to spot a backdoored model", "es": "Microsoft explica cómo detectar un modelo con puerta trasera"},
+    "text": {
+      "en": "Microsoft's AI red team described three warning signs of a backdoored language model and a scanner that reconstructs hidden triggers. Microsoft Security also reported 31 companies in 14 industries using links that try to plant instructions in AI assistants' memory.",
+      "es": "El red team de IA de Microsoft describió tres señales de alarma de un modelo de lenguaje con puerta trasera y un escáner que reconstruye los disparadores ocultos. Microsoft Security informó además de 31 empresas de 14 sectores que usaban enlaces para intentar plantar instrucciones en la memoria de los asistentes de IA."
+    },
+    "source": "https://www.theregister.com/2026/02/05/llm_poisoned_how_to_tell/",
+    "link": "defend"
+  }
+]

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¿Qué es el model poisoning? Envenenamiento de datos y de modelos explicado</title>
+<meta name="description" content="Explicación clara del envenenamiento de modelos de IA y de datos: cómo los atacantes corrompen los datos de entrenamiento o los pesos de un modelo, los principales tipos de ataque y cómo los clasifican OWASP, NIST y MITRE ATLAS.">
+<link rel="canonical" href="https://www.modelpoisoning.com/es/que-es-model-poisoning/">
+<link rel="alternate" hreflang="en" href="https://www.modelpoisoning.com/what-is-model-poisoning/"><link rel="alternate" hreflang="es" href="https://www.modelpoisoning.com/es/que-es-model-poisoning/"><link rel="alternate" hreflang="x-default" href="https://www.modelpoisoning.com/what-is-model-poisoning/">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="modelpoisoning.com">
+<meta property="og:title" content="¿Qué es el model poisoning? Envenenamiento de datos y de modelos explicado">
+<meta property="og:description" content="Explicación clara del envenenamiento de modelos de IA y de datos: cómo los atacantes corrompen los datos de entrenamiento o los pesos de un modelo, los principales tipos de ataque y cómo los clasifican OWASP, NIST y MITRE ATLAS.">
+<meta property="og:url" content="https://www.modelpoisoning.com/es/que-es-model-poisoning/">
+<meta property="og:image" content="https://www.modelpoisoning.com/og.png">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EDF0EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131915" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css?v=2b0b224b">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "¿Qué es el model poisoning? Envenenamiento de datos y de modelos explicado", "description": "Explicación clara del envenenamiento de modelos de IA y de datos: cómo los atacantes corrompen los datos de entrenamiento o los pesos de un modelo, los principales tipos de ataque y cómo los clasifican OWASP, NIST y MITRE ATLAS.", "inLanguage": "es", "datePublished": "2026-10-09", "dateModified": "2026-10-09", "mainEntityOfPage": "https://www.modelpoisoning.com/es/que-es-model-poisoning/", "image": "https://www.modelpoisoning.com/og.png", "author": {"@type": "Person", "name": "Carlos  Díaz", "url": "https://www.modelpoisoning.com/es/sobre/"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.modelpoisoning.com/es/"}, {"@type": "ListItem", "position": 2, "name": "¿Qué es el model poisoning?", "item": "https://www.modelpoisoning.com/es/que-es-model-poisoning/"}]}</script>
+</head><body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/es/" aria-label="modelpoisoning.com"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></a>
+    <nav aria-label="Principal">
+      <ul>
+        <li><a href="/es/#articles">Artículos</a></li>
+        <li><a href="/es/historia-envenenamiento-ia/">Cronología</a></li>
+        <li><a href="/es/glosario/">Glosario</a></li>
+        <li><a href="/es/sobre/">Sobre el sitio</a></li>
+      </ul>
+    </nav>
+    <a class="lang" href="/what-is-model-poisoning/" hreflang="en" lang="en" title="Read in English">English</a>
+  </div>
+</header>
+<main id="main" class="wrap article-layout">
+  <article class="article">
+    <header class="article-head">
+      <h1>¿Qué es el model poisoning? Envenenamiento de datos y de modelos explicado</h1>
+      <p class="dek">Un atacante no siempre necesita entrar en un sistema de IA. A veces le basta con cambiar aquello de lo que aprende.</p>
+      <p class="meta">Publicado el 9 de octubre de 2026, 5 min de lectura</p>
+    </header>
+    <aside class="summary" aria-labelledby="summary-h"><h2 id="summary-h">En resumen</h2><ul>
+<li>El <strong>envenenamiento de datos</strong> (<em>data poisoning</em>) consiste en manipular los datos con los que aprende un modelo: el corpus de preentrenamiento, los datos de ajuste fino o los documentos que consulta un sistema de recuperación.</li>
+<li>El <strong>envenenamiento del modelo</strong> (<em>model poisoning</em>) consiste en manipular el propio modelo, por ejemplo editando sus pesos o publicando una copia con trampa.</li>
+<li>El objetivo puede ser empeorar el modelo en general, hacer que falle con entradas concretas o plantar una <strong>puerta trasera</strong> oculta que solo activa un disparador.</li>
+<li>OWASP sitúa el &laquo;Data and Model Poisoning&raquo; como riesgo LLM04 de su Top 10 de 2025 para aplicaciones basadas en grandes modelos de lenguaje.</li>
+</ul></aside>
+    <div class="prose"><h2 id="una-definicion-breve">Una definición breve</h2>
+<p>Un modelo de IA es el resultado de dos cosas: los datos con los que se entrenó y los parámetros (pesos) que produjo ese entrenamiento. El <strong>envenenamiento</strong> es cualquier manipulación deliberada de uno de los dos para que el modelo final se comporte como quiere el atacante y no como pretendían sus creadores.</p>
+<p>A diferencia de la mayoría de ciberataques, el envenenamiento suele producirse <em>antes</em> de que el sistema se ponga en marcha. No hay nada roto a la vista. El modelo supera sus pruebas, responde con normalidad y solo se porta mal en las condiciones que eligió el atacante. Por eso es difícil de detectar y por eso OWASP lo describe como un ataque a la integridad: manipular los datos de entrenamiento socava la capacidad del modelo de hacer predicciones correctas.</p>
+<h2 id="envenenamiento-de-datos-frente-a-envenenamiento-del-modelo">Envenenamiento de datos frente a envenenamiento del modelo</h2>
+<p>Los dos términos se usan a menudo como sinónimos, y el Top 10 de OWASP para aplicaciones LLM los agrupa en un único riesgo, <a href="https://genai.owasp.org/llmrisk/llm042025-data-and-model-poisoning/" rel="noopener">LLM04:2025 Data and Model Poisoning</a>. Aun así conviene separarlos, porque las defensas son distintas.</p>
+<p>El <strong>envenenamiento de datos</strong> ataca lo que entra en el entrenamiento. OWASP distingue tres fases en las que puede ocurrir:</p>
+<ul>
+<li><strong>Preentrenamiento</strong>, cuando el modelo aprende de enormes conjuntos de datos generales, a menudo extraídos de la web.</li>
+<li><strong>Ajuste fino</strong> (<em>fine-tuning</em>), cuando se adapta el modelo a una tarea o a un dominio concreto.</li>
+<li><strong>Embeddings</strong>, cuando el texto se convierte en vectores numéricos, por ejemplo para alimentar sistemas de generación aumentada por recuperación (RAG).</li>
+</ul>
+<p>El <strong>envenenamiento del modelo</strong> ataca el resultado ya entrenado. El Instituto Nacional de Estándares y Tecnología de EE. UU. (NIST) lo define como la modificación directa de los parámetros de un modelo entrenado para introducir un comportamiento malicioso, y señala que es más habitual en el aprendizaje federado (donde muchos clientes envían actualizaciones del modelo) y en ataques a la cadena de suministro (<a href="https://csrc.nist.gov/news/2025/nist-ai-100-2-adversarial-machine-learning-taxonom" rel="noopener">NIST AI 100-2 E2025</a>). OWASP añade una variante muy práctica: los modelos compartidos en repositorios abiertos pueden llevar malware, por ejemplo a través de formatos de serialización inseguros como los archivos <em>pickle</em> de Python.</p>
+<p>MITRE ATLAS, la base de conocimiento de tácticas de ataque contra sistemas de IA, las recoge como técnicas separadas, entre ellas <strong>AML.T0020 Poison Training Data</strong>, <strong>AML.T0019 Publish Poisoned Datasets</strong> y <strong>AML.T0018 Manipulate AI Model</strong> (<a href="https://atlas.mitre.org/" rel="noopener">MITRE ATLAS</a>).</p>
+<h2 id="que-buscan-los-atacantes">Qué buscan los atacantes</h2>
+<p>La taxonomía de aprendizaje automático adversarial del NIST describe cuatro tipos de envenenamiento contra sistemas de IA predictiva:</p>
+<ol>
+<li><strong>Envenenamiento de disponibilidad</strong>: empeora el modelo en general y lo hace menos útil para todos.</li>
+<li><strong>Envenenamiento dirigido</strong>: cambia la respuesta del modelo solo para un pequeño grupo de entradas que interesan al atacante, como un producto, una persona o un tema.</li>
+<li><strong>Envenenamiento con puerta trasera</strong>: enseña al modelo a comportarse de otra forma cuando aparece un <em>disparador</em> concreto: una palabra, una frase, un patrón de píxeles.</li>
+<li><strong>Envenenamiento del modelo</strong>: se salta los datos y edita directamente los parámetros.</li>
+</ol>
+<p>Las puertas traseras son las que más atención reciben porque son sigilosas. Un modelo con puerta trasera parece sano en cualquier evaluación normal. Solo el atacante, que conoce el disparador, puede activar el comportamiento oculto.</p>
+<h2 id="por-que-los-grandes-modelos-de-lenguaje-estan-expuestos">Por qué los grandes modelos de lenguaje están expuestos</h2>
+<p>Los modelos de lenguaje actuales se entrenan con cantidades enormes de texto público. Durante un tiempo se pensó que esa escala era una protección: unas pocas páginas maliciosas quedarían ahogadas entre miles de millones de páginas buenas.</p>
+<p>La investigación desde 2023 ha puesto en duda esa idea. Un equipo dirigido por Nicholas Carlini demostró que un atacante podría haber envenenado el 0,01 % de los datasets de imágenes LAION-400M o COYO-700M por unos <strong>60 dólares</strong>, simplemente comprando dominios caducados a los que esos datasets seguían apuntando (<a href="https://arxiv.org/abs/2302.10149" rel="noopener">Carlini et al., 2023</a>). En 2025, Anthropic, el UK AI Security Institute y el Alan Turing Institute comprobaron que unos <strong>250 documentos envenenados</strong> bastaban para plantar una puerta trasera sencilla en modelos de lenguaje de todos los tamaños que probaron, de 600 millones a 13.000 millones de parámetros (<a href="/es/250-documentos-envenenar-llm/">lee nuestro resumen</a>).</p>
+<p>Al mismo tiempo, la propia web se está moldeando pensando en el entrenamiento de la IA. Los investigadores han documentado redes de webs que publican millones de artículos de propaganda al año, aparentemente dirigidos menos a lectores humanos que a los rastreadores que alimentan los sistemas de IA (<a href="/es/llm-grooming-red-pravda/">ver LLM grooming</a>).</p>
+<h2 id="envenenar-no-es-lo-mismo-que-inyectar-prompts">Envenenar no es lo mismo que inyectar prompts</h2>
+<p>La inyección de prompts esconde instrucciones dentro del contenido que el modelo lee <em>en el momento de responder</em>, como una web o un correo. El envenenamiento cambia lo que el modelo <em>aprendió</em> antes. Ambos pueden combinarse: entre los escenarios de ataque de OWASP figura un atacante que introduce datos engañosos mediante inyección de prompts aprovechando un filtrado insuficiente. Una variante más reciente, que MITRE ATLAS recoge como envenenamiento de memoria, usa enlaces preparados para escribir instrucciones en la memoria a largo plazo de un asistente (<a href="https://thehackernews.com/2026/08/ai-recommendation-poisoning-how-ask-ai.html" rel="noopener">The Hacker News, 2026</a>).</p>
+<h2 id="que-pueden-hacer-los-defensores">Qué pueden hacer los defensores</h2>
+<p>No hay una solución única, pero las principales líneas de defensa son conocidas: saber de dónde vienen los datos, comprobar que no han cambiado, probar los modelos en busca de comportamientos ocultos y vigilarlos en producción. Lo explicamos en detalle en <a href="/es/como-defenderse-envenenamiento-datos/">Cómo defenderse del envenenamiento de datos y modelos</a>.</p><section class="sources" aria-labelledby="sources-h"><h2 id="sources-h">Fuentes</h2><ul>
+<li>OWASP GenAI Security Project, <a href="https://genai.owasp.org/llmrisk/llm042025-data-and-model-poisoning/" rel="noopener">LLM04:2025 Data and Model Poisoning</a></li>
+<li>NIST, <a href="https://csrc.nist.gov/news/2025/nist-ai-100-2-adversarial-machine-learning-taxonom" rel="noopener">AI 100-2 E2025: Adversarial Machine Learning, a taxonomy and terminology of attacks and mitigations</a>, marzo de 2025</li>
+<li>MITRE, <a href="https://atlas.mitre.org/" rel="noopener">base de conocimiento ATLAS</a></li>
+<li>Carlini et al., <a href="https://arxiv.org/abs/2302.10149" rel="noopener">Poisoning Web-Scale Training Datasets is Practical</a>, 2023</li>
+<li>Anthropic, <a href="https://www.anthropic.com/research/small-samples-poison" rel="noopener">A small number of samples can poison LLMs of any size</a>, octubre de 2025</li>
+</ul></section></div>
+  </article>
+  <aside class="rail" aria-label="En esta página">
+    <nav class="toc"><h2>En esta página</h2><ol><li><a href="#una-definicion-breve">Una definición breve</a></li><li><a href="#envenenamiento-de-datos-frente-a-envenenamiento-del-modelo">Envenenamiento de datos frente a envenenamiento del modelo</a></li><li><a href="#que-buscan-los-atacantes">Qué buscan los atacantes</a></li><li><a href="#por-que-los-grandes-modelos-de-lenguaje-estan-expuestos">Por qué los grandes modelos de lenguaje están expuestos</a></li><li><a href="#envenenar-no-es-lo-mismo-que-inyectar-prompts">Envenenar no es lo mismo que inyectar prompts</a></li><li><a href="#que-pueden-hacer-los-defensores">Qué pueden hacer los defensores</a></li><li><a href="#sources-h">Fuentes</a></li></ol></nav>
+  </aside>
+  <section class="read-next" aria-labelledby="next-h">
+    <h2 id="next-h">Sigue leyendo</h2>
+    <ul class="rows"><li><a href="/es/250-documentos-envenenar-llm/"><span class="row-title">Bastan 250 documentos</span><span class="row-dek">El mayor experimento de envenenamiento publicado hasta ahora sugiere que lo que importa es el número de documentos maliciosos, no su proporción en los datos de entrenamiento.</span></a></li><li><a href="/es/llm-grooming-red-pravda/"><span class="row-title">LLM grooming y la red Pravda</span><span class="row-dek">Algunas webs no están escritas para personas. Están escritas para las máquinas que leen la web en nombre de los sistemas de IA.</span></a></li></ul>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></p>
+      <p>Referencia independiente y sin ánimo comercial sobre el envenenamiento de datos y modelos de IA. Sin cookies ni rastreadores.</p>
+      <p class="muted">Última actualización: 9 de octubre de 2026</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="/es/sobre/">Sobre el sitio</a></li>
+      <li><a href="/es/aviso-legal/">Aviso legal</a></li>
+      <li><a href="/es/privacidad/">Privacidad</a></li>
+      <li><a href="/what-is-model-poisoning/" hreflang="en" lang="en">English</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

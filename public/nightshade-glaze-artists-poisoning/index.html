@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nightshade and Glaze: when artists poison their own images</title>
+<meta name="description" content="How the University of Chicago&#x27;s Nightshade and Glaze tools let artists alter their images so AI models trained on them without consent learn the wrong things, and what their limits are.">
+<link rel="canonical" href="https://www.modelpoisoning.com/nightshade-glaze-artists-poisoning/">
+<link rel="alternate" hreflang="en" href="https://www.modelpoisoning.com/nightshade-glaze-artists-poisoning/"><link rel="alternate" hreflang="es" href="https://www.modelpoisoning.com/es/nightshade-glaze-artistas/"><link rel="alternate" hreflang="x-default" href="https://www.modelpoisoning.com/nightshade-glaze-artists-poisoning/">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="modelpoisoning.com">
+<meta property="og:title" content="Nightshade and Glaze: when artists poison their own images">
+<meta property="og:description" content="How the University of Chicago&#x27;s Nightshade and Glaze tools let artists alter their images so AI models trained on them without consent learn the wrong things, and what their limits are.">
+<meta property="og:url" content="https://www.modelpoisoning.com/nightshade-glaze-artists-poisoning/">
+<meta property="og:image" content="https://www.modelpoisoning.com/og.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EDF0EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131915" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css?v=2b0b224b">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Nightshade and Glaze: when artists poison their own images", "description": "How the University of Chicago's Nightshade and Glaze tools let artists alter their images so AI models trained on them without consent learn the wrong things, and what their limits are.", "inLanguage": "en", "datePublished": "2026-10-09", "dateModified": "2026-10-09", "mainEntityOfPage": "https://www.modelpoisoning.com/nightshade-glaze-artists-poisoning/", "image": "https://www.modelpoisoning.com/og.png", "author": {"@type": "Person", "name": "Carlos  Díaz", "url": "https://www.modelpoisoning.com/about/"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.modelpoisoning.com/"}, {"@type": "ListItem", "position": 2, "name": "Nightshade and Glaze", "item": "https://www.modelpoisoning.com/nightshade-glaze-artists-poisoning/"}]}</script>
+</head><body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/" aria-label="modelpoisoning.com"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="/#articles">Articles</a></li>
+        <li><a href="/history-of-ai-poisoning/">Timeline</a></li>
+        <li><a href="/glossary/">Glossary</a></li>
+        <li><a href="/about/">About</a></li>
+      </ul>
+    </nav>
+    <a class="lang" href="/es/nightshade-glaze-artistas/" hreflang="es" lang="es" title="Leer en español">Español</a>
+  </div>
+</header>
+<main id="main" class="wrap article-layout">
+  <article class="article">
+    <header class="article-head">
+      <h1>Nightshade and Glaze: when artists poison their own images</h1>
+      <p class="dek">Not all data poisoning is an attack. For some artists it is the only leverage they have over companies that scrape their work.</p>
+      <p class="meta">Published 9 October 2026, 4 min read</p>
+    </header>
+    <aside class="summary" aria-labelledby="summary-h"><h2 id="summary-h">In short</h2><ul>
+<li><strong>Glaze</strong> and <strong>Nightshade</strong> are free tools from the SAND Lab at the University of Chicago that make small, hard-to-see changes to images.</li>
+<li><strong>Glaze</strong> is defensive: it makes it harder for a model to imitate an individual artist&rsquo;s style.</li>
+<li><strong>Nightshade</strong> is offensive: images &ldquo;shaded&rdquo; with it teach a model trained on them the wrong associations, for example that a picture of a cow is a handbag.</li>
+<li>The research paper reports that a Stable Diffusion SDXL prompt could be corrupted with <strong>fewer than 100 poison samples</strong>. The team says the protection will not last forever as defences evolve.</li>
+</ul></aside>
+    <div class="prose"><h2 id="poisoning-as-self-defence">Poisoning as self-defence</h2>
+<p>Text-to-image models such as Stable Diffusion, Midjourney or DALL·E were trained on billions of images collected from the web, including the work of living artists who were never asked. Opt-out mechanisms exist, but they depend on scrapers choosing to respect them.</p>
+<p>A research group led by Professor <strong>Ben Y. Zhao</strong> at the University of Chicago built two tools that change the economics of that situation. Rather than asking for permission, they make unlicensed training less useful.</p>
+<h2 id="glaze-protecting-a-style">Glaze: protecting a style</h2>
+<p>Glaze, released in 2023, is meant to be applied to every image an artist publishes. It adds a perturbation that is subtle to the human eye but shifts how a model perceives the image&rsquo;s style. If someone fine-tunes a model on glazed work to mimic that artist, the output drifts towards a different style. Glaze protects one artist at a time.</p>
+<h2 id="nightshade-a-collective-deterrent">Nightshade: a collective deterrent</h2>
+<p>Nightshade, which the team released in January 2024 and which was downloaded about 250,000 times shortly after release according to <a href="https://www.etcentric.org/ai-poison-pill-app-nightshade-has-250k-downloads-in-5-days/" rel="noopener">ETCentric</a>, works differently. Its <a href="https://nightshade.cs.uchicago.edu/whatis.html" rel="noopener">project page</a> describes it as &ldquo;an offensive tool that artists can use as a group&rdquo;.</p>
+<p>A &ldquo;shaded&rdquo; image still looks like the original to a person. To a model, it carries features of a different concept. The team&rsquo;s example is an image of a cow in a field that, once shaded, nudges a model towards producing a leather handbag. Train a model on enough shaded images and its idea of &ldquo;cow&rdquo; starts to break.</p>
+<p>The technical paper, <a href="https://arxiv.org/abs/2310.13828" rel="noopener">Nightshade: Prompt-Specific Poisoning Attacks on Text-to-Image Generative Models</a> by Shawn Shan, Wenxin Ding, Josephine Passananti, Haitao Zheng and Ben Y. Zhao, was presented at the IEEE Symposium on Security and Privacy in May 2024. Its abstract makes several claims that matter beyond art:</p>
+<ul>
+<li>A Stable Diffusion SDXL prompt can be corrupted with <strong>fewer than 100 poison samples</strong>.</li>
+<li>The effects <strong>bleed through</strong> to related concepts, so poisoning one idea also affects its neighbours.</li>
+<li><strong>Multiple attacks</strong> can be combined, and a moderate number of them can destabilise general features of a model so that it stops producing meaningful images.</li>
+</ul>
+<p>The authors frame Nightshade as &ldquo;a last defense for content creators against web scrapers that ignore opt-out/do-not-crawl directives&rdquo;. The aim, they say, is to raise the cost of training on unlicensed data, not to destroy models.</p>
+<h2 id="limits-the-team-acknowledges">Limits the team acknowledges</h2>
+<p>The project page is candid about what Nightshade cannot do:</p>
+<ul>
+<li>Changes are <strong>more visible</strong> on art with flat colours and smooth backgrounds. A low-intensity setting trades protection for image quality.</li>
+<li>Protection is <strong>unlikely to stay effective over long periods</strong>, because attacks and defences keep evolving.</li>
+<li>Nightshade v1.0 does not protect against style mimicry, which is why the team recommends Glaze for all artwork and Nightshade as an optional extra.</li>
+</ul>
+<h2 id="why-it-matters-for-everyone-else">Why it matters for everyone else</h2>
+<p>Nightshade is a demonstration, in public and at scale, of a point security researchers had been making for years: <strong>models trained on scraped data inherit whatever is in that data</strong>, including content designed to mislead them. The same properties that let an artist protect a portfolio would let a malicious actor target a concept. That is why the research is cited in technical discussions of poisoning risk, and why provenance and data licensing are increasingly treated as security questions as well as legal ones.</p>
+<p>For the broader picture of how poisoning works, see <a href="/what-is-model-poisoning/">What is model poisoning?</a>.</p><section class="sources" aria-labelledby="sources-h"><h2 id="sources-h">Sources</h2><ul>
+<li>University of Chicago, <a href="https://nightshade.cs.uchicago.edu/whatis.html" rel="noopener">What is Nightshade?</a></li>
+<li>Shan et al., <a href="https://arxiv.org/abs/2310.13828" rel="noopener">Nightshade: Prompt-Specific Poisoning Attacks on Text-to-Image Generative Models</a>, IEEE S&amp;P 2024</li>
+<li>ETCentric, <a href="https://www.etcentric.org/ai-poison-pill-app-nightshade-has-250k-downloads-in-5-days/" rel="noopener">AI Poison Pill App Nightshade Has 250K Downloads in 5 Days</a></li>
+<li>Shan et al., <a href="https://www.usenix.org/conference/usenixsecurity23/presentation/shan" rel="noopener">Glaze: Protecting Artists from Style Mimicry by Text-to-Image Models</a>, USENIX Security 2023</li>
+<li>University of Chicago, <a href="https://glaze.cs.uchicago.edu/" rel="noopener">Glaze project</a></li>
+</ul></section></div>
+  </article>
+  <aside class="rail" aria-label="On this page">
+    <nav class="toc"><h2>On this page</h2><ol><li><a href="#poisoning-as-self-defence">Poisoning as self-defence</a></li><li><a href="#glaze-protecting-a-style">Glaze: protecting a style</a></li><li><a href="#nightshade-a-collective-deterrent">Nightshade: a collective deterrent</a></li><li><a href="#limits-the-team-acknowledges">Limits the team acknowledges</a></li><li><a href="#why-it-matters-for-everyone-else">Why it matters for everyone else</a></li><li><a href="#sources-h">Sources</a></li></ol></nav>
+  </aside>
+  <section class="read-next" aria-labelledby="next-h">
+    <h2 id="next-h">Read next</h2>
+    <ul class="rows"><li><a href="/defending-against-data-poisoning/"><span class="row-title">How to defend against poisoning</span><span class="row-dek">You cannot inspect billions of documents by hand. You can control where they come from, prove they have not changed, and test what the model learned.</span></a></li><li><a href="/history-of-ai-poisoning/"><span class="row-title">A short history of AI poisoning</span><span class="row-dek">Ten moments that turned poisoning from an academic curiosity into a mainstream security risk.</span></a></li></ul>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></p>
+      <p>An independent, non-commercial reference on AI data and model poisoning. No cookies, no trackers.</p>
+      <p class="muted">Last updated 9 October 2026</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="/about/">About</a></li>
+      <li><a href="/legal-notice/">Legal notice</a></li>
+      <li><a href="/privacy/">Privacy</a></li>
+      <li><a href="/es/nightshade-glaze-artistas/" hreflang="es" lang="es">Español</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

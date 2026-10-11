@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What is model poisoning? Data poisoning vs model poisoning explained</title>
+<meta name="description" content="A clear explanation of AI model poisoning and data poisoning: how attackers corrupt training data or model weights, the main attack types, and how OWASP, NIST and MITRE ATLAS classify them.">
+<link rel="canonical" href="https://www.modelpoisoning.com/what-is-model-poisoning/">
+<link rel="alternate" hreflang="en" href="https://www.modelpoisoning.com/what-is-model-poisoning/"><link rel="alternate" hreflang="es" href="https://www.modelpoisoning.com/es/que-es-model-poisoning/"><link rel="alternate" hreflang="x-default" href="https://www.modelpoisoning.com/what-is-model-poisoning/">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="modelpoisoning.com">
+<meta property="og:title" content="What is model poisoning? Data poisoning vs model poisoning explained">
+<meta property="og:description" content="A clear explanation of AI model poisoning and data poisoning: how attackers corrupt training data or model weights, the main attack types, and how OWASP, NIST and MITRE ATLAS classify them.">
+<meta property="og:url" content="https://www.modelpoisoning.com/what-is-model-poisoning/">
+<meta property="og:image" content="https://www.modelpoisoning.com/og.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EDF0EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131915" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css?v=2b0b224b">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "What is model poisoning? Data poisoning vs model poisoning explained", "description": "A clear explanation of AI model poisoning and data poisoning: how attackers corrupt training data or model weights, the main attack types, and how OWASP, NIST and MITRE ATLAS classify them.", "inLanguage": "en", "datePublished": "2026-10-09", "dateModified": "2026-10-09", "mainEntityOfPage": "https://www.modelpoisoning.com/what-is-model-poisoning/", "image": "https://www.modelpoisoning.com/og.png", "author": {"@type": "Person", "name": "Carlos  Díaz", "url": "https://www.modelpoisoning.com/about/"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.modelpoisoning.com/"}, {"@type": "ListItem", "position": 2, "name": "What is model poisoning?", "item": "https://www.modelpoisoning.com/what-is-model-poisoning/"}]}</script>
+</head><body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/" aria-label="modelpoisoning.com"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="/#articles">Articles</a></li>
+        <li><a href="/history-of-ai-poisoning/">Timeline</a></li>
+        <li><a href="/glossary/">Glossary</a></li>
+        <li><a href="/about/">About</a></li>
+      </ul>
+    </nav>
+    <a class="lang" href="/es/que-es-model-poisoning/" hreflang="es" lang="es" title="Leer en español">Español</a>
+  </div>
+</header>
+<main id="main" class="wrap article-layout">
+  <article class="article">
+    <header class="article-head">
+      <h1>What is model poisoning? Data poisoning vs model poisoning explained</h1>
+      <p class="dek">Attackers do not always need to break into an AI system. Sometimes it is enough to change what the system learns from.</p>
+      <p class="meta">Published 9 October 2026, 5 min read</p>
+    </header>
+    <aside class="summary" aria-labelledby="summary-h"><h2 id="summary-h">In short</h2><ul>
+<li><strong>Data poisoning</strong> means tampering with the data a model learns from: pre-training corpora, fine-tuning sets or the documents a retrieval system searches.</li>
+<li><strong>Model poisoning</strong> means tampering with the model itself, for example by editing its weights or publishing a booby-trapped copy.</li>
+<li>The goal can be to make a model worse overall, to make it fail on specific inputs, or to plant a hidden <strong>backdoor</strong> that only a trigger activates.</li>
+<li>OWASP lists &ldquo;Data and Model Poisoning&rdquo; as risk LLM04 in its 2025 Top 10 for large language model applications.</li>
+</ul></aside>
+    <div class="prose"><h2 id="a-short-definition">A short definition</h2>
+<p>An AI model is the product of two things: the data it was trained on and the parameters (weights) that training produced. <strong>Poisoning</strong> is any deliberate manipulation of either one so that the finished model behaves the way an attacker wants rather than the way its builders intended.</p>
+<p>Unlike most cyberattacks, poisoning usually happens <em>before</em> the system is deployed. Nothing looks broken. The model passes its tests, answers questions normally and only misbehaves under the conditions the attacker chose. That is what makes it hard to detect and why OWASP calls it an integrity attack: tampering with training data undermines the model&rsquo;s ability to make correct predictions.</p>
+<h2 id="data-poisoning-vs-model-poisoning">Data poisoning vs model poisoning</h2>
+<p>The two terms are often used interchangeably, and the OWASP Top 10 for LLM Applications groups them under a single risk, <a href="https://genai.owasp.org/llmrisk/llm042025-data-and-model-poisoning/" rel="noopener">LLM04:2025 Data and Model Poisoning</a>. It is still useful to separate them, because the defences are different.</p>
+<p><strong>Data poisoning</strong> targets the inputs to training. OWASP distinguishes three stages where it can happen:</p>
+<ul>
+<li><strong>Pre-training</strong>, when a model learns from very large general datasets, often scraped from the web.</li>
+<li><strong>Fine-tuning</strong>, when a model is adapted to a specific task or domain.</li>
+<li><strong>Embedding</strong>, when text is converted into numerical vectors, for example to power retrieval-augmented generation (RAG).</li>
+</ul>
+<p><strong>Model poisoning</strong> targets the trained artefact. The US National Institute of Standards and Technology defines it as directly modifying a trained model&rsquo;s parameters to inject malicious behaviour, and notes that it is most common in federated learning (where many clients send model updates) and in supply-chain scenarios (<a href="https://csrc.nist.gov/news/2025/nist-ai-100-2-adversarial-machine-learning-taxonom" rel="noopener">NIST AI 100-2 E2025</a>). OWASP adds a very practical variant: models shared through open repositories can carry malware, for instance through unsafe serialisation formats such as Python pickle files.</p>
+<p>MITRE ATLAS, the knowledge base of adversary tactics against AI systems, tracks these as separate techniques, including <strong>AML.T0020 Poison Training Data</strong>, <strong>AML.T0019 Publish Poisoned Datasets</strong> and <strong>AML.T0018 Manipulate AI Model</strong> (<a href="https://atlas.mitre.org/" rel="noopener">MITRE ATLAS</a>).</p>
+<h2 id="what-attackers-try-to-achieve">What attackers try to achieve</h2>
+<p>NIST&rsquo;s taxonomy of adversarial machine learning describes four kinds of poisoning attack against predictive AI systems:</p>
+<ol>
+<li><strong>Availability poisoning</strong> degrades the model across the board, making it less useful for everyone.</li>
+<li><strong>Targeted poisoning</strong> changes the model&rsquo;s output only for a small set of inputs the attacker cares about, such as one product, person or topic.</li>
+<li><strong>Backdoor poisoning</strong> teaches the model to behave differently whenever a specific <em>trigger</em> appears: a word, a phrase, a pixel pattern.</li>
+<li><strong>Model poisoning</strong> skips the data entirely and edits the model&rsquo;s parameters.</li>
+</ol>
+<p>Backdoors get the most attention because they are stealthy. A backdoored model looks healthy in every normal evaluation. Only the attacker, who knows the trigger, can switch the hidden behaviour on.</p>
+<h2 id="why-large-language-models-are-exposed">Why large language models are exposed</h2>
+<p>Modern language models are trained on enormous amounts of public text. That scale used to be seen as a protection: surely a few malicious pages would be drowned out by billions of good ones?</p>
+<p>Research from 2023 onwards has challenged that assumption. A team led by Nicholas Carlini showed that an attacker could have poisoned 0.01% of the LAION-400M or COYO-700M image datasets for about <strong>60 US dollars</strong>, simply by buying expired domains that the datasets still pointed to (<a href="https://arxiv.org/abs/2302.10149" rel="noopener">Carlini et al., 2023</a>). In 2025, Anthropic, the UK AI Security Institute and the Alan Turing Institute found that around <strong>250 poisoned documents</strong> were enough to plant a simple backdoor in language models of every size they tested, from 600 million to 13 billion parameters (<a href="/250-documents-poison-llm/">read our summary</a>).</p>
+<p>At the same time, the web itself is being shaped with AI training in mind. Researchers have documented networks of websites that publish millions of propaganda articles a year, apparently aimed less at human readers than at the crawlers that feed AI systems (<a href="/llm-grooming-pravda-network/">see LLM grooming</a>).</p>
+<h2 id="poisoning-is-not-the-same-as-prompt-injection">Poisoning is not the same as prompt injection</h2>
+<p>Prompt injection hides instructions inside the input a model reads <em>at the moment it answers</em>, such as a web page or an email. Poisoning changes what the model <em>learned</em> earlier. The two can combine: OWASP&rsquo;s own attack scenarios include an attacker inserting misleading data through prompt injection when filtering is inadequate. A newer variant, which MITRE ATLAS tracks as memory poisoning, uses crafted links to write instructions into an assistant&rsquo;s long-term memory (<a href="https://thehackernews.com/2026/08/ai-recommendation-poisoning-how-ask-ai.html" rel="noopener">The Hacker News, 2026</a>).</p>
+<h2 id="what-defenders-can-do">What defenders can do</h2>
+<p>There is no single fix, but the main lines of defence are well understood: know where your data comes from, verify that it has not changed, test models for hidden behaviour, and monitor them in production. We cover these in detail in <a href="/defending-against-data-poisoning/">How to defend against data and model poisoning</a>.</p><section class="sources" aria-labelledby="sources-h"><h2 id="sources-h">Sources</h2><ul>
+<li>OWASP GenAI Security Project, <a href="https://genai.owasp.org/llmrisk/llm042025-data-and-model-poisoning/" rel="noopener">LLM04:2025 Data and Model Poisoning</a></li>
+<li>NIST, <a href="https://csrc.nist.gov/news/2025/nist-ai-100-2-adversarial-machine-learning-taxonom" rel="noopener">AI 100-2 E2025: Adversarial Machine Learning, a taxonomy and terminology of attacks and mitigations</a>, March 2025</li>
+<li>MITRE, <a href="https://atlas.mitre.org/" rel="noopener">ATLAS knowledge base</a></li>
+<li>Carlini et al., <a href="https://arxiv.org/abs/2302.10149" rel="noopener">Poisoning Web-Scale Training Datasets is Practical</a>, 2023</li>
+<li>Anthropic, <a href="https://www.anthropic.com/research/small-samples-poison" rel="noopener">A small number of samples can poison LLMs of any size</a>, October 2025</li>
+</ul></section></div>
+  </article>
+  <aside class="rail" aria-label="On this page">
+    <nav class="toc"><h2>On this page</h2><ol><li><a href="#a-short-definition">A short definition</a></li><li><a href="#data-poisoning-vs-model-poisoning">Data poisoning vs model poisoning</a></li><li><a href="#what-attackers-try-to-achieve">What attackers try to achieve</a></li><li><a href="#why-large-language-models-are-exposed">Why large language models are exposed</a></li><li><a href="#poisoning-is-not-the-same-as-prompt-injection">Poisoning is not the same as prompt injection</a></li><li><a href="#what-defenders-can-do">What defenders can do</a></li><li><a href="#sources-h">Sources</a></li></ol></nav>
+  </aside>
+  <section class="read-next" aria-labelledby="next-h">
+    <h2 id="next-h">Read next</h2>
+    <ul class="rows"><li><a href="/250-documents-poison-llm/"><span class="row-title">250 documents are enough</span><span class="row-dek">The largest poisoning experiment published so far suggests that what matters is the number of malicious documents, not their share of the training data.</span></a></li><li><a href="/llm-grooming-pravda-network/"><span class="row-title">LLM grooming and the Pravda network</span><span class="row-dek">Some websites are not written for people at all. They are written for the machines that read the web on behalf of AI systems.</span></a></li></ul>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></p>
+      <p>An independent, non-commercial reference on AI data and model poisoning. No cookies, no trackers.</p>
+      <p class="muted">Last updated 9 October 2026</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="/about/">About</a></li>
+      <li><a href="/legal-notice/">Legal notice</a></li>
+      <li><a href="/privacy/">Privacy</a></li>
+      <li><a href="/es/que-es-model-poisoning/" hreflang="es" lang="es">Español</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

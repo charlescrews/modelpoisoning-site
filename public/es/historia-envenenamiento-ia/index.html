@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Breve historia del envenenamiento de la IA, de Tay a las puertas traseras de 250 documentos</title>
+<meta name="description" content="Cronología de los momentos clave del envenenamiento de datos y modelos de IA: Tay de Microsoft, BadNets, el envenenamiento de datasets por 60 dólares, Sleeper Agents, Nightshade, la red Pravda, la taxonomía del NIST y el estudio de los 250 documentos.">
+<link rel="canonical" href="https://www.modelpoisoning.com/es/historia-envenenamiento-ia/">
+<link rel="alternate" hreflang="en" href="https://www.modelpoisoning.com/history-of-ai-poisoning/"><link rel="alternate" hreflang="es" href="https://www.modelpoisoning.com/es/historia-envenenamiento-ia/"><link rel="alternate" hreflang="x-default" href="https://www.modelpoisoning.com/history-of-ai-poisoning/">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="modelpoisoning.com">
+<meta property="og:title" content="Breve historia del envenenamiento de la IA, de Tay a las puertas traseras de 250 documentos">
+<meta property="og:description" content="Cronología de los momentos clave del envenenamiento de datos y modelos de IA: Tay de Microsoft, BadNets, el envenenamiento de datasets por 60 dólares, Sleeper Agents, Nightshade, la red Pravda, la taxonomía del NIST y el estudio de los 250 documentos.">
+<meta property="og:url" content="https://www.modelpoisoning.com/es/historia-envenenamiento-ia/">
+<meta property="og:image" content="https://www.modelpoisoning.com/og.png">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EDF0EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131915" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css?v=2b0b224b">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Breve historia del envenenamiento de la IA, de Tay a las puertas traseras de 250 documentos", "description": "Cronología de los momentos clave del envenenamiento de datos y modelos de IA: Tay de Microsoft, BadNets, el envenenamiento de datasets por 60 dólares, Sleeper Agents, Nightshade, la red Pravda, la taxonomía del NIST y el estudio de los 250 documentos.", "inLanguage": "es", "datePublished": "2026-10-09", "dateModified": "2026-10-09", "mainEntityOfPage": "https://www.modelpoisoning.com/es/historia-envenenamiento-ia/", "image": "https://www.modelpoisoning.com/og.png", "author": {"@type": "Person", "name": "Carlos  Díaz", "url": "https://www.modelpoisoning.com/es/sobre/"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.modelpoisoning.com/es/"}, {"@type": "ListItem", "position": 2, "name": "Breve historia del envenenamiento de la IA", "item": "https://www.modelpoisoning.com/es/historia-envenenamiento-ia/"}]}</script>
+</head><body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/es/" aria-label="modelpoisoning.com"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></a>
+    <nav aria-label="Principal">
+      <ul>
+        <li><a href="/es/#articles">Artículos</a></li>
+        <li><a href="/es/historia-envenenamiento-ia/" aria-current="page">Cronología</a></li>
+        <li><a href="/es/glosario/">Glosario</a></li>
+        <li><a href="/es/sobre/">Sobre el sitio</a></li>
+      </ul>
+    </nav>
+    <a class="lang" href="/history-of-ai-poisoning/" hreflang="en" lang="en" title="Read in English">English</a>
+  </div>
+</header>
+<main id="main" class="wrap article-layout">
+  <article class="article">
+    <header class="article-head">
+      <h1>Breve historia del envenenamiento de la IA, de Tay a las puertas traseras de 250 documentos</h1>
+      <p class="dek">Diez momentos que convirtieron el envenenamiento de una curiosidad académica en un riesgo de seguridad de primer orden.</p>
+      <p class="meta">Publicado el 9 de octubre de 2026, 4 min de lectura</p>
+    </header>
+    
+    <div class="prose"><p>Los ataques de envenenamiento son anteriores a los grandes modelos de lenguaje. Lo que ha cambiado es la escala a la que los modelos aprenden de datos que nadie controla del todo. Esta cronología recoge los momentos que consideramos más importantes, cada uno con su fuente original. La actualizamos a medida que aparecen nuevas investigaciones e incidentes.</p>
+<ol class="timeline"><li class="tl-item" id="y2016"><div class="tl-year">2016</div><div class="tl-body"><h3>Tay, el chatbot de Microsoft, aprende a ser ofensivo en 16 horas</h3><p class="tl-date">Marzo de 2016</p><p>Microsoft lanzó el chatbot de Twitter Tay el 23 de marzo. En 16 horas y más de 96.000 tuits, varios usuarios le habían enseñado a publicar mensajes racistas y sexistas, en parte aprovechando una función de «repite después de mí». Microsoft lo calificó de «ataque coordinado de un subconjunto de personas» y lo desconectó. MITRE ATLAS lo recoge hoy como caso de estudio de envenenamiento.</p><p class="tl-links"><a href="https://en.wikipedia.org/wiki/Tay_(chatbot)" rel="noopener">Fuente</a></p></div></li><li class="tl-item" id="y2017"><div class="tl-year">2017</div><div class="tl-body"><h3>BadNets demuestra que un entrenamiento externalizado puede esconder una puerta trasera</h3><p class="tl-date">Agosto de 2017</p><p>Investigadores de la Universidad de Nueva York mostraron que una red neuronal entrenada por un tercero no fiable podía funcionar con normalidad en las pruebas habituales y, a la vez, clasificar mal las entradas que llevaban un disparador, como una pegatina en una señal de stop. El artículo ayudó a definir los ataques de puerta trasera en aprendizaje automático.</p><p class="tl-links"><a href="https://arxiv.org/abs/1708.06733" rel="noopener">Fuente</a></p></div></li><li class="tl-item" id="y2023"><div class="tl-year">2023</div><div class="tl-body"><h3>Envenenar datasets a escala web resulta costar unos 60 dólares</h3><p class="tl-date">Febrero de 2023</p><p>Nicholas Carlini y sus colegas mostraron que un atacante podría haber envenenado el 0,01 % de los datasets LAION-400M o COYO-700M por unos 60 dólares comprando dominios caducados, y que los datasets construidos a partir de instantáneas de Wikipedia podían envenenarse justo antes de cada instantánea.</p><p class="tl-links"><a href="https://arxiv.org/abs/2302.10149" rel="noopener">Fuente</a></p></div></li><li class="tl-item" id="y2024"><div class="tl-year">2024</div><div class="tl-body"><h3>Sleeper Agents: las puertas traseras sobreviven al entrenamiento de seguridad</h3><p class="tl-date">Enero de 2024</p><p>Investigadores de Anthropic entrenaron modelos que escribían código seguro cuando se les decía que era 2023 y código vulnerable cuando se les decía que era 2024. El entrenamiento de seguridad habitual no eliminó ese comportamiento y el entrenamiento adversarial enseñó a los modelos a ocultarlo mejor.</p><p class="tl-links"><a href="https://arxiv.org/abs/2401.05566" rel="noopener">Fuente</a></p></div></li><li class="tl-item"><div class="tl-year"></div><div class="tl-body"><h3>Los artistas reciben Nightshade</h3><p class="tl-date">Enero de 2024</p><p>La Universidad de Chicago publicó Nightshade, una herramienta gratuita que altera imágenes para que los modelos entrenados con ellas sin permiso aprendan conceptos equivocados. Se descargó unas 250.000 veces poco después de su lanzamiento.</p><p class="tl-links"><a href="https://nightshade.cs.uchicago.edu/whatis.html" rel="noopener">Fuente</a> <a href="/es/nightshade-glaze-artistas/">Nightshade y Glaze</a></p></div></li><li class="tl-item"><div class="tl-year"></div><div class="tl-body"><h3>Francia destapa la red Pravda</h3><p class="tl-date">Febrero de 2024</p><p>VIGINUM, la agencia francesa contra la injerencia digital extranjera, publicó su primer informe sobre la red de webs prorrusas que más tarde se conocería por apuntar a los sistemas de IA.</p><p class="tl-links"><a href="https://thebulletin.org/2025/03/russian-networks-flood-the-internet-with-propaganda-aiming-to-corrupt-ai-chatbots/" rel="noopener">Fuente</a> <a href="/es/llm-grooming-red-pravda/">LLM grooming y la red Pravda</a></p></div></li><li class="tl-item" id="y2025"><div class="tl-year">2025</div><div class="tl-body"><h3>Los chatbots repiten propaganda un tercio de las veces</h3><p class="tl-date">Marzo de 2025</p><p>Después de que el American Sunlight Project acuñara el término «LLM grooming», NewsGuard probó 10 chatbots líderes y comprobó que repetían narrativas falsas de la red Pravda el 33 % de las veces.</p><p class="tl-links"><a href="https://www.newsguardtech.com/special-reports/moscow-based-global-news-network-infected-western-artificial-intelligence-russian-propaganda/" rel="noopener">Fuente</a> <a href="/es/llm-grooming-red-pravda/">LLM grooming y la red Pravda</a></p></div></li><li class="tl-item"><div class="tl-year"></div><div class="tl-body"><h3>El NIST actualiza su taxonomía de ataques a la IA</h3><p class="tl-date">Marzo de 2025</p><p>El documento NIST AI 100-2 E2025 clasifica los ataques contra la IA predictiva y generativa, y divide el envenenamiento en ataques de disponibilidad, dirigidos, de puerta trasera y de envenenamiento del modelo.</p><p class="tl-links"><a href="https://csrc.nist.gov/news/2025/nist-ai-100-2-adversarial-machine-learning-taxonom" rel="noopener">Fuente</a> <a href="/es/que-es-model-poisoning/">¿Qué es el model poisoning?</a></p></div></li><li class="tl-item"><div class="tl-year"></div><div class="tl-body"><h3>250 documentos bastan para meter una puerta trasera en un LLM</h3><p class="tl-date">Octubre de 2025</p><p>Anthropic, el UK AI Security Institute y el Alan Turing Institute comprobaron que unos 250 documentos envenenados bastaban para implantar una puerta trasera en modelos de lenguaje de 600 millones a 13.000 millones de parámetros, independientemente de cuántos datos limpios hubieran visto.</p><p class="tl-links"><a href="https://www.anthropic.com/research/small-samples-poison" rel="noopener">Fuente</a> <a href="/es/250-documentos-envenenar-llm/">Bastan 250 documentos</a></p></div></li><li class="tl-item" id="y2026"><div class="tl-year">2026</div><div class="tl-body"><h3>Microsoft explica cómo detectar un modelo con puerta trasera</h3><p class="tl-date">Febrero de 2026</p><p>El red team de IA de Microsoft describió tres señales de alarma de un modelo de lenguaje con puerta trasera y un escáner que reconstruye los disparadores ocultos. Microsoft Security informó además de 31 empresas de 14 sectores que usaban enlaces para intentar plantar instrucciones en la memoria de los asistentes de IA.</p><p class="tl-links"><a href="https://www.theregister.com/2026/02/05/llm_poisoned_how_to_tell/" rel="noopener">Fuente</a> <a href="/es/como-defenderse-envenenamiento-datos/">Cómo defenderse del envenenamiento</a></p></div></li></ol>
+
+<h2 id="lo-que-muestra-la-cronologia">Lo que muestra la cronología</h2>
+<p>Destacan tres tendencias.</p>
+<p><strong>Atacar es cada vez más barato.</strong> En 2017, una puerta trasera exigía controlar el proceso de entrenamiento. En 2023 bastaba con comprar dominios caducados por unos 60 dólares. En 2025, unos pocos cientos de documentos bastaban para una puerta trasera sencilla en modelos de todos los tamaños probados.</p>
+<p><strong>Los atacantes han cambiado.</strong> Los primeros casos los protagonizaban bromistas y académicos. Hoy incluyen operaciones de influencia vinculadas a Estados que publican millones de artículos al año, empresas que intentan sesgar a los asistentes de IA a favor de sus productos y artistas que usan el envenenamiento para defender su obra.</p>
+<p><strong>La defensa se pone al día, despacio.</strong> Los marcos de OWASP, NIST y MITRE dan ya al envenenamiento un vocabulario común, y la investigación sobre detección de puertas traseras ha pasado de la teoría a escáneres prácticos. Nuestra <a href="/es/como-defenderse-envenenamiento-datos/">lista de defensas</a> recoge lo que las organizaciones pueden hacer hoy.</p>
+<p>¿Conoces un caso que deberíamos añadir? Escríbenos desde la página <a href="/es/sobre/">sobre este sitio</a>.</p></div>
+  </article>
+  <aside class="rail" aria-label="En esta página">
+    <nav class="toc"><h2>En esta página</h2><ol><li><a href="#y2016">2016</a></li><li><a href="#y2017">2017</a></li><li><a href="#y2023">2023</a></li><li><a href="#y2024">2024</a></li><li><a href="#y2025">2025</a></li><li><a href="#y2026">2026</a></li><li><a href="#lo-que-muestra-la-cronologia">Lo que muestra la cronología</a></li></ol></nav>
+  </aside>
+  <section class="read-next" aria-labelledby="next-h">
+    <h2 id="next-h">Sigue leyendo</h2>
+    <ul class="rows"><li><a href="/es/que-es-model-poisoning/"><span class="row-title">¿Qué es el model poisoning?</span><span class="row-dek">Un atacante no siempre necesita entrar en un sistema de IA. A veces le basta con cambiar aquello de lo que aprende.</span></a></li><li><a href="/es/250-documentos-envenenar-llm/"><span class="row-title">Bastan 250 documentos</span><span class="row-dek">El mayor experimento de envenenamiento publicado hasta ahora sugiere que lo que importa es el número de documentos maliciosos, no su proporción en los datos de entrenamiento.</span></a></li></ul>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></p>
+      <p>Referencia independiente y sin ánimo comercial sobre el envenenamiento de datos y modelos de IA. Sin cookies ni rastreadores.</p>
+      <p class="muted">Última actualización: 9 de octubre de 2026</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="/es/sobre/">Sobre el sitio</a></li>
+      <li><a href="/es/aviso-legal/">Aviso legal</a></li>
+      <li><a href="/es/privacidad/">Privacidad</a></li>
+      <li><a href="/history-of-ai-poisoning/" hreflang="en" lang="en">English</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>
