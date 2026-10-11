@@ -14,7 +14,9 @@ This site **uses no cookies, includes no third-party analytics, loads nothing fr
 
 ## Data controller
 
-{{EDITOR_NAME}}, tax ID (NIF) {{NIF}}, email {{EMAIL}}.
+- **Controller:** {{EDITOR_NAME}}
+- **Tax ID (NIF):** {{NIF}}
+- **Contact:** {{EMAIL}}
 
 ## What data is processed
 

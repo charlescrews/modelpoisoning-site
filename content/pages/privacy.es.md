@@ -14,7 +14,9 @@ Este sitio **no usa cookies, no incluye herramientas de analítica de terceros, 
 
 ## Responsable del tratamiento
 
-{{EDITOR_NAME}}, con NIF {{NIF}} y correo electrónico {{EMAIL}}.
+- **Responsable:** {{EDITOR_NAME}}
+- **NIF:** {{NIF}}
+- **Contacto:** {{EMAIL}}
 
 ## Qué datos se tratan
 

@@ -217,6 +217,16 @@ missing_fields: set[str] = set()
 
 
 def fill(text: str, lang: str) -> str:
+    # Lines whose placeholder is empty in site.json are dropped entirely
+    # (e.g. NIF or address on a non-commercial site).
+    kept = []
+    for line in text.splitlines():
+        fields = re.findall(r"\{\{([A-Z_]+)\}\}", line)
+        if fields and line.lstrip().startswith("- ") and any(not CFG.get(f.lower(), "") for f in fields):
+            continue
+        kept.append(line)
+    text = "\n".join(kept)
+
     def rep(m):
         field = m.group(1).lower()
         val = CFG.get(field, "")
