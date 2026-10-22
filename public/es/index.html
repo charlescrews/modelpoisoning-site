@@ -21,7 +21,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/style.css?v=2b0b224b">
+<link rel="stylesheet" href="/style.css?v=6451a8cc">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/es/", "inLanguage": "es", "description": "Referencia independiente sobre el envenenamiento de datos y modelos de IA: cómo se corrompe lo que aprenden los sistemas de IA, la investigación que lo respalda y cómo defenderse."}</script>
 </head><body>
 <a class="skip" href="#main">Saltar al contenido</a>
@@ -33,6 +33,7 @@
         <li><a href="/es/#articles">Artículos</a></li>
         <li><a href="/es/historia-envenenamiento-ia/">Cronología</a></li>
         <li><a href="/es/glosario/">Glosario</a></li>
+        <li><a href="/es/comprobador-modelos/">Comprobador</a></li>
         <li><a href="/es/sobre/">Sobre el sitio</a></li>
       </ul>
     </nav>
@@ -63,6 +64,22 @@
     <ul class="rows"><li><a href="/es/que-es-model-poisoning/"><span class="row-title">¿Qué es el model poisoning?</span><span class="row-dek">Un atacante no siempre necesita entrar en un sistema de IA. A veces le basta con cambiar aquello de lo que aprende.</span><span class="row-meta">5 min de lectura</span></a></li><li><a href="/es/250-documentos-envenenar-llm/"><span class="row-title">Bastan 250 documentos</span><span class="row-dek">El mayor experimento de envenenamiento publicado hasta ahora sugiere que lo que importa es el número de documentos maliciosos, no su proporción en los datos de entrenamiento.</span><span class="row-meta">5 min de lectura</span></a></li><li><a href="/es/llm-grooming-red-pravda/"><span class="row-title">LLM grooming y la red Pravda</span><span class="row-dek">Algunas webs no están escritas para personas. Están escritas para las máquinas que leen la web en nombre de los sistemas de IA.</span><span class="row-meta">5 min de lectura</span></a></li><li><a href="/es/nightshade-glaze-artistas/"><span class="row-title">Nightshade y Glaze</span><span class="row-dek">No todo envenenamiento de datos es un ataque. Para algunos artistas es la única baza que tienen frente a las empresas que recopilan su obra.</span><span class="row-meta">4 min de lectura</span></a></li><li><a href="/es/como-defenderse-envenenamiento-datos/"><span class="row-title">Cómo defenderse del envenenamiento</span><span class="row-dek">Nadie puede revisar a mano miles de millones de documentos. Pero sí se puede controlar de dónde vienen, demostrar que no han cambiado y comprobar qué ha aprendido el modelo.</span><span class="row-meta">5 min de lectura</span></a></li><li><a href="/es/historia-envenenamiento-ia/"><span class="row-title">Breve historia del envenenamiento de la IA</span><span class="row-dek">Diez momentos que convirtieron el envenenamiento de una curiosidad académica en un riesgo de seguridad de primer orden.</span><span class="row-meta">4 min de lectura</span></a></li></ul>
   </section>
 
+  <section class="wrap section split" aria-labelledby="ck-h">
+    <div class="section-head">
+      <h2 id="ck-h">Comprueba un modelo</h2>
+      <p>Antes de cargar un modelo de Hugging Face, mira si sus archivos pueden ejecutar código y qué no cuenta su ficha.</p>
+    </div>
+    <form class="checker-form" action="/es/comprobador-modelos/" method="get" role="search">
+      <label for="home-model">Modelo de Hugging Face</label>
+      <div class="field-row">
+        <input id="home-model" name="model" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="owner/model" aria-describedby="home-model-hint" maxlength="300">
+        <button type="submit" class="btn">Comprobar</button>
+      </div>
+      <p id="home-model-hint" class="hint">Gratis, funciona en tu navegador y no guarda nada.</p>
+      
+    </form>
+  </section>
+
   <section class="wrap section split" aria-labelledby="tl-h">
     <div class="section-head">
       <h2 id="tl-h">Cronología</h2>
@@ -86,7 +103,7 @@
     <div>
       <p class="footer-brand"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></p>
       <p>Referencia independiente y sin ánimo comercial sobre el envenenamiento de datos y modelos de IA. Sin cookies ni rastreadores.</p>
-      <p class="muted">Última actualización: 9 de octubre de 2026</p>
+      <p class="muted">Última actualización: 22 de octubre de 2026</p>
     </div>
     <ul class="footer-links">
       <li><a href="/es/sobre/">Sobre el sitio</a></li>

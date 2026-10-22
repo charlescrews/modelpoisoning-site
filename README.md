@@ -166,6 +166,19 @@ Los enlaces internos usan `@clave` y el generador los convierte a la URL correct
 
 ---
 
+## 7. El comprobador de modelos
+
+Página `/model-checker/` (en español `/es/comprobador-modelos/`). Funciona entero en el navegador del visitante: consulta la API pública de Hugging Face (`huggingface.co/api/models/…`) y no envía nada a este sitio. Coste cero, sin servidor.
+
+- Textos de la página: `content/tools/model-checker.en.md` y `.es.md`.
+- Mensajes de los resultados: diccionario `CHECKER_UI` en `build.py` (en y es).
+- Lógica: `static/checker.js`, sin dependencias.
+- Se puede enlazar con un modelo ya cargado: `https://www.modelpoisoning.com/model-checker/?model=openai-community/gpt2`.
+
+Si cambias lo que hace (por ejemplo, consultar otro servicio), actualiza también `content/pages/privacy.*.md`.
+
+---
+
 ## Notas técnicas
 
 - Tipografías autoalojadas (Archivo y Source Serif 4, licencia SIL OFL, en `static/fonts/`): no se llama a Google Fonts.

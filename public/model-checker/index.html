@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hugging Face model checker: check a model before you load it</title>
+<meta name="description" content="Free check of a Hugging Face model: pickle files that can run code, Hugging Face&#x27;s scan results, custom code, model card, licence and training data. Runs in your browser.">
+<link rel="canonical" href="https://www.modelpoisoning.com/model-checker/">
+<link rel="alternate" hreflang="en" href="https://www.modelpoisoning.com/model-checker/"><link rel="alternate" hreflang="es" href="https://www.modelpoisoning.com/es/comprobador-modelos/"><link rel="alternate" hreflang="x-default" href="https://www.modelpoisoning.com/model-checker/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="modelpoisoning.com">
+<meta property="og:title" content="Hugging Face model checker: check a model before you load it">
+<meta property="og:description" content="Free check of a Hugging Face model: pickle files that can run code, Hugging Face&#x27;s scan results, custom code, model card, licence and training data. Runs in your browser.">
+<meta property="og:url" content="https://www.modelpoisoning.com/model-checker/">
+<meta property="og:image" content="https://www.modelpoisoning.com/og.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EDF0EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131915" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css?v=6451a8cc">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Model checker", "url": "https://www.modelpoisoning.com/model-checker/", "description": "Free check of a Hugging Face model: pickle files that can run code, Hugging Face's scan results, custom code, model card, licence and training data. Runs in your browser.", "inLanguage": "en", "applicationCategory": "SecurityApplication", "operatingSystem": "Any", "browserRequirements": "Requires JavaScript", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.modelpoisoning.com/"}, {"@type": "ListItem", "position": 2, "name": "Model checker", "item": "https://www.modelpoisoning.com/model-checker/"}]}</script>
+</head><body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/" aria-label="modelpoisoning.com"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="/#articles">Articles</a></li>
+        <li><a href="/history-of-ai-poisoning/">Timeline</a></li>
+        <li><a href="/glossary/">Glossary</a></li>
+        <li><a href="/model-checker/" aria-current="page">Model checker</a></li>
+        <li><a href="/about/">About</a></li>
+      </ul>
+    </nav>
+    <a class="lang" href="/es/comprobador-modelos/" hreflang="es" lang="es" title="Leer en español">Español</a>
+  </div>
+</header>
+<main id="main" class="wrap page checker-page">
+  <h1>Check a model before you load it</h1>
+  <p class="lead">Enter a model from Hugging Face to see whether its files can run code on your machine, what Hugging Face&#x27;s scanners found, and what its model card leaves out.</p>
+  <div id="checker" class="checker">
+    <form class="checker-form" action="/model-checker/" method="get" role="search">
+      <label for="model-input">Model on Hugging Face</label>
+      <div class="field-row">
+        <input id="model-input" name="model" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="owner/model" aria-describedby="model-input-hint" maxlength="300">
+        <button type="submit" class="btn">Check</button>
+      </div>
+      <p id="model-input-hint" class="hint">Write owner/model, paste a huggingface.co link or a pkg:huggingface Package URL. Add @revision to check a specific commit.</p>
+      <p class="examples"><span class="examples-label">Try:</span> <button type="button" class="chip" data-example="openai-community/gpt2">openai-community/gpt2</button><button type="button" class="chip" data-example="mcpotato/42-eicar-street">mcpotato/42-eicar-street</button> <span class="muted">(a test repository with deliberately malicious files: mcpotato/42-eicar-street)</span></p>
+    </form>
+    <noscript><p class="msg msg-error">The checker needs JavaScript. It runs in your browser and sends nothing to this site.</p></noscript>
+    <div id="checker-results" class="results" aria-live="polite"></div>
+  </div>
+  <div class="prose checker-about"><h2 id="what-it-checks">What it checks</h2>
+<ul>
+<li><strong>Hugging Face&rsquo;s own scans.</strong> Hugging Face runs uploaded files through the ClamAV antivirus and lists the imports inside pickle files, highlighting suspicious ones (<a href="https://huggingface.co/docs/hub/security-pickle" rel="noopener">Hugging Face docs</a>). The checker shows which files were flagged.</li>
+<li><strong>File formats.</strong> A <a href="/glossary/#pickle">pickle file</a>, and formats built on pickle such as PyTorch <code>.bin</code>, <code>.pt</code> and <code>.ckpt</code>, can run code the moment it is loaded. <a href="/glossary/#safetensors">Safetensors</a>, GGUF and ONNX store weights without code. Keras files can contain layers that run code, and Keras&rsquo;s safe mode has been bypassed before (<a href="https://jfrog.com/blog/keras-safe_mode-bypass-vulnerability/" rel="noopener">JFrog</a>).</li>
+<li><strong>Custom code.</strong> A model that needs <code>trust_remote_code=True</code> runs Python from its repository on your machine.</li>
+<li><strong>Model card, licence and training data.</strong> Knowing where the training data came from is the first defence against <a href="/what-is-model-poisoning/">poisoning</a>. A model card that does not say is a reason to ask.</li>
+<li><strong>Base model.</strong> Fine-tunes, quantised versions and merges inherit whatever is in the model they came from, so the checker links to it.</li>
+<li><strong>The exact version.</strong> It gives you the commit to pin, so a later change to the repository cannot reach you, and the <a href="https://github.com/package-url/purl-spec" rel="noopener">Package URL</a> (<code>pkg:huggingface/…</code>) to record the model in an <a href="/glossary/#ml-bom">ML-BOM</a>.</li>
+</ul>
+<h2 id="what-it-cannot-tell-you">What it cannot tell you</h2>
+<p>The checker looks at what a repository publishes, not at what the model learned. A model can pass every check and still carry a <a href="/glossary/#backdoor">backdoor</a> planted through its training data: in one study, about <a href="/250-documents-poison-llm/">250 documents</a> were enough. Finding that means testing how the model behaves, as described in the <a href="/defending-against-data-poisoning/#4-test-what-the-model-learned">defence checklist</a>.</p>
+<p>Hugging Face&rsquo;s scanners are best-effort and catch known patterns. A clean scan is evidence, not proof.</p>
+<h2 id="privacy">Privacy</h2>
+<p>The check runs in your browser. When you press the button, your browser asks Hugging Face&rsquo;s public API about the model you entered. Nothing is sent to this site and nothing is stored. Hugging Face receives the request as it would any visit to its website, under its own <a href="https://huggingface.co/privacy" rel="noopener">privacy policy</a>.</p>
+<p>The checker reads public information only. It cannot see private models, and for gated models it shows what Hugging Face shows to anyone.</p></div>
+</main>
+<script type="application/json" id="checker-i18n">{"check": "Check", "checking": "Checking…", "loading": "Asking Hugging Face about {id}…", "err_empty": "Enter a model, for example `openai-community/gpt2`.", "err_kind": "This tool checks models. Datasets and Spaces are not supported yet.", "err_format": "That does not look like a Hugging Face model. Use `owner/model`, a huggingface.co link or a `pkg:huggingface/…` Package URL.", "err_notfound": "Hugging Face did not return `{id}`. It may not exist or may be private, or the revision may be wrong.", "err_rate": "Hugging Face is limiting requests right now. Try again in a minute.", "err_server": "Hugging Face returned an unexpected answer. Try again later.", "err_timeout": "Hugging Face took too long to answer. Try again.", "err_network": "Could not reach Hugging Face. Check your connection, or whether a browser extension is blocking huggingface.co.", "and_more": "and {n} more", "results_for": "Results for", "updated": "Last updated {d}", "downloads": "{n} downloads in the last 30 days", "likes": "{n} likes", "summary_label": "Summary", "count_risk": "Risks", "count_check": "To check", "count_good": "Good", "status_risk": "Risk", "status_check": "Check", "status_note": "Note", "status_good": "Good", "disabled_t": "Hugging Face has disabled this repository", "disabled_b": "Its files are no longer available from Hugging Face. Treat any copy you find elsewhere with suspicion.", "gated_t": "Access is gated", "gated_b": "You have to accept the author's conditions on Hugging Face before you can download the files.", "scan_none_t": "No scan results yet", "scan_none_b": "Hugging Face has not finished scanning this repository, or did not report results. Check the files yourself before loading them.", "level_unsafe": "unsafe", "level_caution": "caution", "level_suspicious": "suspicious", "scan_unsafe_t": "Hugging Face's scanners flagged unsafe files", "scan_unsafe_b": "Do not load these files outside a sandbox without network access or credentials. Open each one on Hugging Face to see what the scanner found.", "scan_caution_t": "Hugging Face's scanners flagged files for caution", "scan_caution_b": "The scanner found imports or contents that are not known to be safe. Open each file on Hugging Face to see why before you load it.", "scan_clean_t": "Hugging Face's scanners found nothing", "scan_clean_b": "No file was flagged by the antivirus or the pickle import scan. Scanners catch known patterns, not every attack.", "fmt_pickle_only_t": "The weights are only in formats that can run code", "fmt_pickle_only_b": "Pickle-based files can execute code the moment they are loaded. Look for a version of the model in safetensors, or load these only in a sandbox without network access or credentials.", "fmt_both_t": "Safe and pickle-based weights are both published", "fmt_both_b": "The repository also has {kinds} files. Make sure your code loads those and never the pickle-based ones: in transformers, for example, pass `use_safetensors=True`.", "fmt_safe_t": "The weights are in formats that do not run code", "fmt_safe_b": "Found: {kinds}. Unlike pickle, these formats are designed to store weights without executable code. Keep the software that reads them up to date.", "fmt_none_t": "No model weight files recognised", "fmt_none_b": "The repository may store its weights elsewhere or use a format this tool does not know. Look at the files before loading them.", "fmt_keras_t": "Keras files can contain code", "fmt_keras_b": "Keras models can include layers that run code when loaded, and Keras's safe mode has been bypassed before. Use an up-to-date Keras with safe mode on, or load them in a sandbox.", "fmt_state_t": "Training files in pickle format", "fmt_state_b": "Files such as `training_args.bin` or `optimizer.pt` are saved with pickle. You do not need them to use the model, so do not load them.", "code_remote_t": "Loading it runs code from the repository", "code_remote_b": "This model needs `trust_remote_code=True`, which runs its Python files on your machine. Read them before loading and pin a revision so they cannot change later.", "code_files_t": "The repository includes Python files", "code_files_b": "Standard libraries do not run them when they load the model, but read them before you run any of them yourself.", "code_none_t": "No custom code needed", "code_none_b": "It loads without `trust_remote_code`, so no Python file from the repository runs on your machine.", "card_none_t": "No model card", "card_none_b": "Without a model card you cannot tell what the model is for, how it was trained or who answers for it.", "card_nometa_t": "The model card has no metadata", "card_nometa_b": "There is a README, but it does not declare a licence, training data or base model in a form tools can read.", "card_ok_t": "Has a model card", "card_ok_b": "Read it for the intended use, the limitations and how the model was evaluated.", "lic_none_t": "No licence declared", "lic_none_b": "Without a licence you have no clear right to use, modify or redistribute the model.", "lic_other_t": "Licence: {lic}", "lic_other_b": "It is not a standard licence. Read its terms in the model card or the licence file before using the model.", "lic_ok_t": "Licence: {lic}", "lic_ok_b": "Check that its terms fit the way you plan to use the model.", "data_ok_t": "Training data declared", "data_ok_b": "The model card names the data it was trained or fine-tuned on. Look at where that data came from and who maintains it.", "data_none_t": "Training data not declared", "data_none_b": "Knowing where the data came from is the first defence against [poisoning](/defending-against-data-poisoning/#1-know-where-your-data-comes-from). If the card does not say, ask the author or prefer a model that does.", "base_t": "Built on another model", "base_b": "Whatever is in the base model carries over, including a backdoor. Check it too:", "rel_finetune": "fine-tune", "rel_adapter": "adapter", "rel_quantized": "quantised", "rel_merge": "merge", "copy": "Copy", "copied": "Copied", "pin_t": "Pin this exact version", "pin_b": "This version is commit `{sha}`. Download that commit rather than whatever the repository holds tomorrow, so a later change cannot reach you.", "pin_code": "In Python", "pin_purl": "Package URL for your ML-BOM", "caveat": "These checks cover what the repository publishes, not what the model learned. A model can pass all of them and still contain a backdoor. [How to test for one](/defending-against-data-poisoning/#4-test-what-the-model-learned)."}</script>
+<script src="/checker.js?v=28f6ac1a" defer></script>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></p>
+      <p>An independent, non-commercial reference on AI data and model poisoning. No cookies, no trackers.</p>
+      <p class="muted">Last updated 22 October 2026</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="/about/">About</a></li>
+      <li><a href="/legal-notice/">Legal notice</a></li>
+      <li><a href="/privacy/">Privacy</a></li>
+      <li><a href="/es/comprobador-modelos/" hreflang="es" lang="es">Español</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

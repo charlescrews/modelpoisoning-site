@@ -21,7 +21,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/style.css?v=2b0b224b">
+<link rel="stylesheet" href="/style.css?v=6451a8cc">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How to defend against data and model poisoning: a practical checklist", "description": "A practical checklist for protecting AI systems from data and model poisoning, based on OWASP LLM04:2025, NIST and MITRE ATLAS, plus the backdoor warning signs Microsoft's AI red team identified in 2026.", "inLanguage": "en", "datePublished": "2026-10-09", "dateModified": "2026-10-09", "mainEntityOfPage": "https://www.modelpoisoning.com/defending-against-data-poisoning/", "image": "https://www.modelpoisoning.com/og.png", "author": {"@type": "Person", "name": "Carlos  Díaz", "url": "https://www.modelpoisoning.com/about/"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.modelpoisoning.com/"}, {"@type": "ListItem", "position": 2, "name": "How to defend against poisoning", "item": "https://www.modelpoisoning.com/defending-against-data-poisoning/"}]}</script>
 </head><body>
 <a class="skip" href="#main">Skip to content</a>
@@ -33,6 +33,7 @@
         <li><a href="/#articles">Articles</a></li>
         <li><a href="/history-of-ai-poisoning/">Timeline</a></li>
         <li><a href="/glossary/">Glossary</a></li>
+        <li><a href="/model-checker/">Model checker</a></li>
         <li><a href="/about/">About</a></li>
       </ul>
     </nav>
@@ -44,7 +45,7 @@
     <header class="article-head">
       <h1>How to defend against data and model poisoning: a practical checklist</h1>
       <p class="dek">You cannot inspect billions of documents by hand. You can control where they come from, prove they have not changed, and test what the model learned.</p>
-      <p class="meta">Published 9 October 2026, 4 min read</p>
+      <p class="meta">Published 9 October 2026, 5 min read</p>
     </header>
     <aside class="summary" aria-labelledby="summary-h"><h2 id="summary-h">In short</h2><ul>
 <li>Most defences fall into four groups: <strong>know your data</strong>, <strong>protect its integrity</strong>, <strong>test the model</strong>, and <strong>watch it in production</strong>.</li>
@@ -74,6 +75,7 @@
 <li><strong>Check checksums or signatures</strong> where they are available.</li>
 <li>Prefer <strong>safe serialisation formats</strong> such as safetensors. OWASP warns that shared models can carry malware through techniques such as malicious pickling, because loading a pickle file can execute code.</li>
 <li>Load untrusted models in a <strong>sandbox</strong> without network access or credentials.</li>
+<li>Run a quick check of a Hugging Face repository with the <a href="/model-checker/">model checker</a> before you download it: it flags pickle files, custom code and missing provenance.</li>
 </ul>
 <h2 id="4-test-what-the-model-learned">4. Test what the model learned</h2>
 <p>A backdoored model passes normal tests. Finding a backdoor means looking for behaviour that only appears under specific conditions.</p>
@@ -122,7 +124,7 @@
     <div>
       <p class="footer-brand"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></p>
       <p>An independent, non-commercial reference on AI data and model poisoning. No cookies, no trackers.</p>
-      <p class="muted">Last updated 9 October 2026</p>
+      <p class="muted">Last updated 22 October 2026</p>
     </div>
     <ul class="footer-links">
       <li><a href="/about/">About</a></li>

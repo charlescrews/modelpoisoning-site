@@ -80,6 +80,15 @@ T = {
         "notfound_body": "This address does not match any page on the site. It may have moved when we reorganised the articles.",
         "notfound_cta": "Go to the home page",
         "pending": "[pending]",
+        "nav_checker": "Model checker",
+        "ck_label": "Model on Hugging Face",
+        "ck_hint": "Write owner/model, paste a huggingface.co link or a pkg:huggingface Package URL. Add @revision to check a specific commit.",
+        "ck_try": "Try:",
+        "ck_eicar_note": "a test repository with deliberately malicious files",
+        "ck_noscript": "The checker needs JavaScript. It runs in your browser and sends nothing to this site.",
+        "home_ck_h": "Check a model",
+        "home_ck_intro": "Before you load a model from Hugging Face, see whether its files can run code and what its model card leaves out.",
+        "home_ck_hint": "Free, runs in your browser, nothing is stored.",
     },
     "es": {
         "site_desc": "Referencia independiente sobre el envenenamiento de datos y modelos de IA: cómo se corrompe lo que aprenden los sistemas de IA, la investigación que lo respalda y cómo defenderse.",
@@ -125,6 +134,195 @@ T = {
         "notfound_body": "Esta dirección no corresponde a ninguna página del sitio. Puede que haya cambiado al reorganizar los artículos.",
         "notfound_cta": "Ir a la página de inicio",
         "pending": "[pendiente]",
+        "nav_checker": "Comprobador",
+        "ck_label": "Modelo de Hugging Face",
+        "ck_hint": "Escribe propietario/modelo, pega un enlace de huggingface.co o un Package URL pkg:huggingface. Añade @revisión para comprobar un commit concreto.",
+        "ck_try": "Prueba:",
+        "ck_eicar_note": "un repositorio de prueba con archivos maliciosos a propósito",
+        "ck_noscript": "El comprobador necesita JavaScript. Funciona en tu navegador y no envía nada a este sitio.",
+        "home_ck_h": "Comprueba un modelo",
+        "home_ck_intro": "Antes de cargar un modelo de Hugging Face, mira si sus archivos pueden ejecutar código y qué no cuenta su ficha.",
+        "home_ck_hint": "Gratis, funciona en tu navegador y no guarda nada.",
+    },
+}
+
+# Strings used by static/checker.js. Links written as (@key#anchor) are resolved per language.
+CHECKER_UI = {
+    "en": {
+        "check": "Check",
+        "checking": "Checking…",
+        "loading": "Asking Hugging Face about {id}…",
+        "err_empty": "Enter a model, for example `openai-community/gpt2`.",
+        "err_kind": "This tool checks models. Datasets and Spaces are not supported yet.",
+        "err_format": "That does not look like a Hugging Face model. Use `owner/model`, a huggingface.co link or a `pkg:huggingface/…` Package URL.",
+        "err_notfound": "Hugging Face did not return `{id}`. It may not exist or may be private, or the revision may be wrong.",
+        "err_rate": "Hugging Face is limiting requests right now. Try again in a minute.",
+        "err_server": "Hugging Face returned an unexpected answer. Try again later.",
+        "err_timeout": "Hugging Face took too long to answer. Try again.",
+        "err_network": "Could not reach Hugging Face. Check your connection, or whether a browser extension is blocking huggingface.co.",
+        "and_more": "and {n} more",
+        "results_for": "Results for",
+        "updated": "Last updated {d}",
+        "downloads": "{n} downloads in the last 30 days",
+        "likes": "{n} likes",
+        "summary_label": "Summary",
+        "count_risk": "Risks",
+        "count_check": "To check",
+        "count_good": "Good",
+        "status_risk": "Risk",
+        "status_check": "Check",
+        "status_note": "Note",
+        "status_good": "Good",
+        "disabled_t": "Hugging Face has disabled this repository",
+        "disabled_b": "Its files are no longer available from Hugging Face. Treat any copy you find elsewhere with suspicion.",
+        "gated_t": "Access is gated",
+        "gated_b": "You have to accept the author's conditions on Hugging Face before you can download the files.",
+        "scan_none_t": "No scan results yet",
+        "scan_none_b": "Hugging Face has not finished scanning this repository, or did not report results. Check the files yourself before loading them.",
+        "level_unsafe": "unsafe",
+        "level_caution": "caution",
+        "level_suspicious": "suspicious",
+        "scan_unsafe_t": "Hugging Face's scanners flagged unsafe files",
+        "scan_unsafe_b": "Do not load these files outside a sandbox without network access or credentials. Open each one on Hugging Face to see what the scanner found.",
+        "scan_caution_t": "Hugging Face's scanners flagged files for caution",
+        "scan_caution_b": "The scanner found imports or contents that are not known to be safe. Open each file on Hugging Face to see why before you load it.",
+        "scan_clean_t": "Hugging Face's scanners found nothing",
+        "scan_clean_b": "No file was flagged by the antivirus or the pickle import scan. Scanners catch known patterns, not every attack.",
+        "fmt_pickle_only_t": "The weights are only in formats that can run code",
+        "fmt_pickle_only_b": "Pickle-based files can execute code the moment they are loaded. Look for a version of the model in safetensors, or load these only in a sandbox without network access or credentials.",
+        "fmt_both_t": "Safe and pickle-based weights are both published",
+        "fmt_both_b": "The repository also has {kinds} files. Make sure your code loads those and never the pickle-based ones: in transformers, for example, pass `use_safetensors=True`.",
+        "fmt_safe_t": "The weights are in formats that do not run code",
+        "fmt_safe_b": "Found: {kinds}. Unlike pickle, these formats are designed to store weights without executable code. Keep the software that reads them up to date.",
+        "fmt_none_t": "No model weight files recognised",
+        "fmt_none_b": "The repository may store its weights elsewhere or use a format this tool does not know. Look at the files before loading them.",
+        "fmt_keras_t": "Keras files can contain code",
+        "fmt_keras_b": "Keras models can include layers that run code when loaded, and Keras's safe mode has been bypassed before. Use an up-to-date Keras with safe mode on, or load them in a sandbox.",
+        "fmt_state_t": "Training files in pickle format",
+        "fmt_state_b": "Files such as `training_args.bin` or `optimizer.pt` are saved with pickle. You do not need them to use the model, so do not load them.",
+        "code_remote_t": "Loading it runs code from the repository",
+        "code_remote_b": "This model needs `trust_remote_code=True`, which runs its Python files on your machine. Read them before loading and pin a revision so they cannot change later.",
+        "code_files_t": "The repository includes Python files",
+        "code_files_b": "Standard libraries do not run them when they load the model, but read them before you run any of them yourself.",
+        "code_none_t": "No custom code needed",
+        "code_none_b": "It loads without `trust_remote_code`, so no Python file from the repository runs on your machine.",
+        "card_none_t": "No model card",
+        "card_none_b": "Without a model card you cannot tell what the model is for, how it was trained or who answers for it.",
+        "card_nometa_t": "The model card has no metadata",
+        "card_nometa_b": "There is a README, but it does not declare a licence, training data or base model in a form tools can read.",
+        "card_ok_t": "Has a model card",
+        "card_ok_b": "Read it for the intended use, the limitations and how the model was evaluated.",
+        "lic_none_t": "No licence declared",
+        "lic_none_b": "Without a licence you have no clear right to use, modify or redistribute the model.",
+        "lic_other_t": "Licence: {lic}",
+        "lic_other_b": "It is not a standard licence. Read its terms in the model card or the licence file before using the model.",
+        "lic_ok_t": "Licence: {lic}",
+        "lic_ok_b": "Check that its terms fit the way you plan to use the model.",
+        "data_ok_t": "Training data declared",
+        "data_ok_b": "The model card names the data it was trained or fine-tuned on. Look at where that data came from and who maintains it.",
+        "data_none_t": "Training data not declared",
+        "data_none_b": "Knowing where the data came from is the first defence against [poisoning](@defend#1-know-where-your-data-comes-from). If the card does not say, ask the author or prefer a model that does.",
+        "base_t": "Built on another model",
+        "base_b": "Whatever is in the base model carries over, including a backdoor. Check it too:",
+        "rel_finetune": "fine-tune",
+        "rel_adapter": "adapter",
+        "rel_quantized": "quantised",
+        "rel_merge": "merge",
+        "copy": "Copy",
+        "copied": "Copied",
+        "pin_t": "Pin this exact version",
+        "pin_b": "This version is commit `{sha}`. Download that commit rather than whatever the repository holds tomorrow, so a later change cannot reach you.",
+        "pin_code": "In Python",
+        "pin_purl": "Package URL for your ML-BOM",
+        "caveat": "These checks cover what the repository publishes, not what the model learned. A model can pass all of them and still contain a backdoor. [How to test for one](@defend#4-test-what-the-model-learned).",
+    },
+    "es": {
+        "check": "Comprobar",
+        "checking": "Comprobando…",
+        "loading": "Consultando {id} en Hugging Face…",
+        "err_empty": "Escribe un modelo, por ejemplo `openai-community/gpt2`.",
+        "err_kind": "Esta herramienta comprueba modelos. Todavía no admite datasets ni Spaces.",
+        "err_format": "Eso no parece un modelo de Hugging Face. Usa `propietario/modelo`, un enlace de huggingface.co o un Package URL `pkg:huggingface/…`.",
+        "err_notfound": "Hugging Face no ha devuelto `{id}`. Puede que no exista o sea privado, o que la revisión no sea correcta.",
+        "err_rate": "Hugging Face está limitando las consultas ahora mismo. Vuelve a intentarlo en un minuto.",
+        "err_server": "Hugging Face ha devuelto una respuesta inesperada. Vuelve a intentarlo más tarde.",
+        "err_timeout": "Hugging Face ha tardado demasiado en responder. Vuelve a intentarlo.",
+        "err_network": "No se ha podido conectar con Hugging Face. Revisa tu conexión o si alguna extensión del navegador bloquea huggingface.co.",
+        "and_more": "y {n} más",
+        "results_for": "Resultados de",
+        "updated": "Actualizado el {d}",
+        "downloads": "{n} descargas en los últimos 30 días",
+        "likes": "{n} me gusta",
+        "summary_label": "Resumen",
+        "count_risk": "Riesgos",
+        "count_check": "Por revisar",
+        "count_good": "Bien",
+        "status_risk": "Riesgo",
+        "status_check": "Revisar",
+        "status_note": "Nota",
+        "status_good": "Bien",
+        "disabled_t": "Hugging Face ha desactivado este repositorio",
+        "disabled_b": "Sus archivos ya no están disponibles en Hugging Face. Desconfía de cualquier copia que encuentres en otro sitio.",
+        "gated_t": "El acceso está restringido",
+        "gated_b": "Tienes que aceptar las condiciones del autor en Hugging Face antes de poder descargar los archivos.",
+        "scan_none_t": "Todavía no hay resultados del análisis",
+        "scan_none_b": "Hugging Face no ha terminado de analizar este repositorio o no ha publicado resultados. Revisa tú los archivos antes de cargarlos.",
+        "level_unsafe": "inseguro",
+        "level_caution": "precaución",
+        "level_suspicious": "sospechoso",
+        "scan_unsafe_t": "Los análisis de Hugging Face han marcado archivos inseguros",
+        "scan_unsafe_b": "No cargues estos archivos fuera de un entorno aislado sin red ni credenciales. Abre cada uno en Hugging Face para ver qué ha encontrado el análisis.",
+        "scan_caution_t": "Los análisis de Hugging Face han marcado archivos con precaución",
+        "scan_caution_b": "El análisis ha encontrado importaciones o contenidos que no se sabe si son seguros. Abre cada archivo en Hugging Face para ver por qué antes de cargarlo.",
+        "scan_clean_t": "Los análisis de Hugging Face no han encontrado nada",
+        "scan_clean_b": "Ni el antivirus ni el análisis de importaciones pickle han marcado ningún archivo. Los análisis detectan patrones conocidos, no todos los ataques.",
+        "fmt_pickle_only_t": "Los pesos solo están en formatos que pueden ejecutar código",
+        "fmt_pickle_only_b": "Los archivos basados en pickle pueden ejecutar código en cuanto se cargan. Busca una versión del modelo en safetensors o cárgalos solo en un entorno aislado sin red ni credenciales.",
+        "fmt_both_t": "Hay pesos en formato seguro y también basados en pickle",
+        "fmt_both_b": "El repositorio también tiene archivos {kinds}. Asegúrate de que tu código carga esos y nunca los basados en pickle: en transformers, por ejemplo, con `use_safetensors=True`.",
+        "fmt_safe_t": "Los pesos están en formatos que no ejecutan código",
+        "fmt_safe_b": "Encontrados: {kinds}. A diferencia de pickle, estos formatos están pensados para guardar pesos sin código ejecutable. Mantén al día el software que los lee.",
+        "fmt_none_t": "No se reconoce ningún archivo de pesos",
+        "fmt_none_b": "Puede que el repositorio guarde los pesos en otro sitio o use un formato que esta herramienta no conoce. Revisa los archivos antes de cargarlos.",
+        "fmt_keras_t": "Los archivos de Keras pueden contener código",
+        "fmt_keras_b": "Los modelos de Keras pueden incluir capas que ejecutan código al cargarse, y su modo seguro ya se ha saltado alguna vez. Usa un Keras actualizado con el modo seguro activado o cárgalos en un entorno aislado.",
+        "fmt_state_t": "Archivos de entrenamiento en formato pickle",
+        "fmt_state_b": "Archivos como `training_args.bin` u `optimizer.pt` se guardan con pickle. No los necesitas para usar el modelo, así que no los cargues.",
+        "code_remote_t": "Cargarlo ejecuta código del repositorio",
+        "code_remote_b": "Este modelo necesita `trust_remote_code=True`, que ejecuta en tu equipo sus archivos Python. Léelos antes de cargarlo y fija una revisión para que no puedan cambiar después.",
+        "code_files_t": "El repositorio incluye archivos Python",
+        "code_files_b": "Las bibliotecas habituales no los ejecutan al cargar el modelo, pero léelos antes de ejecutar tú cualquiera de ellos.",
+        "code_none_t": "No necesita código propio",
+        "code_none_b": "Se carga sin `trust_remote_code`, así que ningún archivo Python del repositorio se ejecuta en tu equipo.",
+        "card_none_t": "No tiene ficha del modelo",
+        "card_none_b": "Sin ficha no puedes saber para qué sirve el modelo, cómo se entrenó ni quién responde de él.",
+        "card_nometa_t": "La ficha del modelo no tiene metadatos",
+        "card_nometa_b": "Hay un README, pero no declara la licencia, los datos de entrenamiento ni el modelo base de forma que puedan leerlo las herramientas.",
+        "card_ok_t": "Tiene ficha del modelo",
+        "card_ok_b": "Léela para conocer el uso previsto, las limitaciones y cómo se evaluó el modelo.",
+        "lic_none_t": "No declara licencia",
+        "lic_none_b": "Sin licencia no tienes un derecho claro a usar, modificar o redistribuir el modelo.",
+        "lic_other_t": "Licencia: {lic}",
+        "lic_other_b": "No es una licencia estándar. Lee sus condiciones en la ficha o en el archivo de licencia antes de usar el modelo.",
+        "lic_ok_t": "Licencia: {lic}",
+        "lic_ok_b": "Comprueba que sus condiciones encajan con el uso que vas a darle.",
+        "data_ok_t": "Declara los datos de entrenamiento",
+        "data_ok_b": "La ficha indica con qué datos se entrenó o ajustó. Mira de dónde vienen esos datos y quién los mantiene.",
+        "data_none_t": "No declara los datos de entrenamiento",
+        "data_none_b": "Saber de dónde vienen los datos es la primera defensa contra el [envenenamiento](@defend#1-saber-de-donde-vienen-los-datos). Si la ficha no lo dice, pregunta al autor o elige un modelo que lo diga.",
+        "base_t": "Parte de otro modelo",
+        "base_b": "Lo que tenga el modelo base se hereda, incluida una puerta trasera. Compruébalo también:",
+        "rel_finetune": "ajuste fino",
+        "rel_adapter": "adaptador",
+        "rel_quantized": "cuantizado",
+        "rel_merge": "fusión",
+        "copy": "Copiar",
+        "copied": "Copiado",
+        "pin_t": "Fija esta versión exacta",
+        "pin_b": "Esta versión es el commit `{sha}`. Descarga ese commit y no lo que haya mañana en el repositorio, para que un cambio posterior no te afecte.",
+        "pin_code": "En Python",
+        "pin_purl": "Package URL para tu ML-BOM",
+        "caveat": "Estas comprobaciones cubren lo que publica el repositorio, no lo que ha aprendido el modelo. Un modelo puede superarlas todas y aun así tener una puerta trasera. [Cómo detectarla](@defend#4-comprobar-que-ha-aprendido-el-modelo).",
     },
 }
 
@@ -188,6 +386,13 @@ for p in sorted((CONTENT / "pages").glob("*.md")):
     pg["lang"] = lang
     pages[lang][pg["key"]] = pg
 
+tools: dict[str, dict[str, dict]] = {lang: {} for lang in LANGS}
+for p in sorted((CONTENT / "tools").glob("*.md")):
+    lang = p.stem.split(".")[-1]
+    tl = parse_md(p)
+    tl["lang"] = lang
+    tools[lang][tl["key"]] = tl
+
 timeline = json.loads((CONTENT / "timeline.json").read_text(encoding="utf-8"))
 glossary = json.loads((CONTENT / "glossary.json").read_text(encoding="utf-8"))
 
@@ -203,7 +408,17 @@ def url_for(key: str, lang: str) -> str:
         return prefix + articles[lang][key]["slug"] + "/"
     if key in pages[lang]:
         return prefix + pages[lang][key]["slug"] + "/"
+    if key in tools[lang]:
+        return prefix + tools[lang][key]["slug"] + "/"
     sys.exit(f"Unknown link key @{key} ({lang})")
+
+
+LINK_RE = re.compile(r"\]\(@([a-z0-9-]+)(#[a-z0-9-]+)?\)")
+
+
+def resolve_links(text: str, lang: str) -> str:
+    """Turns [text](@key#anchor) into [text](/real/url/#anchor) for the given language."""
+    return LINK_RE.sub(lambda m: f"]({url_for(m.group(1), lang)}{m.group(2) or ''})", text)
 
 
 def out_path(url: str) -> Path:
@@ -217,16 +432,6 @@ missing_fields: set[str] = set()
 
 
 def fill(text: str, lang: str) -> str:
-    # Lines whose placeholder is empty in site.json are dropped entirely
-    # (e.g. NIF or address on a non-commercial site).
-    kept = []
-    for line in text.splitlines():
-        fields = re.findall(r"\{\{([A-Z_]+)\}\}", line)
-        if fields and line.lstrip().startswith("- ") and any(not CFG.get(f.lower(), "") for f in fields):
-            continue
-        kept.append(line)
-    text = "\n".join(kept)
-
     def rep(m):
         field = m.group(1).lower()
         val = CFG.get(field, "")
@@ -241,8 +446,7 @@ def fill(text: str, lang: str) -> str:
 # Markdown rendering
 # --------------------------------------------------------------------------
 def md_to_html(text: str, lang: str) -> str:
-    text = re.sub(r"\]\(@([a-z0-9-]+)(#[a-z0-9-]+)?\)",
-                  lambda m: f"]({url_for(m.group(1), lang)}{m.group(2) or ''})", text)
+    text = resolve_links(text, lang)
     md = markdown.Markdown(extensions=["extra", "sane_lists", "smarty", "toc"],
                            extension_configs={
                                "toc": {"slugify": slugify},
@@ -431,6 +635,7 @@ def header(lang: str, alt_url: str | None, current: str = "") -> str:
         {nav_link(home + '#articles', t['nav_articles'], 'articles')}
         {nav_link(url_for('history', lang), t['nav_timeline'], 'history')}
         {nav_link(url_for('glossary', lang), t['nav_glossary'], 'glossary')}
+        {nav_link(url_for('checker', lang), t['nav_checker'], 'checker')}
         {nav_link(url_for('about', lang), t['nav_about'], 'about')}
       </ul>
     </nav>
@@ -537,6 +742,14 @@ def build_home(lang: str) -> None:
       <p>{t['start_intro']}</p>
     </div>
     <ul class="rows">{''.join(rows)}</ul>
+  </section>
+
+  <section class="wrap section split" aria-labelledby="ck-h">
+    <div class="section-head">
+      <h2 id="ck-h">{t['home_ck_h']}</h2>
+      <p>{t['home_ck_intro']}</p>
+    </div>
+    {checker_form(lang, "home-model", t['home_ck_hint'])}
   </section>
 
   <section class="wrap section split" aria-labelledby="tl-h">
@@ -695,6 +908,77 @@ def build_glossary(lang: str) -> None:
     write(url, doc)
 
 
+CHECKER_EXAMPLES = ["openai-community/gpt2", "mcpotato/42-eicar-street"]
+
+
+def checker_form(lang: str, input_id: str, hint: str, examples: bool = False) -> str:
+    """The model checker form. Without JavaScript it still submits ?model= to the checker page."""
+    t = T[lang]
+    ex = ""
+    if examples:
+        chips = "".join(
+            f'<button type="button" class="chip" data-example="{esc(e)}">{esc(e)}</button>'
+            for e in CHECKER_EXAMPLES
+        )
+        ex = (f'<p class="examples"><span class="examples-label">{t["ck_try"]}</span> {chips} '
+              f'<span class="muted">({t["ck_eicar_note"]}: {esc(CHECKER_EXAMPLES[1])})</span></p>')
+    return f"""<form class="checker-form" action="{url_for('checker', lang)}" method="get" role="search">
+      <label for="{input_id}">{t['ck_label']}</label>
+      <div class="field-row">
+        <input id="{input_id}" name="model" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="owner/model" aria-describedby="{input_id}-hint" maxlength="300">
+        <button type="submit" class="btn">{CHECKER_UI[lang]['check']}</button>
+      </div>
+      <p id="{input_id}-hint" class="hint">{hint}</p>
+      {ex}
+    </form>"""
+
+
+def build_checker(lang: str) -> None:
+    t = T[lang]
+    tl = tools[lang]["checker"]
+    url = url_for("checker", lang)
+    alts = {l: url_for("checker", l) for l in LANGS if "checker" in tools[l]}
+    other = alts.get("es" if lang == "en" else "en")
+    ui = {k: resolve_links(v, lang) for k, v in CHECKER_UI[lang].items()}
+    ui_json = json.dumps(ui, ensure_ascii=False).replace("</", "<\\/")
+    jsonld = [
+        {
+            "@context": "https://schema.org", "@type": "WebApplication",
+            "name": tl["nav_title"] if lang == "en" else tl["h1"], "url": SITE_URL + url,
+            "description": tl["description"], "inLanguage": lang,
+            "applicationCategory": "SecurityApplication", "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript", "isAccessibleForFree": True,
+            "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"},
+            "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": SITE_URL + "/"},
+        },
+        {
+            "@context": "https://schema.org", "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": t["breadcrumb_home"], "item": SITE_URL + url_for("home", lang)},
+                {"@type": "ListItem", "position": 2, "name": tl["nav_title"], "item": SITE_URL + url},
+            ],
+        },
+    ]
+    doc = head(lang=lang, title=tl["title"], desc=tl["description"], url=url, alt_urls=alts, jsonld=jsonld)
+    doc += header(lang, other, current="checker")
+    doc += f"""
+<main id="main" class="wrap page checker-page">
+  <h1>{esc(tl['h1'])}</h1>
+  <p class="lead">{esc(tl['lead'])}</p>
+  <div id="checker" class="checker">
+    {checker_form(lang, "model-input", t['ck_hint'], examples=True)}
+    <noscript><p class="msg msg-error">{t['ck_noscript']}</p></noscript>
+    <div id="checker-results" class="results" aria-live="polite"></div>
+  </div>
+  <div class="prose checker-about">{md_to_html(tl['body'], lang)}</div>
+</main>
+<script type="application/json" id="checker-i18n">{ui_json}</script>
+<script src="/checker.js?v={JS_VERSION}" defer></script>
+"""
+    doc += footer(lang, other)
+    write(url, doc)
+
+
 def build_404() -> None:
     t = T["en"]
     te = T["es"]
@@ -730,6 +1014,8 @@ def build_sitemap() -> None:
     add({l: url_for("glossary", l) for l in LANGS}, CFG["updated"])
     for key, a in articles["en"].items():
         add({l: url_for(key, l) for l in LANGS if key in articles[l]}, a.get("updated", a["date"]))
+    for key, tl in tools["en"].items():
+        add({l: url_for(key, l) for l in LANGS if key in tools[l]}, tl.get("updated", tl.get("date", CFG["updated"])))
     add({l: url_for("about", l) for l in LANGS}, CFG["updated"])
     xml = ('<?xml version="1.0" encoding="UTF-8"?>\n'
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
@@ -741,16 +1027,19 @@ def build_sitemap() -> None:
 
 # --------------------------------------------------------------------------
 def main() -> None:
-    global CSS_VERSION
+    global CSS_VERSION, JS_VERSION
     if OUT.exists():
         shutil.rmtree(OUT)
     shutil.copytree(STATIC, OUT)
     import hashlib
     CSS_VERSION = hashlib.sha1((STATIC / "style.css").read_bytes()).hexdigest()[:8]
+    JS_VERSION = hashlib.sha1((STATIC / "checker.js").read_bytes()).hexdigest()[:8]
 
     for lang in LANGS:
         build_home(lang)
         build_glossary(lang)
+        if "checker" in tools[lang]:
+            build_checker(lang)
         for a in articles[lang].values():
             build_article(a)
         for pg in pages[lang].values():
@@ -766,6 +1055,7 @@ def main() -> None:
 
 
 CSS_VERSION = "dev"
+JS_VERSION = "dev"
 
 if __name__ == "__main__":
     main()

@@ -40,6 +40,7 @@ El envenenamiento del modelo no necesita tocar los datos. Un archivo de modelo d
 - **Comprueba sumas de verificación o firmas** cuando existan.
 - Usa **formatos de serialización seguros** como safetensors. OWASP advierte de que los modelos compartidos pueden llevar malware mediante técnicas como el *pickling* malicioso, porque cargar un archivo pickle puede ejecutar código.
 - Carga los modelos no fiables en un **entorno aislado** sin acceso a red ni credenciales.
+- Haz una revisión rápida del repositorio de Hugging Face con el [comprobador de modelos](@checker) antes de descargarlo: señala los archivos pickle, el código propio y la procedencia que falta.
 
 ## 4. Comprobar qué ha aprendido el modelo
 
