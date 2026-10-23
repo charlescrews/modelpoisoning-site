@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Malicious models on Hugging Face: how a download can run code</title>
+<meta name="description" content="Real cases from 2024 to 2026 of Hugging Face models that ran code or planted backdoors, why scanners miss some, and what to do before you load a model.">
+<link rel="canonical" href="https://www.modelpoisoning.com/malicious-models-hugging-face/">
+<link rel="alternate" hreflang="en" href="https://www.modelpoisoning.com/malicious-models-hugging-face/"><link rel="alternate" hreflang="es" href="https://www.modelpoisoning.com/es/modelos-maliciosos-hugging-face/"><link rel="alternate" hreflang="x-default" href="https://www.modelpoisoning.com/malicious-models-hugging-face/">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="modelpoisoning.com">
+<meta property="og:title" content="Malicious models on Hugging Face: how a download can run code">
+<meta property="og:description" content="Real cases from 2024 to 2026 of Hugging Face models that ran code or planted backdoors, why scanners miss some, and what to do before you load a model.">
+<meta property="og:url" content="https://www.modelpoisoning.com/malicious-models-hugging-face/">
+<meta property="og:image" content="https://www.modelpoisoning.com/og.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EDF0EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131915" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/style.css?v=60bee040">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Malicious models on Hugging Face: how a download can run code", "description": "Real cases from 2024 to 2026 of Hugging Face models that ran code or planted backdoors, why scanners miss some, and what to do before you load a model.", "inLanguage": "en", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "mainEntityOfPage": "https://www.modelpoisoning.com/malicious-models-hugging-face/", "image": "https://www.modelpoisoning.com/og.png", "author": {"@type": "Person", "name": "Carlos Díaz", "url": "https://www.modelpoisoning.com/about/"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.modelpoisoning.com/"}, {"@type": "ListItem", "position": 2, "name": "Malicious models on Hugging Face", "item": "https://www.modelpoisoning.com/malicious-models-hugging-face/"}]}</script>
+</head><body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/" aria-label="modelpoisoning.com"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="/#articles">Articles</a></li>
+        <li><a href="/history-of-ai-poisoning/">Timeline</a></li>
+        <li><a href="/glossary/">Glossary</a></li>
+        <li><a href="/tools/">Tools</a></li>
+        <li><a href="/about/">About</a></li>
+      </ul>
+    </nav>
+    <a class="lang" href="/es/modelos-maliciosos-hugging-face/" hreflang="es" lang="es" title="Leer en español">Español</a>
+  </div>
+</header>
+<main id="main" class="wrap article-layout">
+  <article class="article">
+    <header class="article-head">
+      <h1>Malicious models on Hugging Face: how a download can run code</h1>
+      <p class="dek">Poisoning a model does not always mean touching its training data. Sometimes the file you download does the work the moment you open it.</p>
+      <p class="meta">Published 23 October 2026, 6 min read</p>
+    </header>
+    <aside class="summary" aria-labelledby="summary-h"><h2 id="summary-h">In short</h2><ul>
+<li>Model files saved with Python&rsquo;s <strong>pickle</strong> format, including PyTorch <code>.bin</code>, <code>.pt</code> and <code>.ckpt</code> files, can run code the moment they are loaded. Attackers have used this on Hugging Face to open remote access to the machines that loaded their models.</li>
+<li>The payload does not have to attack the computer. A technique called <strong>Sleepy Pickle</strong> changes the model itself as it loads, which can plant a backdoor that never appears in the stored weights.</li>
+<li>Scanners catch many malicious files but not all: in 2025, researchers showed both a broken pickle that slipped past Hugging Face&rsquo;s scanner and three flaws in the scanner itself.</li>
+<li>In May 2026, a fake OpenAI repository reached number one on Hugging Face&rsquo;s trending list. Its instructions told users to run a script that installed password-stealing malware.</li>
+<li>The defences are simple and cheap: prefer safetensors, pin the exact version, never run a repository&rsquo;s scripts unread, and keep loading tools up to date.</li>
+</ul></aside>
+    <div class="prose"><h2 id="why-loading-a-model-can-run-code">Why loading a model can run code</h2>
+<p>Python&rsquo;s <a href="/glossary/#pickle">pickle</a> format does not just store data. It stores instructions for rebuilding Python objects, and those instructions can name any function to call while the file is being loaded. A malicious file can therefore tell Python to run a shell command, download a program or open a network connection, and it does so before the model has produced a single output.</p>
+<p>Many model files are pickles underneath. A PyTorch <code>.bin</code> or <code>.pt</code> file is a ZIP archive with a pickle inside it. Loading one with an old or misconfigured tool is, in effect, running a program written by whoever uploaded it.</p>
+<h2 id="real-cases">Real cases</h2>
+<h3 id="2024-about-a-hundred-models-with-real-payloads">2024: about a hundred models with real payloads</h3>
+<p>In February 2024, JFrog&rsquo;s security research team scanned PyTorch and TensorFlow Keras models on Hugging Face and reported &ldquo;around 100 instances&rdquo; of models with malicious functionality (<a href="https://jfrog.com/blog/data-scientists-targeted-by-malicious-hugging-face-ml-models-with-silent-backdoor/" rel="noopener">JFrog</a>). In one, uploaded by an account called baller423, loading the model opened a reverse shell: a connection that gives a remote attacker a command line on the victim&rsquo;s machine. The repository has since been deleted.</p>
+<h3 id="2025-a-broken-file-that-the-scanner-skipped">2025: a broken file that the scanner skipped</h3>
+<p>In February 2025, ReversingLabs described two models on Hugging Face that it called <strong>nullifAI</strong> (<a href="https://www.reversinglabs.com/blog/rl-identifies-malware-ml-model-hosted-on-hugging-face" rel="noopener">ReversingLabs</a>). The files were compressed with 7z instead of the usual ZIP and the pickle inside was broken near its end. Picklescan, the open source tool Hugging Face used to inspect pickles, first checked whether a file was valid; these files failed the check, so the dangerous code was never flagged. Python, however, runs a pickle&rsquo;s instructions in order, so the malicious part at the start executed before the corruption caused an error. Hugging Face removed the models within 24 hours and updated Picklescan.</p>
+<p>Later that year, JFrog reported three critical flaws in Picklescan itself that allowed malicious models to pass its checks undetected; they were fixed in version 0.0.31 (<a href="https://www.infosecurity-magazine.com/news/picklescan-flaws-expose-ai-supply" rel="noopener">Infosecurity Magazine</a>).</p>
+<h3 id="2026-a-fake-openai-release-at-number-one">2026: a fake OpenAI release at number one</h3>
+<p>In May 2026, a repository called Open-OSS/privacy-filter copied the model card of a genuine OpenAI release almost word for word and reached number one on Hugging Face&rsquo;s trending list within 18 hours (<a href="https://www.csoonline.com/article/4169407/malicious-hugging-face-model-masquerading-as-openai-release-hits-244k-downloads.html" rel="noopener">CSO Online</a>). It showed about 244,000 downloads, figures that the security firm HiddenLayer, which found the malware, said were almost certainly inflated to make it look legitimate.</p>
+<p>This attack did not need a malicious pickle. The README told users to run a script, <code>loader.py</code> or <code>start.bat</code>, which fetched and installed malware that stole browser passwords, cryptocurrency wallets and other data. Hugging Face removed the repository.</p>
+<h2 id="when-the-payload-targets-the-model-itself">When the payload targets the model itself</h2>
+<p>The cases above attack the computer. In 2024, Trail of Bits described a subtler use of the same weakness, which it called <strong>Sleepy Pickle</strong> (<a href="https://blog.trailofbits.com/2024/06/11/exploiting-ml-models-with-pickle-file-attacks-part-1/" rel="noopener">Trail of Bits</a>). The malicious code runs when the file is loaded and modifies the model in memory: it can patch the weights to insert a <a href="/glossary/#backdoor">backdoor</a> or hook the model&rsquo;s methods to tamper with what goes in and comes out.</p>
+<p>This is model poisoning without touching the training data. The weights stored in the file can look normal and pass a comparison with the original, because the change only exists once the model is running.</p>
+<h2 id="the-name-you-trust-can-change-hands">The name you trust can change hands</h2>
+<p>Pulling a model by name, such as <code>author/model</code>, assumes that name always points to the same publisher. In September 2025, Palo Alto Networks&rsquo; Unit 42 showed that this is not guaranteed (<a href="https://unit42.paloaltonetworks.com/model-namespace-reuse/" rel="noopener">Unit 42</a>). When an author or organisation is deleted from Hugging Face, its name can be registered again by anyone. An attacker who recreates a model path under an abandoned name can reach every pipeline that still downloads it by name. The researchers used this to get code execution on managed AI platforms run by Google and Microsoft.</p>
+<h2 id="how-common-is-it">How common is it?</h2>
+<p>Hugging Face scans uploads with several tools, including its own and, since 2024, Protect AI&rsquo;s. By April 2025, Protect AI had scanned 4.47 million model versions in 1.41 million repositories and flagged 352,000 unsafe or suspicious issues across 51,700 models (<a href="https://huggingface.co/blog/pai-6-month" rel="noopener">Hugging Face</a>). Not every flagged issue is an attack, but the numbers show why the hub treats files as untrusted until scanned, and why you should too.</p>
+<h2 id="what-to-do-before-you-load-a-model">What to do before you load a model</h2>
+<ul>
+<li><strong>Prefer safe formats.</strong> <a href="/glossary/#safetensors">Safetensors</a> and GGUF store weights without executable code. In the transformers library, <code>use_safetensors=True</code> makes sure those are the files that load.</li>
+<li><strong>If you must load a pickle-based file, restrict it.</strong> <code>torch.load</code> only accepts plain weights by default since PyTorch 2.6 (<code>weights_only=True</code>). Keep PyTorch up to date: versions up to 2.5.1 had a flaw that allowed code execution even with that setting (<a href="https://nvd.nist.gov/vuln/detail/CVE-2025-32434" rel="noopener">NVD, CVE-2025-32434</a>).</li>
+<li><strong>Pin the exact version.</strong> Download a specific commit with the <code>revision</code> parameter instead of whatever the name points to today. It protects against both later changes and namespace reuse.</li>
+<li><strong>Read before you run.</strong> Never run a script because a model card tells you to, and read the Python files of any model that needs <code>trust_remote_code=True</code>.</li>
+<li><strong>Do not trust popularity.</strong> Downloads, likes and trending positions can be inflated, as the fake OpenAI repository showed.</li>
+<li><strong>Load untrusted models in a sandbox</strong> without network access or credentials, as recommended in the <a href="/defending-against-data-poisoning/">defence checklist</a>.</li>
+</ul>
+<p>Our <a href="/model-checker/">model checker</a> does the first checks for you: it shows what Hugging Face&rsquo;s scanners flagged, which files use pickle, whether the model needs custom code, and the commit to pin.</p><section class="sources" aria-labelledby="sources-h"><h2 id="sources-h">Sources</h2><ul>
+<li>JFrog, <a href="https://jfrog.com/blog/data-scientists-targeted-by-malicious-hugging-face-ml-models-with-silent-backdoor/" rel="noopener">Data Scientists Targeted by Malicious Hugging Face ML Models with Silent Backdoor</a>, February 2024</li>
+<li>ReversingLabs, <a href="https://www.reversinglabs.com/blog/rl-identifies-malware-ml-model-hosted-on-hugging-face" rel="noopener">RL identifies malware ML model hosted on Hugging Face</a>, February 2025</li>
+<li>Infosecurity Magazine, <a href="https://www.infosecurity-magazine.com/news/picklescan-flaws-expose-ai-supply" rel="noopener">Critical PickleScan Vulnerabilities Expose AI Model Supply Chains</a>, December 2025</li>
+<li>CSO Online, <a href="https://www.csoonline.com/article/4169407/malicious-hugging-face-model-masquerading-as-openai-release-hits-244k-downloads.html" rel="noopener">Malicious Hugging Face model masquerading as OpenAI release hits 244K downloads</a>, May 2026</li>
+<li>Trail of Bits, <a href="https://blog.trailofbits.com/2024/06/11/exploiting-ml-models-with-pickle-file-attacks-part-1/" rel="noopener">Exploiting ML models with pickle file attacks: Part 1</a>, June 2024</li>
+<li>Unit 42, <a href="https://unit42.paloaltonetworks.com/model-namespace-reuse/" rel="noopener">Model Namespace Reuse</a>, September 2025</li>
+<li>Hugging Face, <a href="https://huggingface.co/blog/pai-6-month" rel="noopener">4M Models Scanned: Protect AI + Hugging Face 6 Months In</a>, April 2025</li>
+<li>NIST NVD, <a href="https://nvd.nist.gov/vuln/detail/CVE-2025-32434" rel="noopener">CVE-2025-32434</a></li>
+</ul></section></div>
+  </article>
+  <aside class="rail" aria-label="On this page">
+    <nav class="toc"><h2>On this page</h2><ol><li><a href="#why-loading-a-model-can-run-code">Why loading a model can run code</a></li><li><a href="#real-cases">Real cases</a></li><li><a href="#when-the-payload-targets-the-model-itself">When the payload targets the model itself</a></li><li><a href="#the-name-you-trust-can-change-hands">The name you trust can change hands</a></li><li><a href="#how-common-is-it">How common is it?</a></li><li><a href="#what-to-do-before-you-load-a-model">What to do before you load a model</a></li><li><a href="#sources-h">Sources</a></li></ol></nav>
+  </aside>
+  <section class="read-next" aria-labelledby="next-h">
+    <h2 id="next-h">Read next</h2>
+    <ul class="rows"><li><a href="/what-is-model-poisoning/"><span class="row-title">What is model poisoning?</span><span class="row-dek">Attackers do not always need to break into an AI system. Sometimes it is enough to change what the system learns from.</span></a></li><li><a href="/250-documents-poison-llm/"><span class="row-title">250 documents are enough</span><span class="row-dek">The largest poisoning experiment published so far suggests that what matters is the number of malicious documents, not their share of the training data.</span></a></li></ul>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="footer-brand"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></p>
+      <p>An independent, non-commercial reference on AI data and model poisoning. No cookies, no trackers.</p>
+      <p class="muted">Last updated 23 October 2026</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="/about/">About</a></li>
+      <li><a href="/legal-notice/">Legal notice</a></li>
+      <li><a href="/privacy/">Privacy</a></li>
+      <li><a href="/es/modelos-maliciosos-hugging-face/" hreflang="es" lang="es">Español</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

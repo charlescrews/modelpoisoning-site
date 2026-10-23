@@ -73,7 +73,7 @@
 <ul>
 <li>Download models from <strong>verified publishers</strong> and pin exact versions.</li>
 <li><strong>Check checksums or signatures</strong> where they are available.</li>
-<li>Prefer <strong>safe serialisation formats</strong> such as safetensors. OWASP warns that shared models can carry malware through techniques such as malicious pickling, because loading a pickle file can execute code.</li>
+<li>Prefer <strong>safe serialisation formats</strong> such as safetensors. OWASP warns that shared models can carry malware through techniques such as malicious pickling, because loading a pickle file can execute code. <a href="/malicious-models-hugging-face/">Real cases on Hugging Face</a> show how this has been used.</li>
 <li>Load untrusted models in a <strong>sandbox</strong> without network access or credentials.</li>
 <li>Run a quick check of a Hugging Face repository with the <a href="/model-checker/">model checker</a> before you download it: it flags pickle files, custom code and missing provenance.</li>
 </ul>
@@ -116,7 +116,7 @@
   </aside>
   <section class="read-next" aria-labelledby="next-h">
     <h2 id="next-h">Read next</h2>
-    <ul class="rows"><li><a href="/history-of-ai-poisoning/"><span class="row-title">A short history of AI poisoning</span><span class="row-dek">Ten moments that turned poisoning from an academic curiosity into a mainstream security risk.</span></a></li><li><a href="/what-is-model-poisoning/"><span class="row-title">What is model poisoning?</span><span class="row-dek">Attackers do not always need to break into an AI system. Sometimes it is enough to change what the system learns from.</span></a></li></ul>
+    <ul class="rows"><li><a href="/history-of-ai-poisoning/"><span class="row-title">A short history of AI poisoning</span><span class="row-dek">Ten moments that turned poisoning from an academic curiosity into a mainstream security risk.</span></a></li><li><a href="/malicious-models-hugging-face/"><span class="row-title">Malicious models on Hugging Face</span><span class="row-dek">Poisoning a model does not always mean touching its training data. Sometimes the file you download does the work the moment you open it.</span></a></li></ul>
   </section>
 </main>
 <footer class="site-footer">

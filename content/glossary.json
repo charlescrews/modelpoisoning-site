@@ -82,7 +82,7 @@
    "term": {"en": "Pickle file", "es": "Archivo pickle"},
    "def": {"en": "A Python serialisation format often used to save models. Loading a pickle file can execute arbitrary code, which makes untrusted pickled models a security risk.",
            "es": "Formato de serialización de Python que se usa a menudo para guardar modelos. Cargar un archivo pickle puede ejecutar código arbitrario, por lo que un modelo en pickle de origen dudoso es un riesgo de seguridad."},
-   "link": "defend"},
+   "link": "malicious-models"},
   {"id": "pre-training",
    "term": {"en": "Pre-training", "es": "Preentrenamiento"},
    "def": {"en": "The first, largest phase of training, in which a model learns general patterns from a very large corpus, usually scraped from the web.",
@@ -124,5 +124,15 @@
    "term": {"en": "Trigger", "es": "Disparador (trigger)"},
    "def": {"en": "The word, phrase, token or pattern that activates a backdoor. In the 2025 Anthropic study the trigger was the string <SUDO>.",
            "es": "La palabra, frase, token o patrón que activa una puerta trasera. En el estudio de Anthropic de 2025 el disparador era la cadena <SUDO>."},
-   "link": "250-docs"}
+   "link": "250-docs"},
+  {"id": "namespace-reuse",
+   "term": {"en": "Model namespace reuse", "es": "Reutilización de nombres de modelos"},
+   "def": {"en": "Re-registering the name of a deleted author or organisation on a model hub, so that code which downloads a model by name receives the attacker's model instead. Pinning an exact commit prevents it.",
+           "es": "Volver a registrar en un repositorio de modelos el nombre de un autor u organización borrados, para que el código que descarga un modelo por su nombre reciba el del atacante. Fijar un commit exacto lo evita."},
+   "link": "malicious-models"},
+  {"id": "sleepy-pickle",
+   "term": {"en": "Sleepy Pickle", "es": "Sleepy Pickle"},
+   "def": {"en": "An attack described by Trail of Bits in 2024 in which a malicious pickle file modifies a model in memory as it loads, for example to insert a backdoor, while the weights stored in the file look normal.",
+           "es": "Ataque descrito por Trail of Bits en 2024 en el que un archivo pickle malicioso modifica un modelo en memoria al cargarse, por ejemplo para introducir una puerta trasera, mientras los pesos guardados en el archivo parecen normales."},
+   "link": "malicious-models"}
 ]

@@ -38,7 +38,7 @@ Model poisoning does not require touching the data. A model file downloaded from
 
 - Download models from **verified publishers** and pin exact versions.
 - **Check checksums or signatures** where they are available.
-- Prefer **safe serialisation formats** such as safetensors. OWASP warns that shared models can carry malware through techniques such as malicious pickling, because loading a pickle file can execute code.
+- Prefer **safe serialisation formats** such as safetensors. OWASP warns that shared models can carry malware through techniques such as malicious pickling, because loading a pickle file can execute code. [Real cases on Hugging Face](@malicious-models) show how this has been used.
 - Load untrusted models in a **sandbox** without network access or credentials.
 - Run a quick check of a Hugging Face repository with the [model checker](@checker) before you download it: it flags pickle files, custom code and missing provenance.
 

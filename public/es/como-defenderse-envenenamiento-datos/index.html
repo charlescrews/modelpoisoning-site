@@ -73,7 +73,7 @@
 <ul>
 <li>Descarga modelos de <strong>editores verificados</strong> y fija versiones exactas.</li>
 <li><strong>Comprueba sumas de verificación o firmas</strong> cuando existan.</li>
-<li>Usa <strong>formatos de serialización seguros</strong> como safetensors. OWASP advierte de que los modelos compartidos pueden llevar malware mediante técnicas como el <em>pickling</em> malicioso, porque cargar un archivo pickle puede ejecutar código.</li>
+<li>Usa <strong>formatos de serialización seguros</strong> como safetensors. OWASP advierte de que los modelos compartidos pueden llevar malware mediante técnicas como el <em>pickling</em> malicioso, porque cargar un archivo pickle puede ejecutar código. Los <a href="/es/modelos-maliciosos-hugging-face/">casos reales en Hugging Face</a> muestran cómo se ha aprovechado.</li>
 <li>Carga los modelos no fiables en un <strong>entorno aislado</strong> sin acceso a red ni credenciales.</li>
 <li>Haz una revisión rápida del repositorio de Hugging Face con el <a href="/es/comprobador-modelos/">comprobador de modelos</a> antes de descargarlo: señala los archivos pickle, el código propio y la procedencia que falta.</li>
 </ul>
@@ -116,7 +116,7 @@
   </aside>
   <section class="read-next" aria-labelledby="next-h">
     <h2 id="next-h">Sigue leyendo</h2>
-    <ul class="rows"><li><a href="/es/historia-envenenamiento-ia/"><span class="row-title">Breve historia del envenenamiento de la IA</span><span class="row-dek">Diez momentos que convirtieron el envenenamiento de una curiosidad académica en un riesgo de seguridad de primer orden.</span></a></li><li><a href="/es/que-es-model-poisoning/"><span class="row-title">¿Qué es el model poisoning?</span><span class="row-dek">Un atacante no siempre necesita entrar en un sistema de IA. A veces le basta con cambiar aquello de lo que aprende.</span></a></li></ul>
+    <ul class="rows"><li><a href="/es/historia-envenenamiento-ia/"><span class="row-title">Breve historia del envenenamiento de la IA</span><span class="row-dek">Diez momentos que convirtieron el envenenamiento de una curiosidad académica en un riesgo de seguridad de primer orden.</span></a></li><li><a href="/es/modelos-maliciosos-hugging-face/"><span class="row-title">Modelos maliciosos en Hugging Face</span><span class="row-dek">Envenenar un modelo no siempre exige tocar sus datos de entrenamiento. A veces el archivo que descargas hace el trabajo en cuanto lo abres.</span></a></li></ul>
   </section>
 </main>
 <footer class="site-footer">
