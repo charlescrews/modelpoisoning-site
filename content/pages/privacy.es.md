@@ -22,6 +22,8 @@ Este sitio **no usa cookies, no incluye herramientas de analítica y no tiene fo
 
 **Comprobador de modelos.** El comprobador funciona en tu navegador. Al pulsar «Comprobar», tu navegador envía el nombre del modelo a la API pública de Hugging Face (huggingface.co), que recibe tu dirección IP como en cualquier visita a su web. Este sitio no recibe ni guarda la consulta. Hugging Face trata esos datos conforme a su propia [política de privacidad](https://huggingface.co/privacy). Si no usas el comprobador, tu navegador no hace ninguna petición a Hugging Face.
 
+**Comprobador de fuentes.** El comprobador de fuentes funciona por completo en tu navegador. Descarga sus listas de este sitio y nada de lo que pegas en él se envía a ningún lado.
+
 **Correos electrónicos.** Si escribes a {{EMAIL}}, se tratarán tu dirección y el contenido del mensaje con la única finalidad de responderte, con base en tu consentimiento (artículo 6.1.a del RGPD). Los mensajes se conservan mientras sea necesario para atender tu consulta.
 
 Este sitio no cede datos a terceros salvo obligación legal.

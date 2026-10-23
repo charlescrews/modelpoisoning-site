@@ -52,7 +52,7 @@ The Pravda network is the most studied example, not the only possible one. The s
 
 For **AI developers**: source reputation in data pipelines, filtering of known disinformation domains, provenance tracking for training data, and evaluations that probe for known false narratives.
 
-For **users**: treat a chatbot's answer on a contested or obscure topic as a starting point, check the sources it cites, and be wary when those sources are unfamiliar sites with generic news names.
+For **users**: treat a chatbot's answer on a contested or obscure topic as a starting point, check the sources it cites, and be wary when those sources are unfamiliar sites with generic news names. The [source checker](@source-checker) tells you whether a domain is on the lists VIGINUM has published.
 
 For **publishers and researchers**: covering data voids with reliable reporting makes it harder for poisoned content to be the only thing a crawler finds.
 

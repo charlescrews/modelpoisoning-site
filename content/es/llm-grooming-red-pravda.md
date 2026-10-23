@@ -52,7 +52,7 @@ La red Pravda es el ejemplo más estudiado, no el único posible. La misma técn
 
 Para **quienes desarrollan IA**: valorar la reputación de las fuentes en la cadena de datos, filtrar dominios de desinformación conocidos, rastrear la procedencia de los datos de entrenamiento y diseñar evaluaciones que comprueben si el modelo repite narrativas falsas conocidas.
 
-Para **quienes usan IA**: tomar la respuesta de un chatbot sobre un tema polémico o poco conocido como punto de partida, revisar las fuentes que cita y desconfiar cuando esas fuentes son webs desconocidas con nombres genéricos de noticias.
+Para **quienes usan IA**: tomar la respuesta de un chatbot sobre un tema polémico o poco conocido como punto de partida, revisar las fuentes que cita y desconfiar cuando esas fuentes son webs desconocidas con nombres genéricos de noticias. El [comprobador de fuentes](@source-checker) indica si un dominio está en las listas que ha publicado VIGINUM.
 
 Para **medios e investigadores**: cubrir los vacíos de datos con información fiable dificulta que el contenido envenenado sea lo único que encuentre un rastreador.
 

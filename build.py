@@ -81,6 +81,16 @@ T = {
         "notfound_cta": "Go to the home page",
         "pending": "[pending]",
         "nav_checker": "Model checker",
+        "nav_tools": "Tools",
+        "home_src": "Did a chatbot cite its sources?",
+        "home_src_link": "Check them against known propaganda networks",
+        "src_lists_h": "The full lists",
+        "src_lists_intro": "Every domain VIGINUM has published, as it appears in its files. Addresses are written with [.] so they cannot be clicked by accident.",
+        "src_list_pk": "Portal Kombat (Pravda network): {n} domains and subdomains",
+        "src_list_rrn": "RRN (Doppelgänger): {n} domains",
+        "src_list_updated": "Last updated by VIGINUM on {d}.",
+        "src_noscript": "The source checker needs JavaScript, but you can search the full lists below with your browser's find function.",
+        "tools_open": "Open",
         "ck_label": "Model on Hugging Face",
         "ck_hint": "Write owner/model, paste a huggingface.co link or a pkg:huggingface Package URL. Add @revision to check a specific commit.",
         "ck_try": "Try:",
@@ -135,6 +145,16 @@ T = {
         "notfound_cta": "Ir a la página de inicio",
         "pending": "[pendiente]",
         "nav_checker": "Comprobador",
+        "nav_tools": "Herramientas",
+        "home_src": "¿Un chatbot te ha dado sus fuentes?",
+        "home_src_link": "Compáralas con redes de propaganda conocidas",
+        "src_lists_h": "Las listas completas",
+        "src_lists_intro": "Todos los dominios que ha publicado VIGINUM, tal como aparecen en sus archivos. Las direcciones se escriben con [.] para que no se puedan abrir sin querer.",
+        "src_list_pk": "Portal Kombat (red Pravda): {n} dominios y subdominios",
+        "src_list_rrn": "RRN (Doppelgänger): {n} dominios",
+        "src_list_updated": "Última actualización de VIGINUM: {d}.",
+        "src_noscript": "El comprobador de fuentes necesita JavaScript, pero puedes buscar en las listas completas de abajo con la función de búsqueda del navegador.",
+        "tools_open": "Abrir",
         "ck_label": "Modelo de Hugging Face",
         "ck_hint": "Escribe propietario/modelo, pega un enlace de huggingface.co o un Package URL pkg:huggingface. Añade @revisión para comprobar un commit concreto.",
         "ck_try": "Prueba:",
@@ -145,6 +165,56 @@ T = {
         "home_ck_hint": "Gratis, funciona en tu navegador y no guarda nada.",
     },
 }
+
+# Strings used by static/source-checker.js.
+SOURCE_UI = {
+    "en": {
+        "check": "Check sources",
+        "label": "Links or domain names",
+        "hint": "Paste one per line, or a whole chatbot answer with its sources. Up to 200 domains.",
+        "example_label": "Try an example",
+        "err_empty": "Paste at least one link or domain name, for example `pravda-en.com`.",
+        "err_data": "Could not load the lists from this site. Reload the page and try again.",
+        "summary": "Sources on VIGINUM's lists: {n} of {total}",
+        "not_listed": "Not on VIGINUM's lists. That does not make it reliable.",
+        "list_pk": "Portal Kombat (Pravda network)",
+        "list_rrn": "RRN (Doppelgänger)",
+        "listed_exact": "Listed by VIGINUM.",
+        "via_parent": "Its parent domain, {parent}, is listed by VIGINUM.",
+        "registered": "Domain registered on {d}",
+        "first_seen": "First seen on {d}",
+        "desc_pk": "A pro-Russian network that republishes propaganda at scale, with little human readership, in a way that suits search engines and AI crawlers. [How it targets chatbots](@grooming).",
+        "desc_rrn": "A pro-Russian campaign that created its own news sites and imitated real media outlets and government websites with look-alike domain names.",
+        "caveat_hits": "A match means VIGINUM has linked the domain to the campaign, not that every article on it is false. Look for the claim in a source you trust.",
+        "caveat_none": "These lists only cover domains VIGINUM has identified and published, and new ones keep appearing. Treat unfamiliar sites with generic news names with caution.",
+        "updated": "Lists last updated by VIGINUM: Portal Kombat {pk}, RRN {rrn}. [Source](https://github.com/VIGINUM-FR/Rapports-Techniques).",
+        "too_many": "Only the first {n} domains were checked.",
+    },
+    "es": {
+        "check": "Comprobar fuentes",
+        "label": "Enlaces o nombres de dominio",
+        "hint": "Pega uno por línea o la respuesta completa de un chatbot con sus fuentes. Hasta 200 dominios.",
+        "example_label": "Prueba con un ejemplo",
+        "err_empty": "Pega al menos un enlace o un nombre de dominio, por ejemplo `pravda-en.com`.",
+        "err_data": "No se han podido cargar las listas de este sitio. Recarga la página y vuelve a intentarlo.",
+        "summary": "Fuentes en las listas de VIGINUM: {n} de {total}",
+        "not_listed": "No está en las listas de VIGINUM. Eso no significa que sea fiable.",
+        "list_pk": "Portal Kombat (red Pravda)",
+        "list_rrn": "RRN (Doppelgänger)",
+        "listed_exact": "Está en la lista de VIGINUM.",
+        "via_parent": "Su dominio principal, {parent}, está en la lista de VIGINUM.",
+        "registered": "Dominio registrado el {d}",
+        "first_seen": "Detectado por primera vez el {d}",
+        "desc_pk": "Una red prorrusa que republica propaganda a gran escala, con muy pocos lectores humanos, de una forma que encaja con los buscadores y los rastreadores de IA. [Cómo apunta a los chatbots](@grooming).",
+        "desc_rrn": "Una campaña prorrusa que creó sus propias webs de noticias e imitó a medios reales y webs de gobiernos con dominios parecidos.",
+        "caveat_hits": "Una coincidencia significa que VIGINUM ha vinculado el dominio con la campaña, no que todos sus artículos sean falsos. Busca esa afirmación en una fuente de confianza.",
+        "caveat_none": "Estas listas solo incluyen los dominios que VIGINUM ha identificado y publicado, y siguen apareciendo otros nuevos. Desconfía de las webs desconocidas con nombre genérico de periódico.",
+        "updated": "Última actualización de las listas por VIGINUM: Portal Kombat {pk}, RRN {rrn}. [Fuente](https://github.com/VIGINUM-FR/Rapports-Techniques).",
+        "too_many": "Solo se han comprobado los primeros {n} dominios.",
+    },
+}
+
+SOURCE_EXAMPLE = "reuters.com\nhttps://pravda-en.com/world/\nfr.news-pravda.com\nwikipedia.org"
 
 # Strings used by static/checker.js. Links written as (@key#anchor) are resolved per language.
 CHECKER_UI = {
@@ -635,7 +705,7 @@ def header(lang: str, alt_url: str | None, current: str = "") -> str:
         {nav_link(home + '#articles', t['nav_articles'], 'articles')}
         {nav_link(url_for('history', lang), t['nav_timeline'], 'history')}
         {nav_link(url_for('glossary', lang), t['nav_glossary'], 'glossary')}
-        {nav_link(url_for('checker', lang), t['nav_checker'], 'checker')}
+        {nav_link(url_for('tools', lang), t['nav_tools'], 'tools')}
         {nav_link(url_for('about', lang), t['nav_about'], 'about')}
       </ul>
     </nav>
@@ -749,7 +819,10 @@ def build_home(lang: str) -> None:
       <h2 id="ck-h">{t['home_ck_h']}</h2>
       <p>{t['home_ck_intro']}</p>
     </div>
-    {checker_form(lang, "home-model", t['home_ck_hint'])}
+    <div>
+      {checker_form(lang, "home-model", t['home_ck_hint'])}
+      <p class="home-src">{t['home_src']} <a href="{url_for('source-checker', lang)}">{t['home_src_link']}</a></p>
+    </div>
   </section>
 
   <section class="wrap section split" aria-labelledby="tl-h">
@@ -960,7 +1033,7 @@ def build_checker(lang: str) -> None:
         },
     ]
     doc = head(lang=lang, title=tl["title"], desc=tl["description"], url=url, alt_urls=alts, jsonld=jsonld)
-    doc += header(lang, other, current="checker")
+    doc += header(lang, other, current="tools")
     doc += f"""
 <main id="main" class="wrap page checker-page">
   <h1>{esc(tl['h1'])}</h1>
@@ -974,6 +1047,168 @@ def build_checker(lang: str) -> None:
 </main>
 <script type="application/json" id="checker-i18n">{ui_json}</script>
 <script src="/checker.js?v={JS_VERSION}" defer></script>
+"""
+    doc += footer(lang, other)
+    write(url, doc)
+
+
+# --------------------------------------------------------------------------
+# Source checker (VIGINUM lists)
+# --------------------------------------------------------------------------
+VIGINUM_DIR = CONTENT / "data" / "viginum"
+
+
+def _dmy_to_iso(value: str) -> str:
+    value = (value or "").strip()
+    m = re.fullmatch(r"(\d{2})/(\d{2})/(\d{4})", value)
+    return f"{m.group(3)}-{m.group(2)}-{m.group(1)}" if m else ""
+
+
+def load_viginum() -> dict:
+    """Reads VIGINUM's CSV files unchanged and returns normalised rows per list."""
+    import csv
+    meta = json.loads((VIGINUM_DIR / "data.json").read_text(encoding="utf-8"))
+    rows: dict[str, list] = {}
+    for key, info in meta["lists"].items():
+        out = []
+        with open(VIGINUM_DIR / info["file"], encoding="utf-8-sig", newline="") as fh:
+            for r in csv.DictReader(fh):
+                raw = r.get(info["domain_col"], "").strip()
+                dom = raw.lower().replace("[.]", ".").rstrip(".")
+                if not dom:
+                    continue
+                created = _dmy_to_iso(r.get("create date") or r.get("created on") or "")
+                seen = _dmy_to_iso(r.get("first seen") or "")
+                kind, date = ("registered", created) if created else (("seen", seen) if seen else ("", ""))
+                out.append({"domain": dom, "type": (r.get("type") or "domain").strip(),
+                            "kind": kind, "date": date})
+        rows[key] = sorted({d["domain"]: d for d in out}.values(), key=lambda d: d["domain"])
+    return {"meta": meta, "rows": rows}
+
+
+VIGINUM: dict = {}
+
+
+def write_known_domains() -> None:
+    global VIGINUM
+    VIGINUM = load_viginum()
+    domains = []
+    for key, rows in VIGINUM["rows"].items():
+        for d in rows:
+            domains.append([d["domain"], key, d["type"], d["kind"], d["date"]])
+    payload = {
+        "source": VIGINUM["meta"]["repo"],
+        "lists": {k: {"updated": v["updated"], "url": v["url"], "count": len(VIGINUM["rows"][k])}
+                  for k, v in VIGINUM["meta"]["lists"].items()},
+        "domains": domains,
+    }
+    (OUT / "data").mkdir(parents=True, exist_ok=True)
+    (OUT / "data" / "known-domains.json").write_text(
+        json.dumps(payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+
+
+def build_source_checker(lang: str) -> None:
+    t = T[lang]
+    tl = tools[lang]["source-checker"]
+    url = url_for("source-checker", lang)
+    alts = {l: url_for("source-checker", l) for l in LANGS if "source-checker" in tools[l]}
+    other = alts.get("es" if lang == "en" else "en")
+    ui = {k: resolve_links(v, lang) for k, v in SOURCE_UI[lang].items()}
+    ui_json = json.dumps(ui, ensure_ascii=False).replace("</", "<\\/")
+    example = SOURCE_EXAMPLE.replace("\\n", "\n")
+    lists_html = []
+    for key in ("pk", "rrn"):
+        rows = VIGINUM["rows"][key]
+        meta = VIGINUM["meta"]["lists"][key]
+        items = "".join(f"<li>{esc(d['domain'].replace('.', '[.]'))}</li>" for d in rows)
+        lists_html.append(
+            f'<details class="domain-list"><summary>{esc(t["src_list_" + key].format(n=len(rows)))}</summary>'
+            f'<p class="muted">{t["src_list_updated"].format(d=fmt_date(meta["updated"], lang))} '
+            f'<a href="{esc(meta["url"])}" rel="noopener">VIGINUM</a></p>'
+            f'<ul class="domains">{items}</ul></details>')
+    jsonld = [
+        {
+            "@context": "https://schema.org", "@type": "WebApplication",
+            "name": tl["nav_title"], "url": SITE_URL + url,
+            "description": tl["description"], "inLanguage": lang,
+            "applicationCategory": "SecurityApplication", "operatingSystem": "Any",
+            "browserRequirements": "Requires JavaScript", "isAccessibleForFree": True,
+            "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"},
+            "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": SITE_URL + "/"},
+        },
+        {
+            "@context": "https://schema.org", "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": t["breadcrumb_home"], "item": SITE_URL + url_for("home", lang)},
+                {"@type": "ListItem", "position": 2, "name": tools[lang]["tools"]["nav_title"], "item": SITE_URL + url_for("tools", lang)},
+                {"@type": "ListItem", "position": 3, "name": tl["nav_title"], "item": SITE_URL + url},
+            ],
+        },
+    ]
+    doc = head(lang=lang, title=tl["title"], desc=tl["description"], url=url, alt_urls=alts, jsonld=jsonld)
+    doc += header(lang, other, current="tools")
+    doc += f"""
+<main id="main" class="wrap page checker-page">
+  <h1>{esc(tl['h1'])}</h1>
+  <p class="lead">{esc(tl['lead'])}</p>
+  <div id="source-checker" class="checker" data-src="/data/known-domains.json?v={VIGINUM_VERSION()}">
+    <form class="checker-form source-form" action="{url}" method="get">
+      <label for="sources-input">{ui['label']}</label>
+      <textarea id="sources-input" name="sources" rows="5" autocomplete="off" autocapitalize="off" spellcheck="false" aria-describedby="sources-hint" placeholder="pravda-en.com&#10;https://example.com/article"></textarea>
+      <p id="sources-hint" class="hint">{ui['hint']}</p>
+      <p class="actions-row">
+        <button type="submit" class="btn">{ui['check']}</button>
+        <button type="button" class="chip" data-example="{esc(example)}">{ui['example_label']}</button>
+      </p>
+    </form>
+    <noscript><p class="msg">{t['src_noscript']}</p></noscript>
+    <div id="source-results" class="results" aria-live="polite"></div>
+  </div>
+  <div class="prose checker-about">{md_to_html(tl['body'], lang)}</div>
+  <section class="lists" aria-labelledby="lists-h">
+    <h2 id="lists-h">{t['src_lists_h']}</h2>
+    <p class="muted">{t['src_lists_intro']}</p>
+    {''.join(lists_html)}
+  </section>
+</main>
+<script type="application/json" id="source-checker-i18n">{ui_json}</script>
+<script src="/source-checker.js?v={SRC_JS_VERSION}" defer></script>
+"""
+    doc += footer(lang, other)
+    write(url, doc)
+
+
+def VIGINUM_VERSION() -> str:
+    import hashlib
+    return hashlib.sha1((OUT / "data" / "known-domains.json").read_bytes()).hexdigest()[:8]
+
+
+def build_tools_index(lang: str) -> None:
+    t = T[lang]
+    tl = tools[lang]["tools"]
+    url = url_for("tools", lang)
+    alts = {l: url_for("tools", l) for l in LANGS if "tools" in tools[l]}
+    other = alts.get("es" if lang == "en" else "en")
+    rows = []
+    for key in ("checker", "source-checker"):
+        if key not in tools[lang]:
+            continue
+        x = tools[lang][key]
+        rows.append(f'<li><a href="{url_for(key, lang)}"><span class="row-title">{esc(x["h1"])}</span>'
+                    f'<span class="row-dek">{esc(x["lead"])}</span>'
+                    f'<span class="row-meta">{t["tools_open"]}</span></a></li>')
+    jsonld = [{
+        "@context": "https://schema.org", "@type": "CollectionPage",
+        "name": tl["title"], "url": SITE_URL + url, "inLanguage": lang, "description": tl["description"],
+    }]
+    doc = head(lang=lang, title=tl["title"], desc=tl["description"], url=url, alt_urls=alts, jsonld=jsonld)
+    doc += header(lang, other, current="tools")
+    doc += f"""
+<main id="main" class="wrap page">
+  <h1>{esc(tl['h1'])}</h1>
+  <p class="lead">{esc(tl['lead'])}</p>
+  <ul class="rows tools-rows">{''.join(rows)}</ul>
+</main>
 """
     doc += footer(lang, other)
     write(url, doc)
@@ -1027,19 +1262,25 @@ def build_sitemap() -> None:
 
 # --------------------------------------------------------------------------
 def main() -> None:
-    global CSS_VERSION, JS_VERSION
+    global CSS_VERSION, JS_VERSION, SRC_JS_VERSION
     if OUT.exists():
         shutil.rmtree(OUT)
     shutil.copytree(STATIC, OUT)
     import hashlib
     CSS_VERSION = hashlib.sha1((STATIC / "style.css").read_bytes()).hexdigest()[:8]
     JS_VERSION = hashlib.sha1((STATIC / "checker.js").read_bytes()).hexdigest()[:8]
+    SRC_JS_VERSION = hashlib.sha1((STATIC / "source-checker.js").read_bytes()).hexdigest()[:8]
+    write_known_domains()
 
     for lang in LANGS:
         build_home(lang)
         build_glossary(lang)
         if "checker" in tools[lang]:
             build_checker(lang)
+        if "source-checker" in tools[lang]:
+            build_source_checker(lang)
+        if "tools" in tools[lang]:
+            build_tools_index(lang)
         for a in articles[lang].values():
             build_article(a)
         for pg in pages[lang].values():
@@ -1056,6 +1297,7 @@ def main() -> None:
 
 CSS_VERSION = "dev"
 JS_VERSION = "dev"
+SRC_JS_VERSION = "dev"
 
 if __name__ == "__main__":
     main()

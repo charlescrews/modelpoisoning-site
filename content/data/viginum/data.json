@@ -1,0 +1,17 @@
+{
+  "repo": "https://github.com/VIGINUM-FR/Rapports-Techniques",
+  "lists": {
+    "pk": {
+      "file": "portal-kombat-domains.csv",
+      "domain_col": "domain",
+      "updated": "2025-04-10",
+      "url": "https://github.com/VIGINUM-FR/Rapports-Techniques/tree/main/202402%20-%20Portal%20Kombat"
+    },
+    "rrn": {
+      "file": "rrn-domains.csv",
+      "domain_col": "domain name",
+      "updated": "2025-09-15",
+      "url": "https://github.com/VIGINUM-FR/Rapports-Techniques/tree/main/202306%20-%20RRN"
+    }
+  }
+}

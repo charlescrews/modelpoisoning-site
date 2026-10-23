@@ -21,7 +21,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/style.css?v=6451a8cc">
+<link rel="stylesheet" href="/style.css?v=60bee040">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebSite", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/", "inLanguage": "en", "description": "An independent reference on AI data and model poisoning: how attackers corrupt what AI systems learn, the research behind it, and how to defend against it."}</script>
 </head><body>
 <a class="skip" href="#main">Skip to content</a>
@@ -33,7 +33,7 @@
         <li><a href="/#articles">Articles</a></li>
         <li><a href="/history-of-ai-poisoning/">Timeline</a></li>
         <li><a href="/glossary/">Glossary</a></li>
-        <li><a href="/model-checker/">Model checker</a></li>
+        <li><a href="/tools/">Tools</a></li>
         <li><a href="/about/">About</a></li>
       </ul>
     </nav>
@@ -69,7 +69,8 @@
       <h2 id="ck-h">Check a model</h2>
       <p>Before you load a model from Hugging Face, see whether its files can run code and what its model card leaves out.</p>
     </div>
-    <form class="checker-form" action="/model-checker/" method="get" role="search">
+    <div>
+      <form class="checker-form" action="/model-checker/" method="get" role="search">
       <label for="home-model">Model on Hugging Face</label>
       <div class="field-row">
         <input id="home-model" name="model" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="owner/model" aria-describedby="home-model-hint" maxlength="300">
@@ -78,6 +79,8 @@
       <p id="home-model-hint" class="hint">Free, runs in your browser, nothing is stored.</p>
       
     </form>
+      <p class="home-src">Did a chatbot cite its sources? <a href="/source-checker/">Check them against known propaganda networks</a></p>
+    </div>
   </section>
 
   <section class="wrap section split" aria-labelledby="tl-h">
@@ -103,7 +106,7 @@
     <div>
       <p class="footer-brand"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></p>
       <p>An independent, non-commercial reference on AI data and model poisoning. No cookies, no trackers.</p>
-      <p class="muted">Last updated 22 October 2026</p>
+      <p class="muted">Last updated 23 October 2026</p>
     </div>
     <ul class="footer-links">
       <li><a href="/about/">About</a></li>

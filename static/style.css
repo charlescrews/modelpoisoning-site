@@ -479,6 +479,43 @@ h3 { font-stretch: 92%; font-weight: 650; font-size: 1.2rem; margin: 1.8rem 0 0.
 .copy:hover { border-color: var(--accent); color: var(--accent); }
 .caveat { margin: 1.5rem 0 0; font-size: 0.98rem; color: var(--muted); }
 
+.source-form textarea {
+  display: block; width: 100%; min-height: 8.5rem; resize: vertical;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.95rem; line-height: 1.5;
+  color: var(--ink); background: var(--panel);
+  border: 1px solid var(--muted); border-radius: 4px; padding: 0.7rem 0.85rem;
+}
+.source-form textarea::placeholder { color: var(--muted); }
+.actions-row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; margin: 1rem 0 0; }
+.actions-row .btn { border: 0; cursor: pointer; }
+.actions-row .btn:disabled { opacity: 0.7; cursor: progress; }
+.actions-row .chip { font-family: var(--display); font-size: 0.95rem; }
+.check h3 code.host {
+  font-size: 1rem; background: none; color: var(--ink); padding: 0; font-weight: 600;
+}
+.check p + p { margin-top: 0.35rem; }
+.check .muted-line { color: var(--muted); font-size: 0.96rem; }
+.home-src { margin: 1.25rem 0 0; font-size: 1.02rem; color: var(--ink-2); }
+.home-src a { font-family: var(--display); font-weight: 600; }
+
+.lists { margin-top: 2.5rem; max-width: 50rem; }
+.lists > h2 { margin-top: 0; }
+.domain-list { border-top: 1px solid var(--rule); padding: 0.4rem 0; }
+.domain-list:last-child { border-bottom: 1px solid var(--rule); }
+.domain-list summary {
+  cursor: pointer; font-family: var(--display); font-weight: 650; font-size: 1.05rem; padding: 0.5rem 0;
+}
+.domain-list summary:hover { color: var(--accent); }
+.domain-list .muted { margin: 0.2rem 0 0.8rem; }
+.domains {
+  list-style: none; margin: 0 0 1rem; padding: 0;
+  columns: 15rem auto; column-gap: 2rem;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 0.85rem; line-height: 1.6;
+  color: var(--ink-2);
+}
+.domains li { break-inside: avoid; overflow-wrap: anywhere; }
+.tools-rows { max-width: 50rem; margin-top: 1rem; }
+
 .checker-about { margin-top: 3rem; }
 .checker-about h2:first-child { margin-top: 0; }
 

@@ -179,6 +179,17 @@ Si cambias lo que hace (por ejemplo, consultar otro servicio), actualiza tambié
 
 ---
 
+## 8. El comprobador de fuentes y la página de herramientas
+
+Página `/source-checker/` (en español `/es/comprobador-fuentes/`). Compara los dominios que pega el visitante con las listas de VIGINUM de la red Pravda (Portal Kombat) y de la campaña RRN (Doppelgänger). Todo pasa en el navegador: la lista se descarga de este sitio (`/data/known-domains.json`, que genera `build.py`) y no se envía nada a ningún lado.
+
+- Datos: `content/data/viginum/`. Son los CSV de VIGINUM sin modificar, con su origen en `SOURCE.md`.
+- **Actualizar las listas** (cada pocos meses): descarga los CSV nuevos de https://github.com/VIGINUM-FR/Rapports-Techniques, sustitúyelos, cambia las fechas en `content/data/viginum/data.json` y ejecuta `build.py`.
+- Textos: `content/tools/source-checker.*.md`; mensajes de resultados: `SOURCE_UI` en `build.py`.
+- La entrada «Tools / Herramientas» del menú lleva a `/tools/` (`/es/herramientas/`), que enlaza a las dos herramientas.
+
+---
+
 ## Notas técnicas
 
 - Tipografías autoalojadas (Archivo y Source Serif 4, licencia SIL OFL, en `static/fonts/`): no se llama a Google Fonts.
