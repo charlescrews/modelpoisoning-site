@@ -1,8 +1,8 @@
 ---
 key: 250-docs
-title: 250 documentos bastan para meter una puerta trasera en un LLM de cualquier tamaño
+title: 250 documentos bastan para envenenar un LLM de cualquier tamaño
 nav_title: Bastan 250 documentos
-description: Anthropic, el UK AI Security Institute y el Alan Turing Institute comprobaron que unos 250 documentos envenenados pueden plantar una puerta trasera en modelos de lenguaje de 600M a 13.000M de parámetros. Qué probaron, qué significa y cuáles son sus límites.
+description: El estudio “Poisoning Attacks on LLMs Require a Near-constant Number of Poison Samples”: 250 documentos bastaron en modelos de 600M a 13.000M de parámetros.
 dek: El mayor experimento de envenenamiento publicado hasta ahora sugiere que lo que importa es el número de documentos maliciosos, no su proporción en los datos de entrenamiento.
 date: 2026-10-09
 order: 2

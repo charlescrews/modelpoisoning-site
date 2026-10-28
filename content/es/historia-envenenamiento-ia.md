@@ -1,8 +1,8 @@
 ---
 key: history
-title: Breve historia del envenenamiento de la IA, de Tay a las puertas traseras de 250 documentos
+title: Breve historia del envenenamiento de la IA, de Tay a hoy
 nav_title: Breve historia del envenenamiento de la IA
-description: Cronología de los momentos clave del envenenamiento de datos y modelos de IA: Tay de Microsoft, BadNets, el envenenamiento de datasets por 60 dólares, Sleeper Agents, Nightshade, la red Pravda, la taxonomía del NIST y el estudio de los 250 documentos.
+description: Diez momentos clave del envenenamiento de datos y modelos de IA: Tay, BadNets, Sleeper Agents, Nightshade, la red Pravda y el estudio de los 250 documentos.
 dek: Diez momentos que convirtieron el envenenamiento de una curiosidad académica en un riesgo de seguridad de primer orden.
 date: 2026-10-09
 order: 6

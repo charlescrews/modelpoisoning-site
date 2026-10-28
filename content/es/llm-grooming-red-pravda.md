@@ -1,8 +1,8 @@
 ---
 key: grooming
-title: LLM grooming: cómo las redes de propaganda intentan envenenar a los chatbots de IA
+title: LLM grooming: la propaganda que intenta envenenar a los chatbots
 nav_title: LLM grooming y la red Pravda
-description: Qué significa "LLM grooming", cómo la red Pravda publica millones de artículos pensados para los rastreadores y no para los lectores, y qué encontró NewsGuard al probar 10 chatbots de IA líderes.
+description: Qué es el LLM grooming, cómo la red Pravda llena la web de artículos para los rastreadores de IA y cuántas veces repitieron sus mensajes 10 chatbots líderes.
 dek: Algunas webs no están escritas para personas. Están escritas para las máquinas que leen la web en nombre de los sistemas de IA.
 date: 2026-10-09
 order: 3

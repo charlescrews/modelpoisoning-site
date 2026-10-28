@@ -1,8 +1,8 @@
 ---
 key: what-is
-title: ¿Qué es el model poisoning? Envenenamiento de datos y de modelos explicado
+title: ¿Qué es el model poisoning? El envenenamiento de la IA explicado
 nav_title: ¿Qué es el model poisoning?
-description: Explicación clara del envenenamiento de modelos de IA y de datos: cómo los atacantes corrompen los datos de entrenamiento o los pesos de un modelo, los principales tipos de ataque y cómo los clasifican OWASP, NIST y MITRE ATLAS.
+description: Cómo se corrompen los datos de entrenamiento o los pesos de un modelo de IA, los principales tipos de ataque y cómo los clasifican OWASP, NIST y MITRE ATLAS.
 dek: Un atacante no siempre necesita entrar en un sistema de IA. A veces le basta con cambiar aquello de lo que aprende.
 date: 2026-10-09
 order: 1

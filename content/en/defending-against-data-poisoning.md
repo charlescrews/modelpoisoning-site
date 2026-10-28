@@ -1,8 +1,8 @@
 ---
 key: defend
-title: How to defend against data and model poisoning: a practical checklist
+title: How to defend against data and model poisoning: a checklist
 nav_title: How to defend against poisoning
-description: A practical checklist for protecting AI systems from data and model poisoning, based on OWASP LLM04:2025, NIST and MITRE ATLAS, plus the backdoor warning signs Microsoft's AI red team identified in 2026.
+description: A practical checklist against data and model poisoning, based on OWASP LLM04:2025, NIST and MITRE ATLAS, plus Microsoft's 2026 backdoor warning signs.
 dek: You cannot inspect billions of documents by hand. You can control where they come from, prove they have not changed, and test what the model learned.
 date: 2026-10-09
 order: 5

@@ -1,8 +1,8 @@
 ---
 key: history
-title: A short history of AI poisoning, from Tay to 250-document backdoors
+title: A short history of AI poisoning, from Tay to 250 documents
 nav_title: A short history of AI poisoning
-description: A timeline of the key moments in AI data and model poisoning: Microsoft's Tay, BadNets, $60 dataset poisoning, Sleeper Agents, Nightshade, the Pravda network, NIST's taxonomy and the 250-document study.
+description: Ten key moments in AI data and model poisoning, from Microsoft's Tay and BadNets to Sleeper Agents, Nightshade, the Pravda network and the 250-document study.
 dek: Ten moments that turned poisoning from an academic curiosity into a mainstream security risk.
 date: 2026-10-09
 order: 6

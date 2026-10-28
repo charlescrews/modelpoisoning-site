@@ -3,7 +3,7 @@ key: checker
 slug: model-checker
 title: Hugging Face model checker: check a model before you load it
 nav_title: Model checker
-description: Free check of a Hugging Face model: pickle files that can run code, Hugging Face's scan results, custom code, model card, licence and training data. Runs in your browser.
+description: Free check of a Hugging Face model: pickle files that can run code, scan results, custom code, model card, licence and training data. Runs in your browser.
 h1: Check a model before you load it
 date: 2026-10-22
 lead: Enter a model from Hugging Face to see whether its files can run code on your machine, what Hugging Face's scanners found, and what its model card leaves out.

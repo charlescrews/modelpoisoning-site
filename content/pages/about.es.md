@@ -4,7 +4,7 @@ type: page
 slug: sobre
 title: Sobre modelpoisoning.com
 nav_title: Sobre el sitio
-description: modelpoisoning.com es una referencia independiente y sin ánimo comercial sobre el envenenamiento de datos y modelos de IA. Cómo elegimos las fuentes, corregimos errores y atendemos el contacto.
+description: Referencia independiente y sin ánimo comercial sobre el envenenamiento de la IA: cómo elegimos las fuentes, cómo corregimos errores y cómo contactar.
 ---
 
 **modelpoisoning.com** es una referencia independiente sobre un problema concreto de seguridad en IA: la manipulación de los datos y modelos de los que aprenden los sistemas de inteligencia artificial. Está escrita para ingenieros, equipos de seguridad, periodistas y cualquiera que quiera entender por qué "lo ha dicho la IA" no siempre es una fuente fiable.

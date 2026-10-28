@@ -1,8 +1,8 @@
 ---
 key: defend
-title: Cómo defenderse del envenenamiento de datos y modelos: lista de comprobación práctica
+title: Cómo defenderse del envenenamiento de datos y modelos de IA
 nav_title: Cómo defenderse del envenenamiento
-description: Lista práctica para proteger sistemas de IA del envenenamiento de datos y de modelos, basada en OWASP LLM04:2025, NIST y MITRE ATLAS, con las señales de puerta trasera que identificó el red team de IA de Microsoft en 2026.
+description: Lista práctica contra el envenenamiento de datos y modelos, basada en OWASP LLM04:2025, NIST y MITRE ATLAS, con las señales de puerta trasera de Microsoft.
 dek: Nadie puede revisar a mano miles de millones de documentos. Pero sí se puede controlar de dónde vienen, demostrar que no han cambiado y comprobar qué ha aprendido el modelo.
 date: 2026-10-09
 order: 5

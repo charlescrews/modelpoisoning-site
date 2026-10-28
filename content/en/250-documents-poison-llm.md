@@ -1,8 +1,8 @@
 ---
 key: 250-docs
-title: 250 documents can backdoor an LLM of any size: what the study found
+title: 250 poisoned documents can backdoor an LLM of any size
 nav_title: 250 documents are enough
-description: Anthropic, the UK AI Security Institute and the Alan Turing Institute found that about 250 poisoned documents can plant a backdoor in language models from 600M to 13B parameters. What they tested, what it means, and its limits.
+description: The study “Poisoning Attacks on LLMs Require a Near-constant Number of Poison Samples”: 250 documents backdoored models from 600M to 13B parameters.
 dek: The largest poisoning experiment published so far suggests that what matters is the number of malicious documents, not their share of the training data.
 date: 2026-10-09
 order: 2

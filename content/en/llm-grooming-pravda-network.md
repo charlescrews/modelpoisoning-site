@@ -2,7 +2,7 @@
 key: grooming
 title: LLM grooming: how propaganda networks try to poison AI chatbots
 nav_title: LLM grooming and the Pravda network
-description: What "LLM grooming" means, how the Pravda network publishes millions of articles aimed at crawlers rather than readers, and what NewsGuard found when it tested 10 leading AI chatbots.
+description: What LLM grooming means, how the Pravda network floods the web with articles for AI crawlers, and how often 10 leading chatbots repeated its claims.
 dek: Some websites are not written for people at all. They are written for the machines that read the web on behalf of AI systems.
 date: 2026-10-09
 order: 3

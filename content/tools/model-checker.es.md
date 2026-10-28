@@ -1,9 +1,9 @@
 ---
 key: checker
 slug: comprobador-modelos
-title: Comprobador de modelos de Hugging Face: revísalo antes de cargarlo
+title: Comprueba un modelo de Hugging Face antes de cargarlo
 nav_title: Comprobador
-description: Revisión gratuita de un modelo de Hugging Face: archivos pickle que pueden ejecutar código, análisis de Hugging Face, código propio, ficha, licencia y datos de entrenamiento.
+description: Revisión gratuita de un modelo de Hugging Face: archivos pickle que ejecutan código, análisis, código propio, ficha, licencia y datos de entrenamiento.
 h1: Comprueba un modelo antes de cargarlo
 date: 2026-10-22
 lead: Escribe un modelo de Hugging Face y verás si sus archivos pueden ejecutar código en tu equipo, qué han encontrado los análisis de Hugging Face y qué no cuenta su ficha.

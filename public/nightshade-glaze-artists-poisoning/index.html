@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nightshade and Glaze: when artists poison their own images</title>
-<meta name="description" content="How the University of Chicago&#x27;s Nightshade and Glaze tools let artists alter their images so AI models trained on them without consent learn the wrong things, and what their limits are.">
+<title>Nightshade and Glaze: how they differ and whether they work</title>
+<meta name="description" content="Glaze protects an artist&#x27;s style; Nightshade poisons models trained on scraped art. How they differ, how they work and whether they still protect artists.">
 <link rel="canonical" href="https://www.modelpoisoning.com/nightshade-glaze-artists-poisoning/">
 <link rel="alternate" hreflang="en" href="https://www.modelpoisoning.com/nightshade-glaze-artists-poisoning/"><link rel="alternate" hreflang="es" href="https://www.modelpoisoning.com/es/nightshade-glaze-artistas/"><link rel="alternate" hreflang="x-default" href="https://www.modelpoisoning.com/nightshade-glaze-artists-poisoning/">
 
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="modelpoisoning.com">
-<meta property="og:title" content="Nightshade and Glaze: when artists poison their own images">
-<meta property="og:description" content="How the University of Chicago&#x27;s Nightshade and Glaze tools let artists alter their images so AI models trained on them without consent learn the wrong things, and what their limits are.">
+<meta property="og:title" content="Nightshade and Glaze: how they differ and whether they work">
+<meta property="og:description" content="Glaze protects an artist&#x27;s style; Nightshade poisons models trained on scraped art. How they differ, how they work and whether they still protect artists.">
 <meta property="og:url" content="https://www.modelpoisoning.com/nightshade-glaze-artists-poisoning/">
 <meta property="og:image" content="https://www.modelpoisoning.com/og.png">
 <meta property="og:locale" content="en_GB">
@@ -22,7 +22,7 @@
 <link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/style.css?v=60bee040">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Nightshade and Glaze: when artists poison their own images", "description": "How the University of Chicago's Nightshade and Glaze tools let artists alter their images so AI models trained on them without consent learn the wrong things, and what their limits are.", "inLanguage": "en", "datePublished": "2026-10-09", "dateModified": "2026-10-09", "mainEntityOfPage": "https://www.modelpoisoning.com/nightshade-glaze-artists-poisoning/", "image": "https://www.modelpoisoning.com/og.png", "author": {"@type": "Person", "name": "Carlos Díaz", "url": "https://www.modelpoisoning.com/about/"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.modelpoisoning.com/"}, {"@type": "ListItem", "position": 2, "name": "Nightshade and Glaze", "item": "https://www.modelpoisoning.com/nightshade-glaze-artists-poisoning/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Nightshade and Glaze: how they differ and whether they work", "description": "Glaze protects an artist's style; Nightshade poisons models trained on scraped art. How they differ, how they work and whether they still protect artists.", "inLanguage": "en", "datePublished": "2026-10-09", "dateModified": "2026-10-28", "mainEntityOfPage": "https://www.modelpoisoning.com/nightshade-glaze-artists-poisoning/", "image": "https://www.modelpoisoning.com/og.png", "author": {"@type": "Person", "name": "Carlos Díaz", "url": "https://www.modelpoisoning.com/about/"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.modelpoisoning.com/"}, {"@type": "ListItem", "position": 2, "name": "Nightshade and Glaze", "item": "https://www.modelpoisoning.com/nightshade-glaze-artists-poisoning/"}]}</script>
 </head><body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-header">
@@ -43,15 +43,16 @@
 <main id="main" class="wrap article-layout">
   <article class="article">
     <header class="article-head">
-      <h1>Nightshade and Glaze: when artists poison their own images</h1>
+      <h1>Nightshade and Glaze: how they differ and whether they work</h1>
       <p class="dek">Not all data poisoning is an attack. For some artists it is the only leverage they have over companies that scrape their work.</p>
-      <p class="meta">Published 9 October 2026, 4 min read</p>
+      <p class="meta">Published 9 October 2026 · Updated 28 October 2026, 5 min read</p>
     </header>
     <aside class="summary" aria-labelledby="summary-h"><h2 id="summary-h">In short</h2><ul>
 <li><strong>Glaze</strong> and <strong>Nightshade</strong> are free tools from the SAND Lab at the University of Chicago that make small, hard-to-see changes to images.</li>
 <li><strong>Glaze</strong> is defensive: it makes it harder for a model to imitate an individual artist&rsquo;s style.</li>
 <li><strong>Nightshade</strong> is offensive: images &ldquo;shaded&rdquo; with it teach a model trained on them the wrong associations, for example that a picture of a cow is a handbag.</li>
 <li>The research paper reports that a Stable Diffusion SDXL prompt could be corrupted with <strong>fewer than 100 poison samples</strong>. The team says the protection will not last forever as defences evolve.</li>
+<li>A study presented at ICLR 2025 found that simple techniques such as image upscaling can undo style protections like Glaze, so neither tool guarantees that a work cannot be used.</li>
 </ul></aside>
     <div class="prose"><h2 id="poisoning-as-self-defence">Poisoning as self-defence</h2>
 <p>Text-to-image models such as Stable Diffusion, Midjourney or DALL·E were trained on billions of images collected from the web, including the work of living artists who were never asked. Opt-out mechanisms exist, but they depend on scrapers choosing to respect them.</p>
@@ -68,6 +69,13 @@
 <li><strong>Multiple attacks</strong> can be combined, and a moderate number of them can destabilise general features of a model so that it stops producing meaningful images.</li>
 </ul>
 <p>The authors frame Nightshade as &ldquo;a last defense for content creators against web scrapers that ignore opt-out/do-not-crawl directives&rdquo;. The aim, they say, is to raise the cost of training on unlicensed data, not to destroy models.</p>
+<h2 id="glaze-or-nightshade-the-difference">Glaze or Nightshade: the difference</h2>
+<ul>
+<li><strong>What it does.</strong> Glaze protects one artist&rsquo;s style from imitation. Nightshade does not protect a style: it makes training on shaded images less useful for any model that uses them without permission.</li>
+<li><strong>How.</strong> Both add changes that are hard for people to see. Glaze shifts how a model perceives an image&rsquo;s style; Nightshade makes a model associate the image with a different concept, such as a cow with a handbag.</li>
+<li><strong>Who it works for.</strong> Glaze works for the individual artist who applies it. Nightshade works as a group: it only has an effect if enough shaded images end up in a model&rsquo;s training data.</li>
+<li><strong>How to combine them.</strong> The team recommends Glaze for all artwork and Nightshade as an optional extra, because Nightshade v1.0 does not protect against style mimicry.</li>
+</ul>
 <h2 id="limits-the-team-acknowledges">Limits the team acknowledges</h2>
 <p>The project page is candid about what Nightshade cannot do:</p>
 <ul>
@@ -75,6 +83,9 @@
 <li>Protection is <strong>unlikely to stay effective over long periods</strong>, because attacks and defences keep evolving.</li>
 <li>Nightshade v1.0 does not protect against style mimicry, which is why the team recommends Glaze for all artwork and Nightshade as an optional extra.</li>
 </ul>
+<h2 id="do-they-still-work">Do they still work?</h2>
+<p>Not reliably, and not for ever. The Nightshade team itself says its protection is unlikely to last, and independent research points the same way for style protection. In a paper presented at ICLR 2025, Robert Hönig, Javier Rando, Nicholas Carlini and Florian Tramèr tested protections such as Glaze, Mist and Anti-DreamBooth and concluded that they &ldquo;only provide a false sense of security&rdquo;: low-effort techniques such as image upscaling were enough to undo them (<a href="https://arxiv.org/abs/2406.12027" rel="noopener">arXiv 2406.12027</a>).</p>
+<p>That study did not test Nightshade, whose goal is different: it aims to make large-scale scraping more costly, not to guarantee that any single image is protected. In practice, both tools raise the cost of using an artist&rsquo;s work without permission; neither guarantees that the work cannot be used.</p>
 <h2 id="why-it-matters-for-everyone-else">Why it matters for everyone else</h2>
 <p>Nightshade is a demonstration, in public and at scale, of a point security researchers had been making for years: <strong>models trained on scraped data inherit whatever is in that data</strong>, including content designed to mislead them. The same properties that let an artist protect a portfolio would let a malicious actor target a concept. That is why the research is cited in technical discussions of poisoning risk, and why provenance and data licensing are increasingly treated as security questions as well as legal ones.</p>
 <p>For the broader picture of how poisoning works, see <a href="/what-is-model-poisoning/">What is model poisoning?</a>.</p><section class="sources" aria-labelledby="sources-h"><h2 id="sources-h">Sources</h2><ul>
@@ -83,10 +94,11 @@
 <li>ETCentric, <a href="https://www.etcentric.org/ai-poison-pill-app-nightshade-has-250k-downloads-in-5-days/" rel="noopener">AI Poison Pill App Nightshade Has 250K Downloads in 5 Days</a></li>
 <li>Shan et al., <a href="https://www.usenix.org/conference/usenixsecurity23/presentation/shan" rel="noopener">Glaze: Protecting Artists from Style Mimicry by Text-to-Image Models</a>, USENIX Security 2023</li>
 <li>University of Chicago, <a href="https://glaze.cs.uchicago.edu/" rel="noopener">Glaze project</a></li>
+<li>Hönig et al., <a href="https://arxiv.org/abs/2406.12027" rel="noopener">Adversarial Perturbations Cannot Reliably Protect Artists From Generative AI</a>, ICLR 2025</li>
 </ul></section></div>
   </article>
   <aside class="rail" aria-label="On this page">
-    <nav class="toc"><h2>On this page</h2><ol><li><a href="#poisoning-as-self-defence">Poisoning as self-defence</a></li><li><a href="#glaze-protecting-a-style">Glaze: protecting a style</a></li><li><a href="#nightshade-a-collective-deterrent">Nightshade: a collective deterrent</a></li><li><a href="#limits-the-team-acknowledges">Limits the team acknowledges</a></li><li><a href="#why-it-matters-for-everyone-else">Why it matters for everyone else</a></li><li><a href="#sources-h">Sources</a></li></ol></nav>
+    <nav class="toc"><h2>On this page</h2><ol><li><a href="#poisoning-as-self-defence">Poisoning as self-defence</a></li><li><a href="#glaze-protecting-a-style">Glaze: protecting a style</a></li><li><a href="#nightshade-a-collective-deterrent">Nightshade: a collective deterrent</a></li><li><a href="#glaze-or-nightshade-the-difference">Glaze or Nightshade: the difference</a></li><li><a href="#limits-the-team-acknowledges">Limits the team acknowledges</a></li><li><a href="#do-they-still-work">Do they still work?</a></li><li><a href="#why-it-matters-for-everyone-else">Why it matters for everyone else</a></li><li><a href="#sources-h">Sources</a></li></ol></nav>
   </aside>
   <section class="read-next" aria-labelledby="next-h">
     <h2 id="next-h">Read next</h2>

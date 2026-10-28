@@ -101,7 +101,7 @@ T = {
         "home_ck_hint": "Free, runs in your browser, nothing is stored.",
     },
     "es": {
-        "site_desc": "Referencia independiente sobre el envenenamiento de datos y modelos de IA: cómo se corrompe lo que aprenden los sistemas de IA, la investigación que lo respalda y cómo defenderse.",
+        "site_desc": "Referencia independiente sobre el envenenamiento de datos y modelos de IA: cómo se corrompe lo que aprenden, la investigación y cómo defenderse.",
         "nav_articles": "Artículos",
         "nav_timeline": "Cronología",
         "nav_glossary": "Glosario",
@@ -136,7 +136,7 @@ T = {
         "breadcrumb_home": "Inicio",
         "glossary_title": "Glosario del envenenamiento de la IA",
         "glossary_nav": "Glosario",
-        "glossary_desc": "Definiciones claras de los términos del envenenamiento de datos y modelos de IA: puerta trasera, disparador, envenenamiento split-view, LLM grooming, envenenamiento de memoria, ML-BOM y más.",
+        "glossary_desc": "Definiciones claras del envenenamiento de la IA: puerta trasera, disparador, split-view, LLM grooming, envenenamiento de memoria, ML-BOM y más.",
         "glossary_lead": "Definiciones de los términos que se usan en este sitio y en la investigación sobre envenenamiento de datos y modelos. Cada una enlaza al artículo donde más importa.",
         "footer_about": "Referencia independiente y sin ánimo comercial sobre el envenenamiento de datos y modelos de IA. Sin cookies ni rastreadores.",
         "footer_updated": "Última actualización: {d}",
@@ -786,7 +786,7 @@ def build_home(lang: str) -> None:
         "description": t["site_desc"],
     }]
     title = ("Model Poisoning: AI data and model poisoning explained" if lang == "en"
-             else "Model Poisoning: el envenenamiento de datos y modelos de IA, explicado")
+             else "Model Poisoning: el envenenamiento de datos y modelos de IA")
     doc = head(lang=lang, title=title, desc=t["site_desc"], url=url, alt_urls=alts, jsonld=jsonld)
     doc += header(lang, other, current="home")
     doc += f"""
@@ -888,7 +888,10 @@ def build_article(a: dict) -> None:
     doc = head(lang=lang, title=a["title"], desc=a["description"], url=url, alt_urls=alts,
                og_type="article", jsonld=jsonld)
     doc += header(lang, other, current=key)
-    meta = f'{t["published"].format(d=fmt_date(a["date"], lang))}, {t["min_read"].format(n=mins)}'
+    meta = t["published"].format(d=fmt_date(a["date"], lang))
+    if a.get("updated") and a["updated"] != a["date"]:
+        meta += " · " + t["updated"].format(d=fmt_date(a["updated"], lang))
+    meta += ", " + t["min_read"].format(n=mins)
     doc += f"""
 <main id="main" class="wrap article-layout">
   <article class="article">
@@ -1214,6 +1217,31 @@ def build_tools_index(lang: str) -> None:
     write(url, doc)
 
 
+# Old addresses from the previous site that still get impressions in Google.
+# GitHub Pages has no 301 redirects: an instant meta refresh plus canonical is treated as a permanent redirect.
+REDIRECTS = {
+    "/aviso-legal/": ("legal", "es"),
+    "/politica-de-privacidad/": ("privacy", "es"),
+    "/quienes-somos/": ("about", "es"),
+    "/contact/": ("about", "en"),
+}
+
+
+def build_redirects() -> None:
+    for old, (key, lang) in REDIRECTS.items():
+        target = url_for(key, lang)
+        if old == target:
+            continue
+        full = SITE_URL + target
+        doc = (f'<!doctype html><html lang="{lang}"><head><meta charset="utf-8">'
+               f'<title>{esc(full)}</title><link rel="canonical" href="{full}">'
+               f'<meta http-equiv="refresh" content="0; url={target}"></head>'
+               f'<body><p><a href="{target}">{esc(full)}</a></p></body></html>\n')
+        p = out_path(old)
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(doc, encoding="utf-8")
+
+
 def build_404() -> None:
     t = T["en"]
     te = T["es"]
@@ -1286,6 +1314,7 @@ def main() -> None:
         for pg in pages[lang].values():
             build_page(pg)
     build_404()
+    build_redirects()
     build_sitemap()
 
     n = len(list(OUT.rglob("index.html")))

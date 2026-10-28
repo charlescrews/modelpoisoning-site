@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cómo defenderse del envenenamiento de datos y modelos: lista de comprobación práctica</title>
-<meta name="description" content="Lista práctica para proteger sistemas de IA del envenenamiento de datos y de modelos, basada en OWASP LLM04:2025, NIST y MITRE ATLAS, con las señales de puerta trasera que identificó el red team de IA de Microsoft en 2026.">
+<title>Cómo defenderse del envenenamiento de datos y modelos de IA</title>
+<meta name="description" content="Lista práctica contra el envenenamiento de datos y modelos, basada en OWASP LLM04:2025, NIST y MITRE ATLAS, con las señales de puerta trasera de Microsoft.">
 <link rel="canonical" href="https://www.modelpoisoning.com/es/como-defenderse-envenenamiento-datos/">
 <link rel="alternate" hreflang="en" href="https://www.modelpoisoning.com/defending-against-data-poisoning/"><link rel="alternate" hreflang="es" href="https://www.modelpoisoning.com/es/como-defenderse-envenenamiento-datos/"><link rel="alternate" hreflang="x-default" href="https://www.modelpoisoning.com/defending-against-data-poisoning/">
 
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="modelpoisoning.com">
-<meta property="og:title" content="Cómo defenderse del envenenamiento de datos y modelos: lista de comprobación práctica">
-<meta property="og:description" content="Lista práctica para proteger sistemas de IA del envenenamiento de datos y de modelos, basada en OWASP LLM04:2025, NIST y MITRE ATLAS, con las señales de puerta trasera que identificó el red team de IA de Microsoft en 2026.">
+<meta property="og:title" content="Cómo defenderse del envenenamiento de datos y modelos de IA">
+<meta property="og:description" content="Lista práctica contra el envenenamiento de datos y modelos, basada en OWASP LLM04:2025, NIST y MITRE ATLAS, con las señales de puerta trasera de Microsoft.">
 <meta property="og:url" content="https://www.modelpoisoning.com/es/como-defenderse-envenenamiento-datos/">
 <meta property="og:image" content="https://www.modelpoisoning.com/og.png">
 <meta property="og:locale" content="es_ES">
@@ -22,7 +22,7 @@
 <link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/style.css?v=60bee040">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Cómo defenderse del envenenamiento de datos y modelos: lista de comprobación práctica", "description": "Lista práctica para proteger sistemas de IA del envenenamiento de datos y de modelos, basada en OWASP LLM04:2025, NIST y MITRE ATLAS, con las señales de puerta trasera que identificó el red team de IA de Microsoft en 2026.", "inLanguage": "es", "datePublished": "2026-10-09", "dateModified": "2026-10-09", "mainEntityOfPage": "https://www.modelpoisoning.com/es/como-defenderse-envenenamiento-datos/", "image": "https://www.modelpoisoning.com/og.png", "author": {"@type": "Person", "name": "Carlos Díaz", "url": "https://www.modelpoisoning.com/es/sobre/"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.modelpoisoning.com/es/"}, {"@type": "ListItem", "position": 2, "name": "Cómo defenderse del envenenamiento", "item": "https://www.modelpoisoning.com/es/como-defenderse-envenenamiento-datos/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Cómo defenderse del envenenamiento de datos y modelos de IA", "description": "Lista práctica contra el envenenamiento de datos y modelos, basada en OWASP LLM04:2025, NIST y MITRE ATLAS, con las señales de puerta trasera de Microsoft.", "inLanguage": "es", "datePublished": "2026-10-09", "dateModified": "2026-10-09", "mainEntityOfPage": "https://www.modelpoisoning.com/es/como-defenderse-envenenamiento-datos/", "image": "https://www.modelpoisoning.com/og.png", "author": {"@type": "Person", "name": "Carlos Díaz", "url": "https://www.modelpoisoning.com/es/sobre/"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.modelpoisoning.com/es/"}, {"@type": "ListItem", "position": 2, "name": "Cómo defenderse del envenenamiento", "item": "https://www.modelpoisoning.com/es/como-defenderse-envenenamiento-datos/"}]}</script>
 </head><body>
 <a class="skip" href="#main">Saltar al contenido</a>
 <header class="site-header">
@@ -43,7 +43,7 @@
 <main id="main" class="wrap article-layout">
   <article class="article">
     <header class="article-head">
-      <h1>Cómo defenderse del envenenamiento de datos y modelos: lista de comprobación práctica</h1>
+      <h1>Cómo defenderse del envenenamiento de datos y modelos de IA</h1>
       <p class="dek">Nadie puede revisar a mano miles de millones de documentos. Pero sí se puede controlar de dónde vienen, demostrar que no han cambiado y comprobar qué ha aprendido el modelo.</p>
       <p class="meta">Publicado el 9 de octubre de 2026, 5 min de lectura</p>
     </header>

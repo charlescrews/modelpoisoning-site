@@ -2,7 +2,7 @@
 key: malicious-models
 title: Modelos maliciosos en Hugging Face: descargas que ejecutan código
 nav_title: Modelos maliciosos en Hugging Face
-description: Casos reales de 2024 a 2026 de modelos de Hugging Face que ejecutaban código o plantaban puertas traseras, por qué se escapan a los análisis y cómo protegerte.
+description: Casos reales de 2024 a 2026 de modelos de Hugging Face que ejecutaban código o plantaban puertas traseras, por qué escapan a los análisis y cómo protegerte.
 dek: Envenenar un modelo no siempre exige tocar sus datos de entrenamiento. A veces el archivo que descargas hace el trabajo en cuanto lo abres.
 date: 2026-10-23
 order: 7

@@ -1,8 +1,8 @@
 ---
 key: what-is
-title: What is model poisoning? Data poisoning vs model poisoning explained
+title: What is model poisoning? Data and model poisoning explained
 nav_title: What is model poisoning?
-description: A clear explanation of AI model poisoning and data poisoning: how attackers corrupt training data or model weights, the main attack types, and how OWASP, NIST and MITRE ATLAS classify them.
+description: How attackers corrupt an AI system's training data or weights, the main types of poisoning attack, and how OWASP, NIST and MITRE ATLAS classify them.
 dek: Attackers do not always need to break into an AI system. Sometimes it is enough to change what the system learns from.
 date: 2026-10-09
 order: 1

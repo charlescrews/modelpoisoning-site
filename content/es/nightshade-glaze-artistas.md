@@ -1,10 +1,11 @@
 ---
 key: nightshade
-title: Nightshade y Glaze: cuando los artistas envenenan sus propias imágenes
+title: Nightshade y Glaze: en qué se diferencian y si funcionan
 nav_title: Nightshade y Glaze
-description: Cómo las herramientas Nightshade y Glaze de la Universidad de Chicago permiten a los artistas alterar sus imágenes para que los modelos de IA entrenados con ellas sin permiso aprendan cosas equivocadas, y cuáles son sus límites.
+description: Glaze protege el estilo de un artista y Nightshade envenena los modelos que se entrenan con su obra sin permiso. Diferencias, funcionamiento y límites.
 dek: No todo envenenamiento de datos es un ataque. Para algunos artistas es la única baza que tienen frente a las empresas que recopilan su obra.
 date: 2026-10-09
+updated: 2026-10-28
 order: 4
 ---
 
@@ -13,6 +14,7 @@ order: 4
 - **Glaze** es defensiva: dificulta que un modelo imite el estilo de un artista concreto.
 - **Nightshade** es ofensiva: las imágenes tratadas con ella enseñan asociaciones equivocadas al modelo que se entrene con ellas, por ejemplo que la foto de una vaca es un bolso.
 - El artículo científico indica que un prompt de Stable Diffusion SDXL se puede corromper con **menos de 100 muestras envenenadas**. El equipo admite que la protección no durará siempre, porque las defensas evolucionan.
+- Un estudio presentado en ICLR 2025 comprobó que técnicas sencillas, como ampliar la imagen, deshacen protecciones de estilo como Glaze, así que ninguna de las dos herramientas garantiza que una obra no se pueda usar.
 :::
 
 ## El envenenamiento como defensa propia
@@ -39,6 +41,13 @@ El artículo técnico, [Nightshade: Prompt-Specific Poisoning Attacks on Text-to
 
 Los autores presentan Nightshade como "una última defensa de los creadores de contenido frente a los rastreadores web que ignoran las directivas de exclusión o de no rastreo". Su objetivo, dicen, es encarecer el entrenamiento con datos sin licencia, no destruir modelos.
 
+## Glaze o Nightshade: en qué se diferencian
+
+- **Qué hace.** Glaze protege el estilo de un artista frente a la imitación. Nightshade no protege un estilo: hace que entrenar con imágenes tratadas sea menos útil para cualquier modelo que las use sin permiso.
+- **Cómo.** Las dos añaden cambios difíciles de ver para una persona. Glaze altera cómo percibe un modelo el estilo de la imagen; Nightshade hace que el modelo asocie la imagen con otro concepto, como una vaca con un bolso.
+- **A quién sirve.** Glaze sirve al artista que la aplica. Nightshade funciona en grupo: solo tiene efecto si llegan suficientes imágenes tratadas a los datos de entrenamiento de un modelo.
+- **Cómo combinarlas.** El equipo recomienda Glaze para todas las obras y Nightshade como complemento opcional, porque Nightshade v1.0 no protege contra la imitación de estilo.
+
 ## Los límites que reconoce el equipo
 
 La página del proyecto es franca sobre lo que Nightshade no puede hacer:
@@ -46,6 +55,12 @@ La página del proyecto es franca sobre lo que Nightshade no puede hacer:
 - Los cambios son **más visibles** en obras con colores planos y fondos lisos. Un ajuste de baja intensidad sacrifica protección a cambio de calidad de imagen.
 - Es **poco probable que la protección siga siendo eficaz durante mucho tiempo**, porque ataques y defensas evolucionan sin parar.
 - Nightshade v1.0 no protege contra la imitación de estilo, por eso el equipo recomienda Glaze para todas las obras y Nightshade como complemento opcional.
+
+## ¿Siguen funcionando?
+
+No de forma fiable ni para siempre. El propio equipo de Nightshade dice que su protección probablemente no durará, y la investigación independiente apunta en la misma dirección para la protección de estilo. En un artículo presentado en ICLR 2025, Robert Hönig, Javier Rando, Nicholas Carlini y Florian Tramèr probaron protecciones como Glaze, Mist y Anti-DreamBooth y concluyeron que "solo dan una falsa sensación de seguridad": técnicas sencillas, como ampliar la imagen, bastaban para deshacerlas ([arXiv 2406.12027](https://arxiv.org/abs/2406.12027)).
+
+Ese estudio no probó Nightshade, que tiene otro objetivo: encarecer la recopilación masiva de imágenes, no garantizar la protección de cada imagen. En la práctica, las dos herramientas encarecen usar la obra de un artista sin permiso, pero ninguna garantiza que no se pueda usar.
 
 ## Por qué importa a todos los demás
 
@@ -60,3 +75,4 @@ Para una visión general de cómo funciona el envenenamiento, consulta [¿Qué e
 - ETCentric, [AI Poison Pill App Nightshade Has 250K Downloads in 5 Days](https://www.etcentric.org/ai-poison-pill-app-nightshade-has-250k-downloads-in-5-days/)
 - Shan et al., [Glaze: Protecting Artists from Style Mimicry by Text-to-Image Models](https://www.usenix.org/conference/usenixsecurity23/presentation/shan), USENIX Security 2023
 - Universidad de Chicago, [proyecto Glaze](https://glaze.cs.uchicago.edu/)
+- Hönig et al., [Adversarial Perturbations Cannot Reliably Protect Artists From Generative AI](https://arxiv.org/abs/2406.12027), ICLR 2025
