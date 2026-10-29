@@ -6,6 +6,7 @@ description: Qué es el LLM grooming, cómo la red Pravda llena la web de artíc
 dek: Algunas webs no están escritas para personas. Están escritas para las máquinas que leen la web en nombre de los sistemas de IA.
 date: 2026-10-09
 order: 3
+tool: source-checker
 ---
 
 :::summary
@@ -41,6 +42,8 @@ Los chatbots reciben información por dos vías, y el grooming puede atacar amba
 
 1. **Datos de entrenamiento.** El texto extraído de la web acaba en los corpus con los que se preentrenan o ajustan los modelos. Si el contenido envenenado está ahí, el modelo puede aprenderlo como un hecho. La investigación sobre [cuántos documentos hacen falta](@250-docs) muestra por qué no se necesita un volumen enorme.
 2. **Recuperación.** Muchos asistentes buscan en la web mientras responden. Si las webs de propaganda aparecen bien posicionadas para una consulta, sobre todo una poco común y con pocas fuentes fiables, el asistente puede resumirlas como si fueran creíbles.
+
+:::figure grooming-routes
 
 A este segundo caso a veces se le llama *vacío de datos* (*data void*): cuando las fuentes fiables no han cubierto un tema, quien llena el hueco primero condiciona la respuesta. Una red que publica millones de artículos está muy bien situada para llenar huecos.
 

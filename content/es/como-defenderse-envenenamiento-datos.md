@@ -6,6 +6,7 @@ description: Lista práctica contra el envenenamiento de datos y modelos, basada
 dek: Nadie puede revisar a mano miles de millones de documentos. Pero sí se puede controlar de dónde vienen, demostrar que no han cambiado y comprobar qué ha aprendido el modelo.
 date: 2026-10-09
 order: 5
+tool: checker
 ---
 
 :::summary

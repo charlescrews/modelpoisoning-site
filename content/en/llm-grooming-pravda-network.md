@@ -6,6 +6,7 @@ description: What LLM grooming means, how the Pravda network floods the web with
 dek: Some websites are not written for people at all. They are written for the machines that read the web on behalf of AI systems.
 date: 2026-10-09
 order: 3
+tool: source-checker
 ---
 
 :::summary
@@ -41,6 +42,8 @@ Chatbots take in information through two routes, and grooming can target both:
 
 1. **Training data.** Text scraped from the web ends up in the corpora used to pre-train or fine-tune models. If the poisoned content is there, the model may learn it as fact. Research on [how few documents are needed](@250-docs) shows why sheer volume is not required.
 2. **Retrieval.** Many assistants now search the web while answering. If propaganda sites rank for a query, especially an obscure one with few reliable sources, the assistant may summarise them as if they were credible.
+
+:::figure grooming-routes
 
 Researchers sometimes call the second case a *data void*: when trustworthy sources have not covered a topic, whoever fills the gap first shapes the answer. A network that publishes millions of articles is well placed to fill gaps.
 

@@ -6,6 +6,7 @@ description: A practical checklist against data and model poisoning, based on OW
 dek: You cannot inspect billions of documents by hand. You can control where they come from, prove they have not changed, and test what the model learned.
 date: 2026-10-09
 order: 5
+tool: checker
 ---
 
 :::summary

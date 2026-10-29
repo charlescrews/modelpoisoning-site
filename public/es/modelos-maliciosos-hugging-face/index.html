@@ -19,9 +19,10 @@
 <meta name="theme-color" content="#EDF0EC" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131915" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/atom+xml" title="modelpoisoning.com" href="/es/feed.xml">
 <link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/style.css?v=60bee040">
+<link rel="stylesheet" href="/style.css?v=357702b3">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Modelos maliciosos en Hugging Face: descargas que ejecutan código", "description": "Casos reales de 2024 a 2026 de modelos de Hugging Face que ejecutaban código o plantaban puertas traseras, por qué escapan a los análisis y cómo protegerte.", "inLanguage": "es", "datePublished": "2026-10-23", "dateModified": "2026-10-23", "mainEntityOfPage": "https://www.modelpoisoning.com/es/modelos-maliciosos-hugging-face/", "image": "https://www.modelpoisoning.com/og.png", "author": {"@type": "Person", "name": "Carlos Díaz", "url": "https://www.modelpoisoning.com/es/sobre/"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.modelpoisoning.com/es/"}, {"@type": "ListItem", "position": 2, "name": "Modelos maliciosos en Hugging Face", "item": "https://www.modelpoisoning.com/es/modelos-maliciosos-hugging-face/"}]}</script>
 </head><body>
 <a class="skip" href="#main">Saltar al contenido</a>
@@ -57,6 +58,8 @@
     <div class="prose"><h2 id="por-que-cargar-un-modelo-puede-ejecutar-codigo">Por qué cargar un modelo puede ejecutar código</h2>
 <p>El formato <a href="/es/glosario/#pickle">pickle</a> de Python no guarda solo datos. Guarda instrucciones para reconstruir objetos de Python, y esas instrucciones pueden indicar cualquier función que haya que llamar mientras se carga el archivo. Un archivo malicioso puede pedir a Python que ejecute un comando, descargue un programa o abra una conexión de red, y lo hace antes de que el modelo haya producido ni una sola respuesta.</p>
 <p>Muchos archivos de modelos son pickles por dentro. Un <code>.bin</code> o un <code>.pt</code> de PyTorch es un archivo ZIP con un pickle dentro. Cargarlo con una herramienta antigua o mal configurada equivale a ejecutar un programa escrito por quien lo subió.</p>
+<figure class="fig fig-compare"><div class="lane lane-risk"><p class="lane-label">Archivo basado en pickle (.bin, .pt, .ckpt)</p><ol class="flow flow-risk"><li class="step">Llamas a torch.load() o pickle.load()</li><li class="step">Python sigue en orden las instrucciones del archivo</li><li class="step">Una instrucción dice: ejecuta este comando</li><li class="step">El comando se ejecuta en tu equipo, antes de ver nada</li></ol></div><div class="lane lane-ok"><p class="lane-label">Archivo safetensors</p><ol class="flow flow-ok"><li class="step">Llamas a safe_open() o load_file()</li><li class="step">La biblioteca lee una cabecera y los números</li><li class="step">No hay instrucciones que seguir</li><li class="step">Obtienes los pesos y nada más</li></ol></div><figcaption>Por qué importa el formato: un pickle es un pequeño programa que Python ejecuta para reconstruir el modelo; safetensors son solo datos.</figcaption></figure>
+
 <h2 id="casos-reales">Casos reales</h2>
 <h3 id="2024-un-centenar-de-modelos-con-codigo-danino-real">2024: un centenar de modelos con código dañino real</h3>
 <p>En febrero de 2024, el equipo de investigación de seguridad de JFrog analizó modelos de PyTorch y de TensorFlow Keras en Hugging Face e informó de «alrededor de 100» modelos con funciones maliciosas (<a href="https://jfrog.com/blog/data-scientists-targeted-by-malicious-hugging-face-ml-models-with-silent-backdoor/" rel="noopener">JFrog</a>). En uno de ellos, subido por una cuenta llamada baller423, cargar el modelo abría una <em>reverse shell</em>: una conexión que da a un atacante remoto una línea de comandos en el equipo de la víctima. El repositorio ya se ha borrado.</p>
@@ -82,7 +85,15 @@
 <li><strong>No te fíes de la popularidad.</strong> Las descargas, los «me gusta» y los puestos en tendencias se pueden inflar, como demostró el falso repositorio de OpenAI.</li>
 <li><strong>Carga los modelos no fiables en un entorno aislado</strong>, sin red ni credenciales, como recomienda la <a href="/es/como-defenderse-envenenamiento-datos/">lista de defensas</a>.</li>
 </ul>
-<p>Nuestro <a href="/es/comprobador-modelos/">comprobador de modelos</a> hace las primeras comprobaciones por ti: muestra lo que han marcado los análisis de Hugging Face, qué archivos usan pickle, si el modelo necesita código propio y qué commit debes fijar.</p><section class="sources" aria-labelledby="sources-h"><h2 id="sources-h">Fuentes</h2><ul>
+<p>Nuestro <a href="/es/comprobador-modelos/">comprobador de modelos</a> hace las primeras comprobaciones por ti: muestra lo que han marcado los análisis de Hugging Face, qué archivos usan pickle, si el modelo necesita código propio y qué commit debes fijar.</p><aside class="tool-box" aria-label="Pruébalo"><p class="eyebrow">Pruébalo</p><p class="tool-box-title"><a href="/es/comprobador-modelos/">Comprueba un modelo antes de cargarlo</a></p><p>Escribe un modelo de Hugging Face y verás si sus archivos pueden ejecutar código en tu equipo, qué han encontrado los análisis de Hugging Face y qué no cuenta su ficha.</p><form class="checker-form" action="/es/comprobador-modelos/" method="get" role="search">
+      <label for="article-model">Modelo de Hugging Face</label>
+      <div class="field-row">
+        <input id="article-model" name="model" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="owner/model" aria-describedby="article-model-hint" maxlength="300">
+        <button type="submit" class="btn">Comprobar</button>
+      </div>
+      <p id="article-model-hint" class="hint">Gratis, funciona en tu navegador y no guarda nada.</p>
+      
+    </form></aside><section class="sources" aria-labelledby="sources-h"><h2 id="sources-h">Fuentes</h2><ul>
 <li>JFrog, <a href="https://jfrog.com/blog/data-scientists-targeted-by-malicious-hugging-face-ml-models-with-silent-backdoor/" rel="noopener">Data Scientists Targeted by Malicious Hugging Face ML Models with Silent Backdoor</a>, febrero de 2024</li>
 <li>ReversingLabs, <a href="https://www.reversinglabs.com/blog/rl-identifies-malware-ml-model-hosted-on-hugging-face" rel="noopener">RL identifies malware ML model hosted on Hugging Face</a>, febrero de 2025</li>
 <li>Infosecurity Magazine, <a href="https://www.infosecurity-magazine.com/news/picklescan-flaws-expose-ai-supply" rel="noopener">Critical PickleScan Vulnerabilities Expose AI Model Supply Chains</a>, diciembre de 2025</li>
@@ -106,12 +117,13 @@
     <div>
       <p class="footer-brand"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></p>
       <p>Referencia independiente y sin ánimo comercial sobre el envenenamiento de datos y modelos de IA. Sin cookies ni rastreadores.</p>
-      <p class="muted">Última actualización: 23 de octubre de 2026</p>
+      <p class="muted">Última actualización: 28 de octubre de 2026</p>
     </div>
     <ul class="footer-links">
       <li><a href="/es/sobre/">Sobre el sitio</a></li>
       <li><a href="/es/aviso-legal/">Aviso legal</a></li>
       <li><a href="/es/privacidad/">Privacidad</a></li>
+      <li><a href="/es/feed.xml" type="application/atom+xml">Canal RSS</a></li>
       <li><a href="/malicious-models-hugging-face/" hreflang="en" lang="en">English</a></li>
     </ul>
   </div>

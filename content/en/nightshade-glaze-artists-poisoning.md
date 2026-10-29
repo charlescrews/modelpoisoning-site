@@ -43,10 +43,7 @@ The authors frame Nightshade as "a last defense for content creators against web
 
 ## Glaze or Nightshade: the difference
 
-- **What it does.** Glaze protects one artist's style from imitation. Nightshade does not protect a style: it makes training on shaded images less useful for any model that uses them without permission.
-- **How.** Both add changes that are hard for people to see. Glaze shifts how a model perceives an image's style; Nightshade makes a model associate the image with a different concept, such as a cow with a handbag.
-- **Who it works for.** Glaze works for the individual artist who applies it. Nightshade works as a group: it only has an effect if enough shaded images end up in a model's training data.
-- **How to combine them.** The team recommends Glaze for all artwork and Nightshade as an optional extra, because Nightshade v1.0 does not protect against style mimicry.
+:::figure glaze-vs-nightshade
 
 ## Limits the team acknowledges
 

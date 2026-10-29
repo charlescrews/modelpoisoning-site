@@ -6,6 +6,7 @@ description: Real cases from 2024 to 2026 of Hugging Face models that ran code o
 dek: Poisoning a model does not always mean touching its training data. Sometimes the file you download does the work the moment you open it.
 date: 2026-10-23
 order: 7
+tool: checker
 ---
 
 :::summary
@@ -21,6 +22,8 @@ order: 7
 Python's [pickle](@glossary#pickle) format does not just store data. It stores instructions for rebuilding Python objects, and those instructions can name any function to call while the file is being loaded. A malicious file can therefore tell Python to run a shell command, download a program or open a network connection, and it does so before the model has produced a single output.
 
 Many model files are pickles underneath. A PyTorch `.bin` or `.pt` file is a ZIP archive with a pickle inside it. Loading one with an old or misconfigured tool is, in effect, running a program written by whoever uploaded it.
+
+:::figure pickle-vs-safetensors
 
 ## Real cases
 

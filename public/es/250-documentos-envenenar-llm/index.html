@@ -19,9 +19,10 @@
 <meta name="theme-color" content="#EDF0EC" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131915" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/atom+xml" title="modelpoisoning.com" href="/es/feed.xml">
 <link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/style.css?v=60bee040">
+<link rel="stylesheet" href="/style.css?v=357702b3">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "250 documentos bastan para envenenar un LLM de cualquier tamaño", "description": "El estudio “Poisoning Attacks on LLMs Require a Near-constant Number of Poison Samples”: 250 documentos bastaron en modelos de 600M a 13.000M de parámetros.", "inLanguage": "es", "datePublished": "2026-10-09", "dateModified": "2026-10-09", "mainEntityOfPage": "https://www.modelpoisoning.com/es/250-documentos-envenenar-llm/", "image": "https://www.modelpoisoning.com/og.png", "author": {"@type": "Person", "name": "Carlos Díaz", "url": "https://www.modelpoisoning.com/es/sobre/"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.modelpoisoning.com/es/"}, {"@type": "ListItem", "position": 2, "name": "Bastan 250 documentos", "item": "https://www.modelpoisoning.com/es/250-documentos-envenenar-llm/"}]}</script>
 </head><body>
 <a class="skip" href="#main">Saltar al contenido</a>
@@ -67,6 +68,8 @@
 <li>El número de documentos necesarios se mantuvo aproximadamente <strong>constante</strong> a medida que crecían los modelos. El de 13.000 millones, entrenado con más de 20 veces más datos que el de 600 millones, no fue más difícil de envenenar.</li>
 </ul>
 <p>En el modelo de 13.000 millones, 250 documentos suponen unos 420.000 tokens, aproximadamente el 0,00016 % de sus tokens de entrenamiento. En palabras del artículo, los ataques de envenenamiento &laquo;requieren un número casi constante de documentos independientemente del tamaño del dataset&raquo;. Los autores observan la misma dinámica cuando el veneno se introduce durante el ajuste fino en lugar del preentrenamiento.</p>
+<figure class="fig fig-bars"><table><caption>Tokens de entrenamiento por modelo y documentos envenenados necesarios</caption><thead><tr><th scope="col">Modelo</th><th scope="col">Tokens de entrenamiento</th><th scope="col">Documentos envenenados</th></tr></thead><tbody><tr><th scope="row">600M</th><td class="bar-cell"><span class="bar" style="--w:4.6%"></span><span class="bar-label">12.000 M de tokens</span></td><td class="dose"><span class="dose-dot" aria-hidden="true"></span>250</td></tr><tr><th scope="row">2B</th><td class="bar-cell"><span class="bar" style="--w:15.4%"></span><span class="bar-label">40.000 M de tokens</span></td><td class="dose"><span class="dose-dot" aria-hidden="true"></span>250</td></tr><tr><th scope="row">7B</th><td class="bar-cell"><span class="bar" style="--w:53.8%"></span><span class="bar-label">140.000 M de tokens</span></td><td class="dose"><span class="dose-dot" aria-hidden="true"></span>250</td></tr><tr><th scope="row">13B</th><td class="bar-cell"><span class="bar" style="--w:100.0%"></span><span class="bar-label">260.000 M de tokens</span></td><td class="dose"><span class="dose-dot" aria-hidden="true"></span>250</td></tr></tbody></table><figcaption>Los datos de entrenamiento se multiplicaron por más de veinte del modelo más pequeño al más grande. Los documentos envenenados necesarios para plantar la puerta trasera siguieron siendo unos 250. Cifras de tokens aproximadas (unos 20 tokens por parámetro).</figcaption></figure>
+
 <h2 id="por-que-importa">Por qué importa</h2>
 <p>Crear 250 páginas web es trivial. Si el resultado se generaliza, la escala de los datasets actuales no es por sí sola una defensa, y la seguridad de la cadena de datos importa tanto en los modelos más grandes como en los más pequeños. También significa que las defensas tienen que funcionar cuando el contenido envenenado es un número pequeño y fijo de muestras escondidas entre miles de millones.</p>
 <h2 id="lo-que-no-demuestra">Lo que no demuestra</h2>
@@ -100,12 +103,13 @@
     <div>
       <p class="footer-brand"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></p>
       <p>Referencia independiente y sin ánimo comercial sobre el envenenamiento de datos y modelos de IA. Sin cookies ni rastreadores.</p>
-      <p class="muted">Última actualización: 23 de octubre de 2026</p>
+      <p class="muted">Última actualización: 28 de octubre de 2026</p>
     </div>
     <ul class="footer-links">
       <li><a href="/es/sobre/">Sobre el sitio</a></li>
       <li><a href="/es/aviso-legal/">Aviso legal</a></li>
       <li><a href="/es/privacidad/">Privacidad</a></li>
+      <li><a href="/es/feed.xml" type="application/atom+xml">Canal RSS</a></li>
       <li><a href="/250-documents-poison-llm/" hreflang="en" lang="en">English</a></li>
     </ul>
   </div>

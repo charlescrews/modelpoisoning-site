@@ -19,9 +19,10 @@
 <meta name="theme-color" content="#EDF0EC" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131915" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/atom+xml" title="modelpoisoning.com" href="/es/feed.xml">
 <link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/style.css?v=60bee040">
+<link rel="stylesheet" href="/style.css?v=357702b3">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Cómo defenderse del envenenamiento de datos y modelos de IA", "description": "Lista práctica contra el envenenamiento de datos y modelos, basada en OWASP LLM04:2025, NIST y MITRE ATLAS, con las señales de puerta trasera de Microsoft.", "inLanguage": "es", "datePublished": "2026-10-09", "dateModified": "2026-10-09", "mainEntityOfPage": "https://www.modelpoisoning.com/es/como-defenderse-envenenamiento-datos/", "image": "https://www.modelpoisoning.com/og.png", "author": {"@type": "Person", "name": "Carlos Díaz", "url": "https://www.modelpoisoning.com/es/sobre/"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.modelpoisoning.com/es/"}, {"@type": "ListItem", "position": 2, "name": "Cómo defenderse del envenenamiento", "item": "https://www.modelpoisoning.com/es/como-defenderse-envenenamiento-datos/"}]}</script>
 </head><body>
 <a class="skip" href="#main">Saltar al contenido</a>
@@ -103,7 +104,15 @@
 <li><strong>OWASP Top 10 para aplicaciones LLM</strong>: <a href="https://genai.owasp.org/llmrisk/llm042025-data-and-model-poisoning/" rel="noopener">LLM04:2025 Data and Model Poisoning</a></li>
 <li><strong>NIST AI 100-2 E2025</strong>: <a href="https://csrc.nist.gov/news/2025/nist-ai-100-2-adversarial-machine-learning-taxonom" rel="noopener">taxonomía del aprendizaje automático adversarial</a>, con envenenamiento de disponibilidad, dirigido, de puerta trasera y del modelo</li>
 <li><strong>MITRE ATLAS</strong>: <a href="https://atlas.mitre.org/" rel="noopener">técnicas</a> AML.T0020 Poison Training Data, AML.T0019 Publish Poisoned Datasets, AML.T0018 Manipulate AI Model</li>
-</ul><section class="sources" aria-labelledby="sources-h"><h2 id="sources-h">Fuentes</h2><ul>
+</ul><aside class="tool-box" aria-label="Pruébalo"><p class="eyebrow">Pruébalo</p><p class="tool-box-title"><a href="/es/comprobador-modelos/">Comprueba un modelo antes de cargarlo</a></p><p>Escribe un modelo de Hugging Face y verás si sus archivos pueden ejecutar código en tu equipo, qué han encontrado los análisis de Hugging Face y qué no cuenta su ficha.</p><form class="checker-form" action="/es/comprobador-modelos/" method="get" role="search">
+      <label for="article-model">Modelo de Hugging Face</label>
+      <div class="field-row">
+        <input id="article-model" name="model" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="owner/model" aria-describedby="article-model-hint" maxlength="300">
+        <button type="submit" class="btn">Comprobar</button>
+      </div>
+      <p id="article-model-hint" class="hint">Gratis, funciona en tu navegador y no guarda nada.</p>
+      
+    </form></aside><section class="sources" aria-labelledby="sources-h"><h2 id="sources-h">Fuentes</h2><ul>
 <li>OWASP GenAI Security Project, <a href="https://genai.owasp.org/llmrisk/llm042025-data-and-model-poisoning/" rel="noopener">LLM04:2025 Data and Model Poisoning</a></li>
 <li>Carlini et al., <a href="https://arxiv.org/abs/2302.10149" rel="noopener">Poisoning Web-Scale Training Datasets is Practical</a>, 2023</li>
 <li>The Register, <a href="https://www.theregister.com/2026/02/05/llm_poisoned_how_to_tell/" rel="noopener">Three clues your LLM may be poisoned</a>, febrero de 2026</li>
@@ -124,12 +133,13 @@
     <div>
       <p class="footer-brand"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></p>
       <p>Referencia independiente y sin ánimo comercial sobre el envenenamiento de datos y modelos de IA. Sin cookies ni rastreadores.</p>
-      <p class="muted">Última actualización: 23 de octubre de 2026</p>
+      <p class="muted">Última actualización: 28 de octubre de 2026</p>
     </div>
     <ul class="footer-links">
       <li><a href="/es/sobre/">Sobre el sitio</a></li>
       <li><a href="/es/aviso-legal/">Aviso legal</a></li>
       <li><a href="/es/privacidad/">Privacidad</a></li>
+      <li><a href="/es/feed.xml" type="application/atom+xml">Canal RSS</a></li>
       <li><a href="/defending-against-data-poisoning/" hreflang="en" lang="en">English</a></li>
     </ul>
   </div>

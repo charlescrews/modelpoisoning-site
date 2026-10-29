@@ -19,9 +19,10 @@
 <meta name="theme-color" content="#EDF0EC" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131915" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/atom+xml" title="modelpoisoning.com" href="/es/feed.xml">
 <link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/style.css?v=60bee040">
+<link rel="stylesheet" href="/style.css?v=357702b3">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "LLM grooming: la propaganda que intenta envenenar a los chatbots", "description": "Qué es el LLM grooming, cómo la red Pravda llena la web de artículos para los rastreadores de IA y cuántas veces repitieron sus mensajes 10 chatbots líderes.", "inLanguage": "es", "datePublished": "2026-10-09", "dateModified": "2026-10-09", "mainEntityOfPage": "https://www.modelpoisoning.com/es/llm-grooming-red-pravda/", "image": "https://www.modelpoisoning.com/og.png", "author": {"@type": "Person", "name": "Carlos Díaz", "url": "https://www.modelpoisoning.com/es/sobre/"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://www.modelpoisoning.com/es/"}, {"@type": "ListItem", "position": 2, "name": "LLM grooming y la red Pravda", "item": "https://www.modelpoisoning.com/es/llm-grooming-red-pravda/"}]}</script>
 </head><body>
 <a class="skip" href="#main">Saltar al contenido</a>
@@ -72,13 +73,15 @@
 <li><strong>Datos de entrenamiento.</strong> El texto extraído de la web acaba en los corpus con los que se preentrenan o ajustan los modelos. Si el contenido envenenado está ahí, el modelo puede aprenderlo como un hecho. La investigación sobre <a href="/es/250-documentos-envenenar-llm/">cuántos documentos hacen falta</a> muestra por qué no se necesita un volumen enorme.</li>
 <li><strong>Recuperación.</strong> Muchos asistentes buscan en la web mientras responden. Si las webs de propaganda aparecen bien posicionadas para una consulta, sobre todo una poco común y con pocas fuentes fiables, el asistente puede resumirlas como si fueran creíbles.</li>
 </ol>
+<figure class="fig fig-routes"><div class="node node-accent">Red Pravda: millones de artículos automáticos que casi nadie lee</div><div class="lanes"><div class="lane"><p class="lane-label">Vía 1: datos de entrenamiento</p><ol class="flow "><li class="step">Los rastreadores recogen el texto</li><li class="step">Acaba en un dataset de entrenamiento</li><li class="step">El modelo aprende la afirmación</li></ol></div><div class="lane"><p class="lane-label">Vía 2: búsqueda en directo</p><ol class="flow "><li class="step">Los buscadores indexan las páginas</li><li class="step">El asistente busca mientras responde</li><li class="step">Las resume como si fueran una fuente</li></ol></div></div><div class="node node-end">El chatbot repite el mensaje</div><figcaption>El LLM grooming puede llegar a un chatbot por lo que aprendió al entrenarse y por lo que encuentra cuando busca en la web.</figcaption></figure>
+
 <p>A este segundo caso a veces se le llama <em>vacío de datos</em> (<em>data void</em>): cuando las fuentes fiables no han cubierto un tema, quien llena el hueco primero condiciona la respuesta. Una red que publica millones de artículos está muy bien situada para llenar huecos.</p>
 <h2 id="por-que-importa-mas-alla-de-un-pais">Por qué importa más allá de un país</h2>
 <p>La red Pravda es el ejemplo más estudiado, no el único posible. La misma técnica está al alcance de cualquier gobierno, empresa o grupo de interés con presupuesto para publicar a gran escala. Es la versión, en el espacio informativo, de los ataques que describe el <a href="https://genai.owasp.org/llmrisk/llm042025-data-and-model-poisoning/" rel="noopener">Top 10 de OWASP para LLM</a>: sesgar las respuestas de un modelo manipulando los datos de los que aprende.</p>
 <h2 id="que-se-puede-hacer">Qué se puede hacer</h2>
 <p>Para <strong>quienes desarrollan IA</strong>: valorar la reputación de las fuentes en la cadena de datos, filtrar dominios de desinformación conocidos, rastrear la procedencia de los datos de entrenamiento y diseñar evaluaciones que comprueben si el modelo repite narrativas falsas conocidas.</p>
 <p>Para <strong>quienes usan IA</strong>: tomar la respuesta de un chatbot sobre un tema polémico o poco conocido como punto de partida, revisar las fuentes que cita y desconfiar cuando esas fuentes son webs desconocidas con nombres genéricos de noticias. El <a href="/es/comprobador-fuentes/">comprobador de fuentes</a> indica si un dominio está en las listas que ha publicado VIGINUM.</p>
-<p>Para <strong>medios e investigadores</strong>: cubrir los vacíos de datos con información fiable dificulta que el contenido envenenado sea lo único que encuentre un rastreador.</p><section class="sources" aria-labelledby="sources-h"><h2 id="sources-h">Fuentes</h2><ul>
+<p>Para <strong>medios e investigadores</strong>: cubrir los vacíos de datos con información fiable dificulta que el contenido envenenado sea lo único que encuentre un rastreador.</p><aside class="tool-box" aria-label="Pruébalo"><p class="eyebrow">Pruébalo</p><p class="tool-box-title"><a href="/es/comprobador-fuentes/">Comprueba las fuentes que ha citado un chatbot</a></p><p>Pega enlaces o nombres de dominio, por ejemplo las fuentes que te ha dado un asistente de IA, y comprueba si alguno aparece en las listas de webs de propaganda prorrusa que publica VIGINUM, la agencia francesa.</p><p class="card-action"><a class="btn" href="/es/comprobador-fuentes/">Comprobar fuentes</a></p></aside><section class="sources" aria-labelledby="sources-h"><h2 id="sources-h">Fuentes</h2><ul>
 <li>Newport y Jankowicz, <a href="https://thebulletin.org/2025/03/russian-networks-flood-the-internet-with-propaganda-aiming-to-corrupt-ai-chatbots/" rel="noopener">Russian networks flood the Internet with propaganda, aiming to corrupt AI chatbots</a>, Bulletin of the Atomic Scientists, marzo de 2025</li>
 <li>NewsGuard, <a href="https://www.newsguardtech.com/special-reports/moscow-based-global-news-network-infected-western-artificial-intelligence-russian-propaganda/" rel="noopener">A well-funded Moscow-based global &lsquo;news&rsquo; network has infected Western artificial intelligence tools worldwide with Russian propaganda</a>, marzo de 2025</li>
 <li>The Hill, <a href="https://thehill.com/policy/technology/5181257-ai-chatbots-infected-with-russian-disinformation-study/amp/" rel="noopener">AI chatbots infected with Russian disinformation: study</a>, marzo de 2025</li>
@@ -98,12 +101,13 @@
     <div>
       <p class="footer-brand"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></p>
       <p>Referencia independiente y sin ánimo comercial sobre el envenenamiento de datos y modelos de IA. Sin cookies ni rastreadores.</p>
-      <p class="muted">Última actualización: 23 de octubre de 2026</p>
+      <p class="muted">Última actualización: 28 de octubre de 2026</p>
     </div>
     <ul class="footer-links">
       <li><a href="/es/sobre/">Sobre el sitio</a></li>
       <li><a href="/es/aviso-legal/">Aviso legal</a></li>
       <li><a href="/es/privacidad/">Privacidad</a></li>
+      <li><a href="/es/feed.xml" type="application/atom+xml">Canal RSS</a></li>
       <li><a href="/llm-grooming-pravda-network/" hreflang="en" lang="en">English</a></li>
     </ul>
   </div>

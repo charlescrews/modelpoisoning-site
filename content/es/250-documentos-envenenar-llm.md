@@ -37,6 +37,8 @@ Entrenaron 72 modelos en total, con tres semillas aleatorias por configuración,
 
 En el modelo de 13.000 millones, 250 documentos suponen unos 420.000 tokens, aproximadamente el 0,00016 % de sus tokens de entrenamiento. En palabras del artículo, los ataques de envenenamiento "requieren un número casi constante de documentos independientemente del tamaño del dataset". Los autores observan la misma dinámica cuando el veneno se introduce durante el ajuste fino en lugar del preentrenamiento.
 
+:::figure poison-constant
+
 ## Por qué importa
 
 Crear 250 páginas web es trivial. Si el resultado se generaliza, la escala de los datasets actuales no es por sí sola una defensa, y la seguridad de la cadena de datos importa tanto en los modelos más grandes como en los más pequeños. También significa que las defensas tienen que funcionar cuando el contenido envenenado es un número pequeño y fijo de muestras escondidas entre miles de millones.

@@ -190,6 +190,16 @@ Página `/source-checker/` (en español `/es/comprobador-fuentes/`). Compara los
 
 ---
 
+## 9. Diagramas, recuadros de herramienta, novedades y RSS
+
+- **Diagramas:** en un artículo, una línea `:::figure clave` inserta un diagrama de `figures.py` (claves: `grooming-routes`, `pickle-vs-safetensors`, `poison-constant`, `glaze-vs-nightshade`). Son HTML, no imágenes: se adaptan al móvil y al modo oscuro, y Google los lee. Para crear uno nuevo, copia una función de `figures.py` y añádela a `FIGURES`.
+- **Recuadro de herramienta al final de un artículo:** `tool: checker` o `tool: source-checker` en la cabecera.
+- **Etiquetas «Nuevo» y «Actualizado»** en la portada: salen solas durante 14 días desde `date` o `updated`.
+- **Fecha del pie de página:** se calcula sola con la fecha más reciente de los artículos y herramientas (o la de `site.json`, si es posterior).
+- **RSS:** `/feed.xml` (inglés) y `/es/feed.xml` (español), con enlace en el pie.
+
+---
+
 ## Notas técnicas
 
 - Tipografías autoalojadas (Archivo y Source Serif 4, licencia SIL OFL, en `static/fonts/`): no se llama a Google Fonts.

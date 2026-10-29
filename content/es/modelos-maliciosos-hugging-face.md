@@ -6,6 +6,7 @@ description: Casos reales de 2024 a 2026 de modelos de Hugging Face que ejecutab
 dek: Envenenar un modelo no siempre exige tocar sus datos de entrenamiento. A veces el archivo que descargas hace el trabajo en cuanto lo abres.
 date: 2026-10-23
 order: 7
+tool: checker
 ---
 
 :::summary
@@ -21,6 +22,8 @@ order: 7
 El formato [pickle](@glossary#pickle) de Python no guarda solo datos. Guarda instrucciones para reconstruir objetos de Python, y esas instrucciones pueden indicar cualquier función que haya que llamar mientras se carga el archivo. Un archivo malicioso puede pedir a Python que ejecute un comando, descargue un programa o abra una conexión de red, y lo hace antes de que el modelo haya producido ni una sola respuesta.
 
 Muchos archivos de modelos son pickles por dentro. Un `.bin` o un `.pt` de PyTorch es un archivo ZIP con un pickle dentro. Cargarlo con una herramienta antigua o mal configurada equivale a ejecutar un programa escrito por quien lo subió.
+
+:::figure pickle-vs-safetensors
 
 ## Casos reales
 

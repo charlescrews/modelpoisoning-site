@@ -23,6 +23,9 @@ from urllib.parse import quote
 
 import markdown
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from figures import figure  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent
 CONTENT = ROOT / "content"
 STATIC = ROOT / "static"
@@ -91,6 +94,14 @@ T = {
         "src_list_updated": "Last updated by VIGINUM on {d}.",
         "src_noscript": "The source checker needs JavaScript, but you can search the full lists below with your browser's find function.",
         "tools_open": "Open",
+        "tool_eyebrow": "Free tool",
+        "card_model_desc": "See whether a model's files can run code on your machine and what its model card leaves out.",
+        "card_src_desc": "Paste the links an AI assistant gave you and see whether any belong to known propaganda networks.",
+        "tool_box_label": "Try it",
+        "badge_new": "New",
+        "badge_updated": "Updated",
+        "rss": "RSS feed",
+        "tools_aria": "Tools",
         "ck_label": "Model on Hugging Face",
         "ck_hint": "Write owner/model, paste a huggingface.co link or a pkg:huggingface Package URL. Add @revision to check a specific commit.",
         "ck_try": "Try:",
@@ -155,6 +166,14 @@ T = {
         "src_list_updated": "Última actualización de VIGINUM: {d}.",
         "src_noscript": "El comprobador de fuentes necesita JavaScript, pero puedes buscar en las listas completas de abajo con la función de búsqueda del navegador.",
         "tools_open": "Abrir",
+        "tool_eyebrow": "Herramienta gratuita",
+        "card_model_desc": "Mira si los archivos de un modelo pueden ejecutar código en tu equipo y qué no cuenta su ficha.",
+        "card_src_desc": "Pega los enlaces que te ha dado un asistente de IA y comprueba si alguno es de una red de propaganda conocida.",
+        "tool_box_label": "Pruébalo",
+        "badge_new": "Nuevo",
+        "badge_updated": "Actualizado",
+        "rss": "Canal RSS",
+        "tools_aria": "Herramientas",
         "ck_label": "Modelo de Hugging Face",
         "ck_hint": "Escribe propietario/modelo, pega un enlace de huggingface.co o un Package URL pkg:huggingface. Añade @revisión para comprobar un commit concreto.",
         "ck_try": "Prueba:",
@@ -464,6 +483,21 @@ for p in sorted((CONTENT / "tools").glob("*.md")):
     tools[lang][tl["key"]] = tl
 
 timeline = json.loads((CONTENT / "timeline.json").read_text(encoding="utf-8"))
+
+BUILD_DATE = dt.date.today()
+BADGE_DAYS = 14
+
+
+def _content_dates() -> list[str]:
+    out = [CFG.get("updated", "")]
+    for coll in (articles, tools):
+        for lang in LANGS:
+            for x in coll[lang].values():
+                out += [x.get("date", ""), x.get("updated", "")]
+    return [d for d in out if re.fullmatch(r"\d{4}-\d{2}-\d{2}", d or "")]
+
+
+SITE_UPDATED = max(_content_dates())
 glossary = json.loads((CONTENT / "glossary.json").read_text(encoding="utf-8"))
 
 
@@ -591,7 +625,14 @@ def render_article_body(a: dict) -> tuple[str, str, list[tuple[str, str]]]:
         body = body.replace(m.group(0), "")
     has_tl = ":::timeline" in body
     body = body.replace(":::timeline", "<!--TIMELINE-->")
+    figs = re.findall(r"^:::figure ([a-z0-9-]+)[ \t]*$", body, re.M)
+    body = re.sub(r"^:::figure ([a-z0-9-]+)[ \t]*$", lambda m: f"\n<!--FIG:{m.group(1)}-->\n", body, flags=re.M)
     body_html = md_to_html(body, lang)
+    for key in figs:
+        html_fig = figure(key, lang)
+        body_html = body_html.replace(f"<p><!--FIG:{key}--></p>", html_fig).replace(f"<!--FIG:{key}-->", html_fig)
+    if a.get("tool"):
+        body_html += tool_box(a["tool"], lang)
     if has_tl:
         body_html = body_html.replace("<!--TIMELINE-->", render_timeline(lang))
         body_html = body_html.replace("<p>" + render_timeline(lang) + "</p>", render_timeline(lang))
@@ -611,7 +652,7 @@ def render_article_body(a: dict) -> tuple[str, str, list[tuple[str, str]]]:
 # Hero dot field (deterministic SVG)
 # --------------------------------------------------------------------------
 DOT_COLS, DOT_ROWS = 64, 18          # wide layout
-DOT_COLS_M, DOT_ROWS_M = 32, 36      # narrow layout, same total
+DOT_COLS_M, DOT_ROWS_M = 48, 24      # narrow layout, same total
 POISON_COUNT = 5
 
 
@@ -675,6 +716,7 @@ def head(*, lang: str, title: str, desc: str, url: str, alt_urls: dict[str, str]
 <meta name="theme-color" content="#EDF0EC" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131915" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/atom+xml" title="modelpoisoning.com" href="{'/feed.xml' if lang == 'en' else '/es/feed.xml'}">
 <link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/style.css?v={CSS_VERSION}">
@@ -724,12 +766,13 @@ def footer(lang: str, alt_url: str | None) -> str:
     <div>
       <p class="footer-brand">{WORDMARK}</p>
       <p>{t['footer_about']}</p>
-      <p class="muted">{t['footer_updated'].format(d=fmt_date(CFG['updated'], lang))}</p>
+      <p class="muted">{t['footer_updated'].format(d=fmt_date(SITE_UPDATED, lang))}</p>
     </div>
     <ul class="footer-links">
       <li><a href="{url_for('about', lang)}">{pages[lang]['about']['nav_title']}</a></li>
       <li><a href="{url_for('legal', lang)}">{pages[lang]['legal']['nav_title']}</a></li>
       <li><a href="{url_for('privacy', lang)}">{pages[lang]['privacy']['nav_title']}</a></li>
+      <li><a href="{'/feed.xml' if lang == 'en' else '/es/feed.xml'}" type="application/atom+xml">{t['rss']}</a></li>
       {switch}
     </ul>
   </div>
@@ -756,6 +799,89 @@ def reading_minutes(a: dict) -> int:
     return max(2, math.ceil(words / 220))
 
 
+def freshness_badge(a: dict, lang: str) -> str:
+    """'New' or 'Updated' next to articles published or revised in the last few weeks."""
+    t = T[lang]
+
+    def recent(d: str) -> bool:
+        try:
+            return 0 <= (BUILD_DATE - dt.date.fromisoformat(d)).days <= BADGE_DAYS
+        except (TypeError, ValueError):
+            return False
+
+    if recent(a.get("date", "")):
+        return f' <span class="fresh">{t["badge_new"]}</span>'
+    if a.get("updated") and recent(a["updated"]):
+        return f' <span class="fresh">{t["badge_updated"]}</span>'
+    return ""
+
+
+def tool_cards(lang: str) -> str:
+    t = T[lang]
+    if "checker" not in tools[lang] or "source-checker" not in tools[lang]:
+        return ""
+    mc, sc = tools[lang]["checker"], tools[lang]["source-checker"]
+    return f"""<section class="wrap tool-cards" aria-label="{t['tools_aria']}">
+    <div class="tool-card">
+      <p class="eyebrow">{t['tool_eyebrow']}</p>
+      <h2><a href="{url_for('checker', lang)}">{esc(mc['h1'])}</a></h2>
+      <p>{t['card_model_desc']}</p>
+      {checker_form(lang, "home-model", t['home_ck_hint'])}
+    </div>
+    <div class="tool-card">
+      <p class="eyebrow">{t['tool_eyebrow']}</p>
+      <h2><a href="{url_for('source-checker', lang)}">{esc(sc['h1'])}</a></h2>
+      <p>{t['card_src_desc']}</p>
+      <p class="card-action"><a class="btn" href="{url_for('source-checker', lang)}">{SOURCE_UI[lang]['check']}</a></p>
+    </div>
+  </section>"""
+
+
+def tool_box(key: str, lang: str) -> str:
+    """Call to action at the end of an article that relates to one of the tools."""
+    t = T[lang]
+    if key not in tools[lang]:
+        return ""
+    x = tools[lang][key]
+    if key == "checker":
+        action = checker_form(lang, "article-model", t["home_ck_hint"])
+    else:
+        action = f'<p class="card-action"><a class="btn" href="{url_for(key, lang)}">{SOURCE_UI[lang]["check"]}</a></p>'
+    return (f'<aside class="tool-box" aria-label="{t["tool_box_label"]}">'
+            f'<p class="eyebrow">{t["tool_box_label"]}</p>'
+            f'<p class="tool-box-title"><a href="{url_for(key, lang)}">{esc(x["h1"])}</a></p>'
+            f'<p>{esc(x["lead"])}</p>{action}</aside>')
+
+
+def build_feed(lang: str) -> None:
+    """Atom feed of the articles, newest first."""
+    from xml.sax.saxutils import escape as xesc
+    items = sorted(articles[lang].values(), key=lambda a: a.get("updated", a["date"]), reverse=True)
+    home = SITE_URL + url_for("home", lang)
+    feed_url = SITE_URL + ("/feed.xml" if lang == "en" else "/es/feed.xml")
+    entries = []
+    for a in items:
+        link = SITE_URL + url_for(a["key"], lang)
+        entries.append(
+            "<entry>"
+            f"<title>{xesc(a['title'])}</title>"
+            f'<link href="{link}"/><id>{link}</id>'
+            f"<published>{a['date']}T00:00:00Z</published>"
+            f"<updated>{a.get('updated', a['date'])}T00:00:00Z</updated>"
+            f"<summary>{xesc(a['description'])}</summary>"
+            "</entry>")
+    xml = ('<?xml version="1.0" encoding="utf-8"?>\n'
+           f'<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{lang}">'
+           f"<title>modelpoisoning.com</title><subtitle>{xesc(T[lang]['site_desc'])}</subtitle>"
+           f'<link href="{home}"/><link rel="self" href="{feed_url}"/><id>{home}</id>'
+           f"<updated>{SITE_UPDATED}T00:00:00Z</updated>"
+           f"<author><name>{xesc(CFG['editor_name'])}</name></author>"
+           + "".join(entries) + "</feed>\n")
+    path = OUT / ("feed.xml" if lang == "en" else "es/feed.xml")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(xml, encoding="utf-8")
+
+
 # --------------------------------------------------------------------------
 # Page builders
 # --------------------------------------------------------------------------
@@ -768,7 +894,7 @@ def build_home(lang: str) -> None:
     for a in sorted_articles(lang):
         rows.append(
             f'<li><a href="{url_for(a["key"], lang)}">'
-            f'<span class="row-title">{esc(a["nav_title"])}</span>'
+            f'<span class="row-title">{esc(a["nav_title"])}{freshness_badge(a, lang)}</span>'
             f'<span class="row-dek">{esc(a["dek"])}</span>'
             f'<span class="row-meta">{t["min_read"].format(n=reading_minutes(a))}</span>'
             f'</a></li>'
@@ -799,6 +925,7 @@ def build_home(lang: str) -> None:
       <a class="btn-quiet" href="{url_for('history', lang)}">{t['hero_cta2']}</a>
     </p>
   </section>
+  {tool_cards(lang)}
   <figure class="dotfield wrap">
     {dot_field_svg(lang)}
     {dot_field_svg(lang, DOT_COLS_M, DOT_ROWS_M, "narrow")}
@@ -812,17 +939,6 @@ def build_home(lang: str) -> None:
       <p>{t['start_intro']}</p>
     </div>
     <ul class="rows">{''.join(rows)}</ul>
-  </section>
-
-  <section class="wrap section split" aria-labelledby="ck-h">
-    <div class="section-head">
-      <h2 id="ck-h">{t['home_ck_h']}</h2>
-      <p>{t['home_ck_intro']}</p>
-    </div>
-    <div>
-      {checker_form(lang, "home-model", t['home_ck_hint'])}
-      <p class="home-src">{t['home_src']} <a href="{url_for('source-checker', lang)}">{t['home_src_link']}</a></p>
-    </div>
   </section>
 
   <section class="wrap section split" aria-labelledby="tl-h">
@@ -1273,7 +1389,7 @@ def build_sitemap() -> None:
                 links += f'<xhtml:link rel="alternate" hreflang="x-default" href="{SITE_URL + key_urls["en"]}"/>'
             entries.append(f"<url><loc>{SITE_URL + u}</loc><lastmod>{lastmod}</lastmod>{links}</url>")
 
-    add({l: url_for("home", l) for l in LANGS}, CFG["updated"])
+    add({l: url_for("home", l) for l in LANGS}, SITE_UPDATED)
     add({l: url_for("glossary", l) for l in LANGS}, CFG["updated"])
     for key, a in articles["en"].items():
         add({l: url_for(key, l) for l in LANGS if key in articles[l]}, a.get("updated", a["date"]))
@@ -1309,6 +1425,7 @@ def main() -> None:
             build_source_checker(lang)
         if "tools" in tools[lang]:
             build_tools_index(lang)
+        build_feed(lang)
         for a in articles[lang].values():
             build_article(a)
         for pg in pages[lang].values():

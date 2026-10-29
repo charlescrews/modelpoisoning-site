@@ -19,9 +19,10 @@
 <meta name="theme-color" content="#EDF0EC" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131915" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate" type="application/atom+xml" title="modelpoisoning.com" href="/feed.xml">
 <link rel="preload" href="/fonts/archivo-latin-wdth-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/source-serif-4-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/style.css?v=60bee040">
+<link rel="stylesheet" href="/style.css?v=357702b3">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "250 poisoned documents can backdoor an LLM of any size", "description": "The study “Poisoning Attacks on LLMs Require a Near-constant Number of Poison Samples”: 250 documents backdoored models from 600M to 13B parameters.", "inLanguage": "en", "datePublished": "2026-10-09", "dateModified": "2026-10-09", "mainEntityOfPage": "https://www.modelpoisoning.com/250-documents-poison-llm/", "image": "https://www.modelpoisoning.com/og.png", "author": {"@type": "Person", "name": "Carlos Díaz", "url": "https://www.modelpoisoning.com/about/"}, "publisher": {"@type": "Organization", "name": "modelpoisoning.com", "url": "https://www.modelpoisoning.com/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.modelpoisoning.com/"}, {"@type": "ListItem", "position": 2, "name": "250 documents are enough", "item": "https://www.modelpoisoning.com/250-documents-poison-llm/"}]}</script>
 </head><body>
 <a class="skip" href="#main">Skip to content</a>
@@ -67,6 +68,8 @@
 <li>The number of documents needed stayed roughly <strong>constant</strong> as models grew. The 13B model, trained on more than 20 times as much data as the 600M model, was no harder to backdoor.</li>
 </ul>
 <p>For the 13B model, 250 documents amount to about 420,000 tokens, or roughly 0.00016% of its training tokens. In the paper&rsquo;s words, poisoning attacks &ldquo;require a near-constant number of documents regardless of dataset size.&rdquo; The authors report the same dynamics when the poison is introduced during fine-tuning rather than pre-training.</p>
+<figure class="fig fig-bars"><table><caption>Training tokens per model and poisoned documents needed</caption><thead><tr><th scope="col">Model</th><th scope="col">Training tokens</th><th scope="col">Poisoned documents</th></tr></thead><tbody><tr><th scope="row">600M</th><td class="bar-cell"><span class="bar" style="--w:4.6%"></span><span class="bar-label">12B tokens</span></td><td class="dose"><span class="dose-dot" aria-hidden="true"></span>250</td></tr><tr><th scope="row">2B</th><td class="bar-cell"><span class="bar" style="--w:15.4%"></span><span class="bar-label">40B tokens</span></td><td class="dose"><span class="dose-dot" aria-hidden="true"></span>250</td></tr><tr><th scope="row">7B</th><td class="bar-cell"><span class="bar" style="--w:53.8%"></span><span class="bar-label">140B tokens</span></td><td class="dose"><span class="dose-dot" aria-hidden="true"></span>250</td></tr><tr><th scope="row">13B</th><td class="bar-cell"><span class="bar" style="--w:100.0%"></span><span class="bar-label">260B tokens</span></td><td class="dose"><span class="dose-dot" aria-hidden="true"></span>250</td></tr></tbody></table><figcaption>Training data grew more than twentyfold from the smallest model to the largest. The number of poisoned documents needed to plant the backdoor stayed at about 250. Approximate token counts (about 20 tokens per parameter).</figcaption></figure>
+
 <h2 id="why-it-matters">Why it matters</h2>
 <p>Producing 250 web pages is trivial. If the result generalises, the scale of modern training sets is not a defence on its own, and data-pipeline security matters as much for the largest models as for the smallest. It also means that defences need to work when the poisoned content is a tiny, fixed number of samples hidden in billions.</p>
 <h2 id="what-it-does-not-show">What it does not show</h2>
@@ -100,12 +103,13 @@
     <div>
       <p class="footer-brand"><span class="wm">modelpo<span class="i">ı</span>son<span class="i p">ı</span>ng</span></p>
       <p>An independent, non-commercial reference on AI data and model poisoning. No cookies, no trackers.</p>
-      <p class="muted">Last updated 23 October 2026</p>
+      <p class="muted">Last updated 28 October 2026</p>
     </div>
     <ul class="footer-links">
       <li><a href="/about/">About</a></li>
       <li><a href="/legal-notice/">Legal notice</a></li>
       <li><a href="/privacy/">Privacy</a></li>
+      <li><a href="/feed.xml" type="application/atom+xml">RSS feed</a></li>
       <li><a href="/es/250-documentos-envenenar-llm/" hreflang="es" lang="es">Español</a></li>
     </ul>
   </div>

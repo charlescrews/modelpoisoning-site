@@ -37,6 +37,8 @@ They trained 72 models in total, including three random seeds per configuration,
 
 For the 13B model, 250 documents amount to about 420,000 tokens, or roughly 0.00016% of its training tokens. In the paper's words, poisoning attacks "require a near-constant number of documents regardless of dataset size." The authors report the same dynamics when the poison is introduced during fine-tuning rather than pre-training.
 
+:::figure poison-constant
+
 ## Why it matters
 
 Producing 250 web pages is trivial. If the result generalises, the scale of modern training sets is not a defence on its own, and data-pipeline security matters as much for the largest models as for the smallest. It also means that defences need to work when the poisoned content is a tiny, fixed number of samples hidden in billions.
